@@ -16,6 +16,8 @@ class ViewController: NSViewController {
     var videoSession:AVCaptureSession? = nil
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
     
+    var sessionReady:Bool = true
+    
     @IBOutlet weak var playerPreview:NSView?
     
     override func viewDidLoad() {
@@ -25,7 +27,7 @@ class ViewController: NSViewController {
         videoOutput = AVCaptureVideoDataOutput()
         videoSession = AVCaptureSession()
         videoPreviewLayer = AVCaptureVideoPreviewLayer()
-        playerPreview = NSView()
+//        playerPreview = NSView()
     }
     
     override func viewWillAppear() {
@@ -49,6 +51,12 @@ class ViewController: NSViewController {
     }
 
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
+        if (sessionReady == false){
+            sessionReady = !sessionReady
+            print("---> Already capturing video")
+            return
+        }
+        
         do {
             let input = try AVCaptureDeviceInput(device: webcam)
             startVideoSession(input: input)
@@ -58,6 +66,7 @@ class ViewController: NSViewController {
         catch {
             print("---> Cannot use webcam")
         }
+        sessionReady = !sessionReady
     }
     
     func startVideoSession(input: AVCaptureDeviceInput){
@@ -77,13 +86,12 @@ class ViewController: NSViewController {
             videoPreviewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.portrait
             
             // position the layer
-            //videoPreviewLayer!.position = CGPoint(x: self.videoPreviewLayer.frame.width/2, y: self.videoPreview.frame.height/2)
-            //videoPreviewLayer!.bounds = self.videoPreview.frame
+            videoPreviewLayer!.position = CGPoint(x: (self.playerPreview?.frame.width)!/2, y: (self.playerPreview?.frame.height)!/2)
+            videoPreviewLayer!.bounds = (self.playerPreview?.frame)!
             
             // add the preview to the view
-            //videoPreviewLayer!.layer.addSublayer(videoPreviewLayer)
-            
             playerPreview?.layer?.addSublayer(videoPreviewLayer!)
+            print(playerPreview)
             
         }
     }
