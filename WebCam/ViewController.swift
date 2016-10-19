@@ -72,6 +72,8 @@ class ViewController: NSViewController {
     }
     
     func startVideoSession(input: AVCaptureDeviceInput){
+        // Need to initialize the session in a different function on start
+        // This only need to start the session if ready
         if videoSession!.canAddInput(input){
             videoSession!.addInput(input)
             
