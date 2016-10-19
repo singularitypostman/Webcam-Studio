@@ -16,6 +16,7 @@ class ViewController: NSViewController {
     var videoSession:AVCaptureSession? = nil
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
     
+    @IBOutlet weak var playerPreview:NSView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class ViewController: NSViewController {
         videoOutput = AVCaptureVideoDataOutput()
         videoSession = AVCaptureSession()
         videoPreviewLayer = AVCaptureVideoPreviewLayer()
+        playerPreview = NSView()
     }
     
     override func viewWillAppear() {
@@ -80,6 +82,9 @@ class ViewController: NSViewController {
             
             // add the preview to the view
             //videoPreviewLayer!.layer.addSublayer(videoPreviewLayer)
+            
+            playerPreview?.layer?.addSublayer(videoPreviewLayer!)
+            
         }
     }
 
