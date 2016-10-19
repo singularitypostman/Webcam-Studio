@@ -36,13 +36,6 @@ class ViewController: NSViewController {
         // Pick the first one
         if (devices?.count)! > 0 {
             webcam = devices?[0] as? AVCaptureDevice
-            print("---> Device \(webcam)")
-            do {
-                let input = try AVCaptureDeviceInput(device: webcam)
-            }
-            catch {
-                print("---> Cannot use webcam")
-            }
         }
         
     }
@@ -54,7 +47,15 @@ class ViewController: NSViewController {
     }
 
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
-        print("---> Starting video session")
+        do {
+            let input = try AVCaptureDeviceInput(device: webcam)
+            startVideoSession(input: input)
+            print("---> Sending device to session")
+            
+        }
+        catch {
+            print("---> Cannot use webcam")
+        }
     }
     
     func startVideoSession(input: AVCaptureDeviceInput){
