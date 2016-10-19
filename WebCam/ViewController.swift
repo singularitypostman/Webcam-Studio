@@ -23,9 +23,12 @@ class ViewController: NSViewController {
     }
     
     override func viewWillAppear() {
-//        let devices = AVCaptureDevice.devices(withMediaType: "AVMediaTypeVideo")
-        let devices = AVCaptureDevice.devices()
+        // Web cameras
+        let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureDALDevice")
+        // Microphone
+        // let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureHALDevice")
         print("---> Devices")
+        
         for device in devices!{
             print("---> Device \(device)")
             if (device as AnyObject).position == AVCaptureDevicePosition.back {
