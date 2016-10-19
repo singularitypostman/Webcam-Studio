@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DEFAA13D1DB714A40013BEC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA13C1DB714A40013BEC0 /* AppDelegate.swift */; };
+		DEFAA13F1DB714A40013BEC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA13E1DB714A40013BEC0 /* ViewController.swift */; };
+		DEFAA1411DB714A40013BEC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFAA1401DB714A40013BEC0 /* Assets.xcassets */; };
+		DEFAA1441DB714A40013BEC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEFAA1421DB714A40013BEC0 /* Main.storyboard */; };
+		DEFAA14F1DB714A50013BEC0 /* WebCamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA14E1DB714A50013BEC0 /* WebCamTests.swift */; };
+		DEFAA15A1DB714A50013BEC0 /* WebCamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA1591DB714A50013BEC0 /* WebCamUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DEFAA14B1DB714A50013BEC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DEFAA1311DB714A40013BEC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DEFAA1381DB714A40013BEC0;
+			remoteInfo = WebCam;
+		};
+		DEFAA1561DB714A50013BEC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DEFAA1311DB714A40013BEC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DEFAA1381DB714A40013BEC0;
+			remoteInfo = WebCam;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DEFAA1391DB714A40013BEC0 /* WebCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEFAA13C1DB714A40013BEC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DEFAA13E1DB714A40013BEC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DEFAA1401DB714A40013BEC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DEFAA1431DB714A40013BEC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DEFAA1451DB714A40013BEC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEFAA14A1DB714A50013BEC0 /* WebCamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebCamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEFAA14E1DB714A50013BEC0 /* WebCamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCamTests.swift; sourceTree = "<group>"; };
+		DEFAA1501DB714A50013BEC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEFAA1551DB714A50013BEC0 /* WebCamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebCamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEFAA1591DB714A50013BEC0 /* WebCamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCamUITests.swift; sourceTree = "<group>"; };
+		DEFAA15B1DB714A50013BEC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DEFAA1361DB714A40013BEC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEFAA1471DB714A50013BEC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEFAA1521DB714A50013BEC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DEFAA1301DB714A40013BEC0 = {
+			isa = PBXGroup;
+			children = (
+				DEFAA13B1DB714A40013BEC0 /* WebCam */,
+				DEFAA14D1DB714A50013BEC0 /* WebCamTests */,
+				DEFAA1581DB714A50013BEC0 /* WebCamUITests */,
+				DEFAA13A1DB714A40013BEC0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DEFAA13A1DB714A40013BEC0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DEFAA1391DB714A40013BEC0 /* WebCam.app */,
+				DEFAA14A1DB714A50013BEC0 /* WebCamTests.xctest */,
+				DEFAA1551DB714A50013BEC0 /* WebCamUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DEFAA13B1DB714A40013BEC0 /* WebCam */ = {
+			isa = PBXGroup;
+			children = (
+				DEFAA13C1DB714A40013BEC0 /* AppDelegate.swift */,
+				DEFAA13E1DB714A40013BEC0 /* ViewController.swift */,
+				DEFAA1401DB714A40013BEC0 /* Assets.xcassets */,
+				DEFAA1421DB714A40013BEC0 /* Main.storyboard */,
+				DEFAA1451DB714A40013BEC0 /* Info.plist */,
+			);
+			path = WebCam;
+			sourceTree = "<group>";
+		};
+		DEFAA14D1DB714A50013BEC0 /* WebCamTests */ = {
+			isa = PBXGroup;
+			children = (
+				DEFAA14E1DB714A50013BEC0 /* WebCamTests.swift */,
+				DEFAA1501DB714A50013BEC0 /* Info.plist */,
+			);
+			path = WebCamTests;
+			sourceTree = "<group>";
+		};
+		DEFAA1581DB714A50013BEC0 /* WebCamUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DEFAA1591DB714A50013BEC0 /* WebCamUITests.swift */,
+				DEFAA15B1DB714A50013BEC0 /* Info.plist */,
+			);
+			path = WebCamUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DEFAA1381DB714A40013BEC0 /* WebCam */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEFAA15E1DB714A50013BEC0 /* Build configuration list for PBXNativeTarget "WebCam" */;
+			buildPhases = (
+				DEFAA1351DB714A40013BEC0 /* Sources */,
+				DEFAA1361DB714A40013BEC0 /* Frameworks */,
+				DEFAA1371DB714A40013BEC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WebCam;
+			productName = WebCam;
+			productReference = DEFAA1391DB714A40013BEC0 /* WebCam.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DEFAA1491DB714A50013BEC0 /* WebCamTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEFAA1611DB714A50013BEC0 /* Build configuration list for PBXNativeTarget "WebCamTests" */;
+			buildPhases = (
+				DEFAA1461DB714A50013BEC0 /* Sources */,
+				DEFAA1471DB714A50013BEC0 /* Frameworks */,
+				DEFAA1481DB714A50013BEC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DEFAA14C1DB714A50013BEC0 /* PBXTargetDependency */,
+			);
+			name = WebCamTests;
+			productName = WebCamTests;
+			productReference = DEFAA14A1DB714A50013BEC0 /* WebCamTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DEFAA1541DB714A50013BEC0 /* WebCamUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEFAA1641DB714A50013BEC0 /* Build configuration list for PBXNativeTarget "WebCamUITests" */;
+			buildPhases = (
+				DEFAA1511DB714A50013BEC0 /* Sources */,
+				DEFAA1521DB714A50013BEC0 /* Frameworks */,
+				DEFAA1531DB714A50013BEC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DEFAA1571DB714A50013BEC0 /* PBXTargetDependency */,
+			);
+			name = WebCamUITests;
+			productName = WebCamUITests;
+			productReference = DEFAA1551DB714A50013BEC0 /* WebCamUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DEFAA1311DB714A40013BEC0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Shavit Tzuriel";
+				TargetAttributes = {
+					DEFAA1381DB714A40013BEC0 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = M87Q25Q5K3;
+						ProvisioningStyle = Automatic;
+					};
+					DEFAA1491DB714A50013BEC0 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = M87Q25Q5K3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DEFAA1381DB714A40013BEC0;
+					};
+					DEFAA1541DB714A50013BEC0 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = M87Q25Q5K3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DEFAA1381DB714A40013BEC0;
+					};
+				};
+			};
+			buildConfigurationList = DEFAA1341DB714A40013BEC0 /* Build configuration list for PBXProject "WebCam" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DEFAA1301DB714A40013BEC0;
+			productRefGroup = DEFAA13A1DB714A40013BEC0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DEFAA1381DB714A40013BEC0 /* WebCam */,
+				DEFAA1491DB714A50013BEC0 /* WebCamTests */,
+				DEFAA1541DB714A50013BEC0 /* WebCamUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DEFAA1371DB714A40013BEC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEFAA1411DB714A40013BEC0 /* Assets.xcassets in Resources */,
+				DEFAA1441DB714A40013BEC0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEFAA1481DB714A50013BEC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEFAA1531DB714A50013BEC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DEFAA1351DB714A40013BEC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEFAA13F1DB714A40013BEC0 /* ViewController.swift in Sources */,
+				DEFAA13D1DB714A40013BEC0 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEFAA1461DB714A50013BEC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEFAA14F1DB714A50013BEC0 /* WebCamTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEFAA1511DB714A50013BEC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEFAA15A1DB714A50013BEC0 /* WebCamUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DEFAA14C1DB714A50013BEC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DEFAA1381DB714A40013BEC0 /* WebCam */;
+			targetProxy = DEFAA14B1DB714A50013BEC0 /* PBXContainerItemProxy */;
+		};
+		DEFAA1571DB714A50013BEC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DEFAA1381DB714A40013BEC0 /* WebCam */;
+			targetProxy = DEFAA1561DB714A50013BEC0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DEFAA1421DB714A40013BEC0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DEFAA1431DB714A40013BEC0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DEFAA15C1DB714A50013BEC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DEFAA15D1DB714A50013BEC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		DEFAA15F1DB714A50013BEC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M87Q25Q5K3;
+				INFOPLIST_FILE = WebCam/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shavittzuriel.WebCam;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		DEFAA1601DB714A50013BEC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M87Q25Q5K3;
+				INFOPLIST_FILE = WebCam/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shavittzuriel.WebCam;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		DEFAA1621DB714A50013BEC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M87Q25Q5K3;
+				INFOPLIST_FILE = WebCamTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shavittzuriel.WebCamTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WebCam.app/Contents/MacOS/WebCam";
+			};
+			name = Debug;
+		};
+		DEFAA1631DB714A50013BEC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M87Q25Q5K3;
+				INFOPLIST_FILE = WebCamTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shavittzuriel.WebCamTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WebCam.app/Contents/MacOS/WebCam";
+			};
+			name = Release;
+		};
+		DEFAA1651DB714A50013BEC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M87Q25Q5K3;
+				INFOPLIST_FILE = WebCamUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shavittzuriel.WebCamUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = WebCam;
+			};
+			name = Debug;
+		};
+		DEFAA1661DB714A50013BEC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M87Q25Q5K3;
+				INFOPLIST_FILE = WebCamUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shavittzuriel.WebCamUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = WebCam;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DEFAA1341DB714A40013BEC0 /* Build configuration list for PBXProject "WebCam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEFAA15C1DB714A50013BEC0 /* Debug */,
+				DEFAA15D1DB714A50013BEC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEFAA15E1DB714A50013BEC0 /* Build configuration list for PBXNativeTarget "WebCam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEFAA15F1DB714A50013BEC0 /* Debug */,
+				DEFAA1601DB714A50013BEC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DEFAA1611DB714A50013BEC0 /* Build configuration list for PBXNativeTarget "WebCamTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEFAA1621DB714A50013BEC0 /* Debug */,
+				DEFAA1631DB714A50013BEC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DEFAA1641DB714A50013BEC0 /* Build configuration list for PBXNativeTarget "WebCamUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEFAA1651DB714A50013BEC0 /* Debug */,
+				DEFAA1661DB714A50013BEC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DEFAA1311DB714A40013BEC0 /* Project object */;
+}
