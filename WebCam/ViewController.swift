@@ -20,6 +20,9 @@ class ViewController: NSViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        videoOutput = AVCaptureVideoDataOutput()
+        videoSession = AVCaptureSession()
+        videoPreviewLayer = AVCaptureVideoPreviewLayer()
     }
     
     override func viewWillAppear() {
@@ -54,7 +57,32 @@ class ViewController: NSViewController {
     }
 
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
-        
+        print("---> Starting video session")
+    }
+    
+    func startVideoSession(input: AVCaptureDeviceInput){
+        if videoSession!.canAddInput(input){
+            videoSession!.addInput(input)
+            
+            videoOutput!.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: Int(kCVPixelFormatType_420YpCbCr8PlanarFullRange)]
+            videoOutput!.alwaysDiscardsLateVideoFrames = true
+            //videoOutput!.setSampleBufferDelegate(videoOutput!.sampleBufferDelegate, queue: dispatch_queue_create("VideoBuffer", DISPATCH_QUEUE_SERIAL))
+            
+            videoSession!.addOutput(videoOutput)
+            videoSession!.startRunning()
+            
+            videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoSession)
+            // resize the video to fill
+            videoPreviewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
+            videoPreviewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.portrait
+            
+            // position the layer
+            //videoPreviewLayer!.position = CGPoint(x: self.videoPreviewLayer.frame.width/2, y: self.videoPreview.frame.height/2)
+            //videoPreviewLayer!.bounds = self.videoPreview.frame
+            
+            // add the preview to the view
+            //videoPreviewLayer!.layer.addSublayer(videoPreviewLayer)
+        }
     }
 
 }
