@@ -97,6 +97,20 @@ class ViewController: NSViewController {
             playerPreview?.layer?.addSublayer(videoPreviewLayer!)
             print(playerPreview)
             
+            // File output
+            let videoFileOutput:AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
+            if videoSession!.canAddOutput(videoFileOutput){
+                videoSession!.addOutput(videoFileOutput)
+                
+                print("---> Video file output \(videoFileOutput)")
+            }
+            
+            // Stream to the server
+            //let streamURL:NSURL = NSURL(string: "http://localhost:3000")!
+            //let outputStream:OutputStream = OutputStream(url: streamURL as URL, append: true)!
+            //outputStream.open()
+            
+            
         }
     }
 
