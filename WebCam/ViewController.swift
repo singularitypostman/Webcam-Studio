@@ -26,7 +26,7 @@ class ViewController: NSViewController {
         // Do any additional setup after loading the view.
         videoOutput = AVCaptureVideoDataOutput()
         videoSession = AVCaptureSession()
-        videoPreviewLayer = AVCaptureVideoPreviewLayer()
+//        videoPreviewLayer = AVCaptureVideoPreviewLayer()
 //        playerPreview = NSView()
     }
     
@@ -52,6 +52,8 @@ class ViewController: NSViewController {
 
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
         if (sessionReady == false){
+            // Stop the session
+            videoPreviewLayer?.session.stopRunning()
             sessionReady = !sessionReady
             print("---> Already capturing video")
             return
