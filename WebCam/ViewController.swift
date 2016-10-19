@@ -24,9 +24,11 @@ class ViewController: NSViewController {
     
     override func viewWillAppear() {
         // Web cameras
-        let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureDALDevice")
+        //let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureDALDevice")
         // Microphone
         // let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureHALDevice")
+        
+        let devices = AVCaptureDevice.devices()
         print("---> Devices")
         
         for device in devices!{
