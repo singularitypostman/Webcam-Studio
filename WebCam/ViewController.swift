@@ -37,6 +37,12 @@ class ViewController: NSViewController {
         if (devices?.count)! > 0 {
             webcam = devices?[0] as? AVCaptureDevice
             print("---> Device \(webcam)")
+            do {
+                let input = try AVCaptureDeviceInput(device: webcam)
+            }
+            catch {
+                print("---> Cannot use webcam")
+            }
         }
         
     }
