@@ -7,13 +7,39 @@
 //
 
 import Cocoa
+import AVFoundation
 
 class ViewController: NSViewController {
+    
+    var videoOutput:AVCaptureVideoDataOutput? = nil
+    var videoSession:AVCaptureSession? = nil
+    var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear() {
+//        let devices = AVCaptureDevice.devices(withMediaType: "AVMediaTypeVideo")
+        let devices = AVCaptureDevice.devices()
+        print("---> Devices")
+        for device in devices!{
+            print("---> Device \(device)")
+            if (device as AnyObject).position == AVCaptureDevicePosition.back {
+                // Trying to use the camera
+                do {
+                    let input = try AVCaptureDeviceInput(device: device as! AVCaptureDevice)
+                    // Start the video session
+                    //
+                }
+                catch {
+                    print("---> Cannot use the camera")
+                }
+            }
+        }
     }
 
     override var representedObject: Any? {
@@ -22,6 +48,9 @@ class ViewController: NSViewController {
         }
     }
 
+    @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
+        
+    }
 
 }
 
