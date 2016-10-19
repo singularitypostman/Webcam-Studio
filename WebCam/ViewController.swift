@@ -11,6 +11,7 @@ import AVFoundation
 
 class ViewController: NSViewController {
     
+    var webcam:AVCaptureDevice? = nil
     var videoOutput:AVCaptureVideoDataOutput? = nil
     var videoSession:AVCaptureSession? = nil
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
@@ -31,23 +32,13 @@ class ViewController: NSViewController {
         // Microphone
         // let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureHALDevice")
         
-        let devices = AVCaptureDevice.devices()
-        print("---> Devices")
-        
-        for device in devices!{
-            print("---> Device \(device)")
-            if (device as AnyObject).position == AVCaptureDevicePosition.back {
-                // Trying to use the camera
-                do {
-                    let input = try AVCaptureDeviceInput(device: device as! AVCaptureDevice)
-                    // Start the video session
-                    //
-                }
-                catch {
-                    print("---> Cannot use the camera")
-                }
-            }
+        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
+        // Pick the first one
+        if (devices?.count)! > 0 {
+            webcam = devices?[0] as? AVCaptureDevice
+            print("---> Device \(webcam)")
         }
+        
     }
 
     override var representedObject: Any? {
