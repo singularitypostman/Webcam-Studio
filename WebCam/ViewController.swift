@@ -31,17 +31,7 @@ class ViewController: NSViewController {
     }
     
     override func viewWillAppear() {
-        // Web cameras
-        //let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureDALDevice")
-        // Microphone
-        // let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureHALDevice")
-        
-        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
-        // Pick the first one
-        if (devices?.count)! > 0 {
-            webcam = devices?[0] as? AVCaptureDevice
-        }
-        
+        self.setVideoSession()
     }
 
     override var representedObject: Any? {
@@ -59,58 +49,76 @@ class ViewController: NSViewController {
             return
         }
         
+        // Start the session
+        videoPreviewLayer?.session.startRunning()
+        print("---> Starting a new video session")
+        
+        sessionReady = !sessionReady
+    }
+    
+    func setVideoSession(){
+        // Web cameras
+        //let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureDALDevice")
+        // Microphone
+        // let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureHALDevice")
+        
+        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
+        // Pick the first one
+        if (devices?.count)! > 0 {
+            webcam = devices?[0] as? AVCaptureDevice
+        } else{
+            print("---> No available devices")
+            return
+        }
+        
         do {
             let input = try AVCaptureDeviceInput(device: webcam)
-            startVideoSession(input: input)
-            print("---> Sending device to session")
+            if videoSession!.canAddInput(input){
+                videoSession!.addInput(input)
+                
+                videoOutput!.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: Int(kCVPixelFormatType_420YpCbCr8PlanarFullRange)]
+                videoOutput!.alwaysDiscardsLateVideoFrames = true
+                //videoOutput!.setSampleBufferDelegate(videoOutput!.sampleBufferDelegate, queue: dispatch_queue_create("VideoBuffer", DISPATCH_QUEUE_SERIAL))
+                
+                videoSession!.addOutput(videoOutput)
+                
+                videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoSession)
+                // resize the video to fill
+                videoPreviewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
+                videoPreviewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.portrait
+                
+                // position the layer
+                videoPreviewLayer!.position = CGPoint(x: (self.playerPreview?.frame.width)!/2, y: (self.playerPreview?.frame.height)!/2)
+                videoPreviewLayer!.bounds = (self.playerPreview?.frame)!
+                
+                // add the preview to the view
+                playerPreview?.layer?.addSublayer(videoPreviewLayer!)
+                
+                let videoFileOutput:AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
+                if videoSession!.canAddOutput(videoFileOutput){
+                    videoSession!.addOutput(videoFileOutput)
+                    
+                    print("---> Video file output \(videoFileOutput)")
+                }
+            }
             
         }
         catch {
             print("---> Cannot use webcam")
         }
-        sessionReady = !sessionReady
+        
     }
     
     func startVideoSession(input: AVCaptureDeviceInput){
         // Need to initialize the session in a different function on start
         // This only need to start the session if ready
         if videoSession!.canAddInput(input){
-            videoSession!.addInput(input)
-            
-            videoOutput!.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: Int(kCVPixelFormatType_420YpCbCr8PlanarFullRange)]
-            videoOutput!.alwaysDiscardsLateVideoFrames = true
-            //videoOutput!.setSampleBufferDelegate(videoOutput!.sampleBufferDelegate, queue: dispatch_queue_create("VideoBuffer", DISPATCH_QUEUE_SERIAL))
-            
-            videoSession!.addOutput(videoOutput)
             videoSession!.startRunning()
-            
-            videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoSession)
-            // resize the video to fill
-            videoPreviewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
-            videoPreviewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.portrait
-            
-            // position the layer
-            videoPreviewLayer!.position = CGPoint(x: (self.playerPreview?.frame.width)!/2, y: (self.playerPreview?.frame.height)!/2)
-            videoPreviewLayer!.bounds = (self.playerPreview?.frame)!
-            
-            // add the preview to the view
-            playerPreview?.layer?.addSublayer(videoPreviewLayer!)
-            print(playerPreview)
-            
-            // File output
-            let videoFileOutput:AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
-            if videoSession!.canAddOutput(videoFileOutput){
-                videoSession!.addOutput(videoFileOutput)
-                
-                print("---> Video file output \(videoFileOutput)")
-            }
             
             // Stream to the server
             //let streamURL:NSURL = NSURL(string: "http://localhost:3000")!
             //let outputStream:OutputStream = OutputStream(url: streamURL as URL, append: true)!
             //outputStream.open()
-            
-            
         }
     }
 
