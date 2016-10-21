@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import AVKit
 import AVFoundation
 
 class ViewController: NSViewController {
@@ -19,6 +20,7 @@ class ViewController: NSViewController {
     var sessionReady:Bool = true
     
     @IBOutlet weak var playerPreview:NSView?
+    @IBOutlet weak var playerStreamView:AVPlayerView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +30,23 @@ class ViewController: NSViewController {
         videoSession = AVCaptureSession()
 //        videoPreviewLayer = AVCaptureVideoPreviewLayer()
 //        playerPreview = NSView()
+        
+        playerStreamView = AVPlayerView()
     }
     
     override func viewWillAppear() {
         self.setVideoSession()
+    }
+    
+    override func viewDidAppear() {
+        // Start playing
+        let streamURL:NSURL = NSURL(string: "rtmp://localhost:3001/live/1")!
+        let asset = AVAsset.init(url: streamURL as URL)
+        let player:AVPlayerItem = AVPlayerItem(asset: asset)
+        
+        playerStreamView?.player = AVPlayer(playerItem: player)
+        playerStreamView?.player?.play()
+        
     }
 
     override var representedObject: Any? {
@@ -52,6 +67,12 @@ class ViewController: NSViewController {
         // Start the session
         videoPreviewLayer?.session.startRunning()
         print("---> Starting a new video session")
+        
+        // Stream to the server
+        let streamURL:NSURL = NSURL(string: "rtmp://localhost:3001/live/1")!
+//        let outputStream:OutputStream = OutputStream(url: streamURL as URL, append: true)!
+        //outputStream.open()
+        //outputStream.write(, maxLength: 256)
         
         sessionReady = !sessionReady
     }
@@ -94,6 +115,11 @@ class ViewController: NSViewController {
                 // add the preview to the view
                 playerPreview?.layer?.addSublayer(videoPreviewLayer!)
                 
+                // Output data
+                if videoSession!.canAddOutput(videoOutput){
+                    videoSession!.addOutput(videoOutput)
+                }
+                
                 let videoFileOutput:AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
                 if videoSession!.canAddOutput(videoFileOutput){
                     videoSession!.addOutput(videoFileOutput)
@@ -107,19 +133,6 @@ class ViewController: NSViewController {
             print("---> Cannot use webcam")
         }
         
-    }
-    
-    func startVideoSession(input: AVCaptureDeviceInput){
-        // Need to initialize the session in a different function on start
-        // This only need to start the session if ready
-        if videoSession!.canAddInput(input){
-            videoSession!.startRunning()
-            
-            // Stream to the server
-            //let streamURL:NSURL = NSURL(string: "http://localhost:3000")!
-            //let outputStream:OutputStream = OutputStream(url: streamURL as URL, append: true)!
-            //outputStream.open()
-        }
     }
 
 }

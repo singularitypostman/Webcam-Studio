@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11198.2" systemVersion="16A313a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.AVKitIBPlugin" version="11198.2"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11198.2"/>
     </dependencies>
     <scenes>
@@ -682,15 +683,15 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="WebCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="303"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="577"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tJi-3s-627">
-                                <rect key="frame" x="0.0" y="20" width="480" height="283"/>
+                                <rect key="frame" x="0.0" y="294" width="480" height="283"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </customView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Urc-MN-c6c">
-                                <rect key="frame" x="-10" y="-7" width="98" height="32"/>
+                                <rect key="frame" x="-10" y="267" width="98" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Capture" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pDm-9e-M7f">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -700,15 +701,20 @@
                                     <action selector="CaptureWebCamVideo:" target="XfG-lQ-9wD" id="0hU-LP-MVp"/>
                                 </connections>
                             </button>
+                            <avPlayerView fixedFrame="YES" controlsStyle="inline" translatesAutoresizingMaskIntoConstraints="NO" id="LaM-PG-T3T">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </avPlayerView>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="playerPreview" destination="tJi-3s-627" id="8sS-q9-poz"/>
+                        <outlet property="playerStreamView" destination="LaM-PG-T3T" id="Vl7-YE-2Hp"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="692.5"/>
+            <point key="canvasLocation" x="75" y="829.5"/>
         </scene>
     </scenes>
 </document>
