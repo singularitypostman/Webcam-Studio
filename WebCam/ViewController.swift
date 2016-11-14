@@ -48,18 +48,29 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let player:AVPlayerItem = AVPlayerItem(asset: asset)
         
         playerStreamView?.player = AVPlayer(playerItem: player)
-        playerStreamView?.player?.play()
+//        playerStreamView?.player?.play()
         
     }
 
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
+            print("---> Update the view if it was loaded")
         }
     }
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
-        print("---> Streaming now")
+        
+        let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
+        CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+//        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
+        let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
+        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
+        let image = CVPixelBufferGetBaseAddress(imageBuffer)
+        
+        let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
+        
+        stream.broadcastData(message: imageData)
     }
     
     
@@ -107,7 +118,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             if videoSession!.canAddInput(input){
                 videoSession!.addInput(input)
                 
-                videoOutput!.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: Int(kCVPixelFormatType_420YpCbCr8PlanarFullRange)]
+//                videoOutput!.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: Int(kCVPixelFormatType_420YpCbCr8PlanarFullRange)]
                 videoOutput!.alwaysDiscardsLateVideoFrames = true
                 
                 // Register the sample buffer callback
