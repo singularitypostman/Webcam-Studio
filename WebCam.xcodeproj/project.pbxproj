@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE9023931DD96211003A3D14 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9023921DD96211003A3D14 /* Stream.swift */; };
 		DEFAA13D1DB714A40013BEC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA13C1DB714A40013BEC0 /* AppDelegate.swift */; };
 		DEFAA13F1DB714A40013BEC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA13E1DB714A40013BEC0 /* ViewController.swift */; };
 		DEFAA1411DB714A40013BEC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFAA1401DB714A40013BEC0 /* Assets.xcassets */; };
@@ -33,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE9023921DD96211003A3D14 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
+		DEB9FF2C1DD91A7F0046EC15 /* remote_requests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = remote_requests.playground; sourceTree = "<group>"; };
 		DEFAA1391DB714A40013BEC0 /* WebCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFAA13C1DB714A40013BEC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEFAA13E1DB714A40013BEC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,11 +98,13 @@
 		DEFAA13B1DB714A40013BEC0 /* WebCam */ = {
 			isa = PBXGroup;
 			children = (
+				DEB9FF2C1DD91A7F0046EC15 /* remote_requests.playground */,
 				DEFAA13C1DB714A40013BEC0 /* AppDelegate.swift */,
 				DEFAA13E1DB714A40013BEC0 /* ViewController.swift */,
 				DEFAA1401DB714A40013BEC0 /* Assets.xcassets */,
 				DEFAA1421DB714A40013BEC0 /* Main.storyboard */,
 				DEFAA1451DB714A40013BEC0 /* Info.plist */,
+				DE9023921DD96211003A3D14 /* Stream.swift */,
 			);
 			path = WebCam;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEFAA13F1DB714A40013BEC0 /* ViewController.swift in Sources */,
+				DE9023931DD96211003A3D14 /* Stream.swift in Sources */,
 				DEFAA13D1DB714A40013BEC0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,6 +511,7 @@
 				DEFAA1601DB714A50013BEC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DEFAA1611DB714A50013BEC0 /* Build configuration list for PBXNativeTarget "WebCamTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +520,7 @@
 				DEFAA1631DB714A50013BEC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DEFAA1641DB714A50013BEC0 /* Build configuration list for PBXNativeTarget "WebCamUITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +529,7 @@
 				DEFAA1661DB714A50013BEC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

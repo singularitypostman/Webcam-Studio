@@ -69,8 +69,15 @@ class ViewController: NSViewController {
         print("---> Starting a new video session")
         
         // Stream to the server
-        let streamURL:NSURL = NSURL(string: "rtmp://localhost:3001/live/1")!
-//        let outputStream:OutputStream = OutputStream(url: streamURL as URL, append: true)!
+//        let streamURL:NSURL = NSURL(string: "rtmp://localhost:3001/live/1")!
+//        DispatchQueue(label: "streaming").async {
+//            let outputStream:OutputStream = OutputStream(url: streamURL as URL, append: true)!
+//            print("---> Output stream \(outputStream)")
+//        }
+        
+        let stream: Stream = Stream()
+        stream.broadcast(message: "Message from camera")
+        
         //outputStream.open()
         //outputStream.write(, maxLength: 256)
         
