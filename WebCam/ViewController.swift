@@ -9,15 +9,19 @@
 import Cocoa
 import AVKit
 import AVFoundation
+import CoreMedia
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     var webcam:AVCaptureDevice? = nil
     var videoOutput:AVCaptureVideoDataOutput? = nil
     var videoSession:AVCaptureSession? = nil
+    let videoFileOutput:AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
     
     var sessionReady:Bool = true
+    
+    let stream: Stream = Stream()
     
     @IBOutlet weak var playerPreview:NSView?
     @IBOutlet weak var playerStreamView:AVPlayerView?
@@ -54,33 +58,32 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
+    
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+//        print("---> Streaming now")
+    }
+    
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didDrop sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+//        print("---> Streaming (end?)")
+        print(sampleBuffer)
+        print(CMSampleBufferGetImageBuffer(sampleBuffer))
+        
+//        stream.broadcast(message: "Message from camera")
+
+    }
 
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
         if (sessionReady == false){
             // Stop the session
             videoPreviewLayer?.session.stopRunning()
             sessionReady = !sessionReady
-            print("---> Already capturing video")
             return
         }
         
         // Start the session
         videoPreviewLayer?.session.startRunning()
-        print("---> Starting a new video session")
         
-        // Stream to the server
-//        let streamURL:NSURL = NSURL(string: "rtmp://localhost:3001/live/1")!
-//        DispatchQueue(label: "streaming").async {
-//            let outputStream:OutputStream = OutputStream(url: streamURL as URL, append: true)!
-//            print("---> Output stream \(outputStream)")
-//        }
-        
-        let stream: Stream = Stream()
-        stream.broadcast(message: "Message from camera")
-        
-        //outputStream.open()
-        //outputStream.write(, maxLength: 256)
-        
+        // Set the camera state
         sessionReady = !sessionReady
     }
     
@@ -108,8 +111,6 @@ class ViewController: NSViewController {
                 videoOutput!.alwaysDiscardsLateVideoFrames = true
                 //videoOutput!.setSampleBufferDelegate(videoOutput!.sampleBufferDelegate, queue: dispatch_queue_create("VideoBuffer", DISPATCH_QUEUE_SERIAL))
                 
-                videoSession!.addOutput(videoOutput)
-                
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoSession)
                 // resize the video to fill
                 videoPreviewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
@@ -127,12 +128,18 @@ class ViewController: NSViewController {
                     videoSession!.addOutput(videoOutput)
                 }
                 
-                let videoFileOutput:AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
                 if videoSession!.canAddOutput(videoFileOutput){
                     videoSession!.addOutput(videoFileOutput)
                     
                     print("---> Video file output \(videoFileOutput)")
                 }
+                
+                // Register the sample buffer callback
+                let queue = DispatchQueue(label: "Streaming")
+                videoOutput?.setSampleBufferDelegate(self, queue: queue)
+
+                
+                
             }
             
         }
