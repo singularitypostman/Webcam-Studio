@@ -16,7 +16,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var webcam:AVCaptureDevice? = nil
     var videoOutput:AVCaptureVideoDataOutput? = nil
     var videoSession:AVCaptureSession? = nil
-    let videoFileOutput:AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
     
     var sessionReady:Bool = true
@@ -60,13 +59,14 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
-//        print("---> Streaming now")
+        print("---> Streaming now")
     }
+    
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didDrop sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
 //        print("---> Streaming (end?)")
-        print(sampleBuffer)
-        print(CMSampleBufferGetImageBuffer(sampleBuffer))
+//        print(sampleBuffer)
+//        print(CMSampleBufferGetImageBuffer(sampleBuffer))
         
 //        stream.broadcast(message: "Message from camera")
 
@@ -109,7 +109,10 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
                 
                 videoOutput!.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: Int(kCVPixelFormatType_420YpCbCr8PlanarFullRange)]
                 videoOutput!.alwaysDiscardsLateVideoFrames = true
-                //videoOutput!.setSampleBufferDelegate(videoOutput!.sampleBufferDelegate, queue: dispatch_queue_create("VideoBuffer", DISPATCH_QUEUE_SERIAL))
+                
+                // Register the sample buffer callback
+                let queue = DispatchQueue(label: "Streaming")
+                videoOutput!.setSampleBufferDelegate(self, queue: queue)
                 
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoSession)
                 // resize the video to fill
@@ -127,18 +130,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
                 if videoSession!.canAddOutput(videoOutput){
                     videoSession!.addOutput(videoOutput)
                 }
-                
-                if videoSession!.canAddOutput(videoFileOutput){
-                    videoSession!.addOutput(videoFileOutput)
-                    
-                    print("---> Video file output \(videoFileOutput)")
-                }
-                
-                // Register the sample buffer callback
-                let queue = DispatchQueue(label: "Streaming")
-                videoOutput?.setSampleBufferDelegate(self, queue: queue)
-
-                
                 
             }
             
