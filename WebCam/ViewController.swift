@@ -75,11 +75,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didDrop sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
-//        print("---> Streaming (end?)")
-//        print(sampleBuffer)
-//        print(CMSampleBufferGetImageBuffer(sampleBuffer))
-        
-//        stream.broadcast(message: "Message from camera")
+        print("---> Streaming (end?)")
+        stream.broadcast(message: "Message from camera")
 
     }
 

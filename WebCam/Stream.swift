@@ -36,8 +36,12 @@ class Stream {
             let broadcastMessageLength = message.length
             let p = UnsafeRawPointer($0).bindMemory(to: sockaddr.self, capacity: 1)
             
+            let messagePacket = memcpy(malloc(message.length), message.bytes, message.length)
+            
             // Send the message
-            sendto(fd, message.bytes, broadcastMessageLength, 0, p, socklen_t(addr_in.sin_len))
+            sendto(fd, messagePacket, broadcastMessageLength, 0, p, socklen_t(addr_in.sin_len))
+            
+//            sendto(fd, message.bytes, broadcastMessageLength, 0, p, socklen_t(addr_in.sin_len))
         }
     }
     
