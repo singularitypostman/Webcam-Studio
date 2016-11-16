@@ -3,7 +3,6 @@
 import Cocoa
 import Darwin
 
-
 func htons(value: CUnsignedShort) -> CUnsignedShort {
     return (value << 8) + (value >> 8)
 }
@@ -31,4 +30,5 @@ func sendMessage(message: String){
 }
 
 sendMessage(message: "Message from Swift 3")
+
 

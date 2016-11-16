@@ -35,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		DE9023921DD96211003A3D14 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
+		DEB68C481DDC0DC500F4B096 /* WebCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebCam.entitlements; sourceTree = "<group>"; };
 		DEB9FF2C1DD91A7F0046EC15 /* remote_requests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = remote_requests.playground; sourceTree = "<group>"; };
 		DEFAA1391DB714A40013BEC0 /* WebCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFAA13C1DB714A40013BEC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +99,7 @@
 		DEFAA13B1DB714A40013BEC0 /* WebCam */ = {
 			isa = PBXGroup;
 			children = (
+				DEB68C481DDC0DC500F4B096 /* WebCam.entitlements */,
 				DEB9FF2C1DD91A7F0046EC15 /* remote_requests.playground */,
 				DEFAA13C1DB714A40013BEC0 /* AppDelegate.swift */,
 				DEFAA13E1DB714A40013BEC0 /* ViewController.swift */,
@@ -197,6 +199,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = M87Q25Q5K3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					DEFAA1491DB714A50013BEC0 = {
 						CreatedOnToolsVersion = 8.0;
@@ -406,6 +413,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WebCam/WebCam.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = M87Q25Q5K3;
 				INFOPLIST_FILE = WebCam/Info.plist;
@@ -420,6 +429,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WebCam/WebCam.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = M87Q25Q5K3;
 				INFOPLIST_FILE = WebCam/Info.plist;

@@ -39,17 +39,15 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     override func viewWillAppear() {
         self.setVideoSession()
-    }
-    
-    override func viewDidAppear() {
-        // Start playing
-        let streamURL:NSURL = NSURL(string: "rtmp://localhost:3001/live/1")!
-        let asset = AVAsset.init(url: streamURL as URL)
-        let player:AVPlayerItem = AVPlayerItem(asset: asset)
         
-        playerStreamView?.player = AVPlayer(playerItem: player)
-//        playerStreamView?.player?.play()
+        // Use a m3u8 playlist
+        //let streamURL:URL = URL(string: "http://localhost:3000/playlists/1.mp4")!
+        // Play mp4
+        let streamURL:URL = URL(string: "http://localhost:3000/stream/live")!
+        let player:AVPlayer = AVPlayer(url: streamURL)
         
+        playerStreamView?.player = player
+        player.play()
     }
 
     override var representedObject: Any? {
