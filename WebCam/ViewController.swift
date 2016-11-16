@@ -23,7 +23,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     let stream: Stream = Stream()
     
     @IBOutlet weak var playerPreview:NSView?
-    @IBOutlet weak var playerStreamView:AVPlayerView?
+    @IBOutlet weak var videoPlayerView: NSView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 //        videoPreviewLayer = AVCaptureVideoPreviewLayer()
 //        playerPreview = NSView()
         
-        playerStreamView = AVPlayerView()
     }
     
     override func viewWillAppear() {
@@ -46,7 +45,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let streamURL:URL = URL(string: "http://localhost:3000/stream/live")!
         let player:AVPlayer = AVPlayer(url: streamURL)
         
-        playerStreamView?.player = player
+        let playerView = AVPlayerView()
+        playerView.frame = videoPlayerView.frame
+        playerView.player = player
+        videoPlayerView.addSubview(playerView)
+        
+        // Start streaming
         player.play()
     }
 

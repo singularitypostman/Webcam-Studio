@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.AVKitIBPlugin" version="11542"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -702,15 +701,16 @@
                                     <action selector="CaptureWebCamVideo:" target="XfG-lQ-9wD" id="0hU-LP-MVp"/>
                                 </connections>
                             </button>
-                            <avPlayerView wantsLayer="YES" fixedFrame="YES" controlsStyle="inline" translatesAutoresizingMaskIntoConstraints="NO" id="LaM-PG-T3T">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IvV-WZ-6dQ">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="275"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </avPlayerView>
+                            </customView>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="playerPreview" destination="tJi-3s-627" id="8sS-q9-poz"/>
-                        <outlet property="playerStreamView" destination="LaM-PG-T3T" id="Vl7-YE-2Hp"/>
+                        <outlet property="videoPlayer" destination="IvV-WZ-6dQ" id="O8v-T3-IXI"/>
+                        <outlet property="videoPlayerView" destination="IvV-WZ-6dQ" id="lNB-qL-bZT"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
