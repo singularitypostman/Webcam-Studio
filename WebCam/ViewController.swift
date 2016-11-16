@@ -40,9 +40,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.setVideoSession()
         
         // Use a m3u8 playlist
-        //let streamURL:URL = URL(string: "http://localhost:3000/playlists/1.mp4")!
+        let streamURL:URL = URL(string: "http://localhost:3000/playlists/1.mp4")!
         // Play mp4
-        let streamURL:URL = URL(string: "http://localhost:3000/stream/live")!
+        //let streamURL:URL = URL(string: "http://localhost:3000/stream/live")!
         let player:AVPlayer = AVPlayer(url: streamURL)
         
         let playerView = AVPlayerView()
