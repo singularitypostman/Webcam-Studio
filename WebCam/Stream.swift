@@ -32,7 +32,7 @@ class Stream {
     func broadcastData(message: NSData){
         var addr_in = sockaddr_in(sin_len: __uint8_t(MemoryLayout<sockaddr_in>.size), sin_family: sa_family_t(AF_INET), sin_port: self.htons(value: port), sin_addr: INADDR_ANY, sin_zero: (0,0,0,0, 0,0,0,0))
         
-        let chunkSize = 16000
+        let chunkSize = 4000
         var dataOffset: Int = 0
         
         repeat {

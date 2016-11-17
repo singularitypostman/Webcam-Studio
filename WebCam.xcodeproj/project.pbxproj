@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DE9023931DD96211003A3D14 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9023921DD96211003A3D14 /* Stream.swift */; };
+		DEB6904B1DDCE2F20038BF5E /* DetectionBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB6904A1DDCE2F20038BF5E /* DetectionBoxView.swift */; };
 		DEFAA13D1DB714A40013BEC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA13C1DB714A40013BEC0 /* AppDelegate.swift */; };
 		DEFAA13F1DB714A40013BEC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA13E1DB714A40013BEC0 /* ViewController.swift */; };
 		DEFAA1411DB714A40013BEC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFAA1401DB714A40013BEC0 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		DE9023921DD96211003A3D14 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
 		DEB68C481DDC0DC500F4B096 /* WebCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebCam.entitlements; sourceTree = "<group>"; };
+		DEB6904A1DDCE2F20038BF5E /* DetectionBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetectionBoxView.swift; sourceTree = "<group>"; };
 		DEB9FF2C1DD91A7F0046EC15 /* remote_requests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = remote_requests.playground; sourceTree = "<group>"; };
 		DEFAA1391DB714A40013BEC0 /* WebCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFAA13C1DB714A40013BEC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				DEB9FF2C1DD91A7F0046EC15 /* remote_requests.playground */,
 				DEFAA13C1DB714A40013BEC0 /* AppDelegate.swift */,
 				DEFAA13E1DB714A40013BEC0 /* ViewController.swift */,
+				DEB6904A1DDCE2F20038BF5E /* DetectionBoxView.swift */,
 				DEFAA1401DB714A40013BEC0 /* Assets.xcassets */,
 				DEFAA1421DB714A40013BEC0 /* Main.storyboard */,
 				DEFAA1451DB714A40013BEC0 /* Info.plist */,
@@ -270,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB6904B1DDCE2F20038BF5E /* DetectionBoxView.swift in Sources */,
 				DEFAA13F1DB714A40013BEC0 /* ViewController.swift in Sources */,
 				DE9023931DD96211003A3D14 /* Stream.swift in Sources */,
 				DEFAA13D1DB714A40013BEC0 /* AppDelegate.swift in Sources */,

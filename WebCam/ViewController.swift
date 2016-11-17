@@ -11,6 +11,7 @@ import AVKit
 import AVFoundation
 import CoreMedia
 
+
 class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     var webcam:AVCaptureDevice? = nil
@@ -19,6 +20,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
     
     var sessionReady:Bool = true
+    var detectionBoxView: NSView?
     
     let stream: Stream = Stream()
     
@@ -31,8 +33,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Do any additional setup after loading the view.
         videoOutput = AVCaptureVideoDataOutput()
         videoSession = AVCaptureSession()
-//        videoPreviewLayer = AVCaptureVideoPreviewLayer()
-//        playerPreview = NSView()
         
     }
     
@@ -40,9 +40,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.setVideoSession()
         
         // Use a m3u8 playlist
-        let streamURL:URL = URL(string: "http://localhost:3000/playlists/1.mp4")!
+//        let streamURL:URL = URL(string: "http://localhost:3000/playlists/1.mp4")!
         // Play mp4
-        //let streamURL:URL = URL(string: "http://localhost:3000/stream/live")!
+        let streamURL:URL = URL(string: "http://localhost:3000/stream/live")!
         let player:AVPlayer = AVPlayer(url: streamURL)
         
         let playerView = AVPlayerView()
@@ -52,6 +52,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Start streaming
         player.play()
+        
     }
 
     override var representedObject: Any? {
@@ -64,12 +65,24 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
         
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-        CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
 //        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
         let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
         let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
         let image = CVPixelBufferGetBaseAddress(imageBuffer)
         
+        
+        
+        // Perform core animation in the main thread
+        DispatchQueue.main.async {
+            // Detect the image
+            self.detectLiveImage(picture: imageBuffer)
+        }
+    
+        // Unlock the buffer
+        _ = CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        
+        // Send the live image to the server
         let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
         
         stream.broadcastData(message: imageData)
@@ -80,6 +93,23 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         print("---> Streaming (end?)")
         stream.broadcast(message: "Message from camera")
 
+    }
+    
+    func detectLiveImage(picture: CVImageBuffer){
+        
+        let context = CIContext()
+        let detector = CIDetector(ofType: CIDetectorTypeFace, context: context, options: nil)
+        let image: CIImage = CIImage(cvImageBuffer: picture)
+        let features = detector?.features(in: image) // [CIFeature]
+        
+        print("---> Detecting")
+        print("---> Image: \(image)")
+        
+        for ciFeature in features! {
+            // Display a rectangle
+            print("---> Features bounds: \(ciFeature.bounds)")
+            detectionBoxView?.draw(ciFeature.bounds)
+        }
     }
 
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
@@ -134,7 +164,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
                 videoPreviewLayer!.bounds = (self.playerPreview?.frame)!
                 
                 // add the preview to the view
-                playerPreview?.layer?.addSublayer(videoPreviewLayer!)
+//                playerPreview?.layer?.addSublayer(videoPreviewLayer!)
+                playerPreview?.layer? = videoPreviewLayer!
+                
+                // Add a detection box on top of the preview layer
+                self.detectionBoxView = DetectionBoxView()
+                playerPreview?.addSubview(self.detectionBoxView!)
                 
                 // Output data
                 if videoSession!.canAddOutput(videoOutput){
