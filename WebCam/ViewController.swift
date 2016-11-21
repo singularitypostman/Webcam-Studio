@@ -127,6 +127,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         sessionReady = !sessionReady
     }
     
+    @IBAction func CaptureScreenVideo(_ sender: Any) {
+        print("---> Capturing screen")
+    }
+    
+    
     func setVideoSession(){
         // Web cameras
         //let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureDALDevice")
