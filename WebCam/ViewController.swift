@@ -17,6 +17,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var videoOutput:AVCaptureVideoDataOutput? = nil
     var videoSession:AVCaptureSession? = nil
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
+    var screenCaptureSession:AVCaptureSession? = nil
     var videoFileOutput: AVCaptureMovieFileOutput? = nil
     var videoFilePath: URL? = nil
     
@@ -35,16 +36,18 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         videoOutput = AVCaptureVideoDataOutput()
         // Video file for screen capture
         videoFileOutput = AVCaptureMovieFileOutput()
+        // Webcam session
         videoSession = AVCaptureSession()
         videoSession?.sessionPreset = AVCaptureSessionPresetHigh
-        self.videoFilePath = URL(fileURLWithPath: NSHomeDirectory()+"/Documents/Monique/session_1.mp4")
+        // Screen capture session
+        screenCaptureSession = AVCaptureSession()
+        screenCaptureSession?.sessionPreset = AVCaptureSessionPresetHigh
         
+        self.setVideoSession()
+        self.setCaptureSession()
     }
     
     override func viewWillAppear() {
-        self.setVideoSession()
-        self.setCaptureSession()
-        
         // Use a m3u8 playlist
 //        let streamURL:URL = URL(string: "http://localhost:3000/playlists/1.mp4")!
         // Play mp4
@@ -69,6 +72,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+        return
         
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
         _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
@@ -96,6 +100,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didDrop sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+        return
         print("---> Streaming (end?)")
         stream.broadcast(message: "Message from camera")
 
@@ -128,7 +133,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
      */
     @available(OSX 10.7, *)
     public func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
-        print("---> Capturing")
+        print("---> Finish writing to \(outputFileURL.absoluteString)")
+        print("---> Error? \(error)")
     }
     
     func detectLiveImage(picture: CVImageBuffer){
@@ -171,7 +177,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
         print("---> Capturing screen")
-        self.videoSession?.startRunning()
+        self.screenCaptureSession?.startRunning()
         self.videoFileOutput?.startRecording(toOutputFileURL: self.videoFilePath, recordingDelegate: self)
         
         sessionReady = !sessionReady
@@ -237,16 +243,32 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     func setCaptureSession(){
+        // Set the capture recording directory
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/Monique"))
+        let filePathValidator: FileManager = FileManager.default
+        self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.absoluteString.appending("session_1.mp4"))
+        
+        // Create folder if not exists
+        do {
+            if filePathValidator.fileExists(atPath: videoFileDirectory.absoluteString) == false {
+                try filePathValidator.createDirectory(at: videoFileDirectory, withIntermediateDirectories: true, attributes: nil)
+            }
+        } catch let err as NSError {
+            print("---> Error creating a directory at \(videoFileDirectory.absoluteString)")
+            print(err)
+        }
+
         // Set the screen input
         let displayID: CGDirectDisplayID = CGDirectDisplayID(CGMainDisplayID())
         let input: AVCaptureScreenInput = AVCaptureScreenInput(displayID: displayID)
         
-        if self.videoSession?.canAddInput(input) != nil {
-            self.videoSession?.addInput(input)
+        if self.screenCaptureSession?.canAddInput(input) != nil {
+            self.screenCaptureSession?.addInput(input)
         }
         
-        if (self.videoSession?.canAddOutput(self.videoFileOutput))! {
-            self.videoSession?.addOutput(self.videoFileOutput)
+        if (self.screenCaptureSession?.canAddOutput(self.videoFileOutput))! {
+            self.screenCaptureSession?.addOutput(self.videoFileOutput)
         }
     }
 
