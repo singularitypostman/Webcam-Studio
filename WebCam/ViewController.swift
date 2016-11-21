@@ -18,6 +18,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var videoOutput:AVCaptureVideoDataOutput? = nil
     var videoSession:AVCaptureSession? = nil
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
+    var videoFileOutput: AVCaptureMovieFileOutput? = nil
+    var videoFilePath: URL? = nil
     
     var sessionReady:Bool = true
     var detectionBoxView: NSView?
@@ -32,12 +34,17 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 
         // Do any additional setup after loading the view.
         videoOutput = AVCaptureVideoDataOutput()
+        // Video file for screen capture
+        videoFileOutput = AVCaptureMovieFileOutput()
         videoSession = AVCaptureSession()
+        videoSession?.sessionPreset = AVCaptureSessionPresetHigh
+        self.videoFilePath = URL(fileURLWithPath: NSHomeDirectory()+"/Documents/Monique/session_1.mp4")
         
     }
     
     override func viewWillAppear() {
         self.setVideoSession()
+        self.setCaptureSession()
         
         // Use a m3u8 playlist
 //        let streamURL:URL = URL(string: "http://localhost:3000/playlists/1.mp4")!
@@ -128,7 +135,17 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     @IBAction func CaptureScreenVideo(_ sender: Any) {
+        if (sessionReady == false){
+            // Stop the session
+            sessionReady = !sessionReady
+            return
+        }
+        
         print("---> Capturing screen")
+        self.videoSession?.startRunning()
+        self.videoFileOutput?.startRecording(toOutputFileURL: self.videoFilePath, recordingDelegate: self)
+        
+        sessionReady = !sessionReady
     }
     
     
@@ -188,6 +205,20 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             print("---> Cannot use webcam")
         }
         
+    }
+    
+    func setCaptureSession(){
+        // Set the screen input
+        let displayID: CGDirectDisplayID = CGDirectDisplayID(CGMainDisplayID())
+        let input: AVCaptureScreenInput = AVCaptureScreenInput(displayID: displayID)
+        
+        if self.videoSession?.canAddInput(input) != nil {
+            self.videoSession?.addInput(input)
+        }
+        
+        if (self.videoSession?.canAddOutput(self.videoFileOutput))! {
+            self.videoSession?.addOutput(self.videoFileOutput)
+        }
     }
 
 }
