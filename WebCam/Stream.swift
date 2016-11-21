@@ -61,6 +61,12 @@ class Stream {
         
     }
     
+    // Stream to YouTube
+    func broadcastYouTube(){
+        let streamURL:URL = URL(string: "rtmp://a.rtmp.youtube.com/live2")!
+        
+    }
+    
     private func htons(value: CUnsignedShort) -> CUnsignedShort {
         return (value << 8) + (value >> 8)
     }
