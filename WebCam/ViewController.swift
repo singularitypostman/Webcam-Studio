@@ -133,8 +133,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
      */
     @available(OSX 10.7, *)
     public func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
-        print("---> Finish writing to \(outputFileURL.absoluteString)")
-        print("---> Error? \(error)")
+        
+        do {
+            try FileManager.default.moveItem(at: outputFileURL, to: self.videoFilePath!)
+        } catch let err as NSError {
+            print("Error moving video file: \(err)")
+        }
     }
     
     func detectLiveImage(picture: CVImageBuffer){
@@ -270,6 +274,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         if (self.screenCaptureSession?.canAddOutput(self.videoFileOutput))! {
             self.screenCaptureSession?.addOutput(self.videoFileOutput)
         }
+        
     }
 
 }
