@@ -30,42 +30,22 @@ class Stream {
     }
     
     func broadcastData(message: NSData){
-        var addr_in = sockaddr_in(sin_len: __uint8_t(MemoryLayout<sockaddr_in>.size), sin_family: sa_family_t(AF_INET), sin_port: self.htons(value: port), sin_addr: INADDR_ANY, sin_zero: (0,0,0,0, 0,0,0,0))
+        //var addr_in = sockaddr_in(sin_len: __uint8_t(MemoryLayout<sockaddr_in>.size), sin_family: sa_family_t(AF_INET), sin_port: self.htons(value: port), sin_addr: INADDR_ANY, sin_zero: (0,0,0,0, 0,0,0,0))
         
-        //let chunkSize = 4000
-        let chunkSize = 1024
+        let chunkSize = 4000
         var dataOffset: Int = 0
-        print(message)
         
         repeat {
             let tmpChunkSize = ((message.length - dataOffset) > chunkSize) ? chunkSize : (message.length - dataOffset)
-            let chunk:Data = message.subdata(with: NSMakeRange(dataOffset, tmpChunkSize))
+            let chunk: NSData = message.subdata(with: NSMakeRange(dataOffset, tmpChunkSize)) as NSData
             
             // Send chunk of data
-            print("Chunk \(chunk)")
-            withUnsafePointer(to: &addr_in) {
-                let p = UnsafeRawPointer($0).bindMemory(to: sockaddr.self, capacity: 1)
-                
-                print(p)
-                // Data
-                print(Mirror(reflecting: chunk))
-                // UnsafeRawPointer
-                print(Mirror(reflecting: message.bytes))
-                
-                
-                sendChunk(chunk: message.bytes, messageLength: tmpChunkSize)
-                //sendto(fd, message.bytes, tmpChunkSize, 0, p, socklen_t(addr_in.sin_len))
-            }
+            //sendChunk(chunk: message.bytes, messageLength: tmpChunkSize)
+            sendChunk(chunk: chunk.bytes, messageLength: tmpChunkSize)
             
             // Update the offset
             dataOffset = dataOffset + tmpChunkSize
         } while (dataOffset < message.length)
-        
-    }
-    
-    // Stream to YouTube
-    func broadcastYouTube(){
-        let streamURL:URL = URL(string: "rtmp://a.rtmp.youtube.com/live2")!
         
     }
     
@@ -79,7 +59,7 @@ class Stream {
         withUnsafePointer(to: &addr_in) {
             let p = UnsafeRawPointer($0).bindMemory(to: sockaddr.self, capacity: 1)
             let sent = sendto(fd, chunk, messageLength, 0, p, socklen_t(addr_in.sin_len))
-            print("---> Sent? \(sent) \(messageLength)")
+            print("---> (\(messageLength)) Sent? \(sent) = \(messageLength)")
             
             if sent == -1{
                 print("Error sending a message: \(errno)")
