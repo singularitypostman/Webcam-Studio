@@ -48,10 +48,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     override func viewWillAppear() {
-        // Use a m3u8 playlist
-//        let streamURL:URL = URL(string: "http://localhost:3000/playlists/1.mp4")!
-        // Play mp4
-        let streamURL:URL = URL(string: "http://localhost:3000/stream/live")!
+        // Use a m3u8 playlist of live video
+        let streamURL:URL = URL(string: "http://localhost:3000//videos/live/playlist")!
         let player:AVPlayer = AVPlayer(url: streamURL)
         
         let playerView = AVPlayerView()
@@ -60,6 +58,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         videoPlayerView.addSubview(playerView)
         
         // Start streaming
+        print("---> Playing video from \(streamURL.absoluteURL.absoluteString)")
         player.play()
         
     }
