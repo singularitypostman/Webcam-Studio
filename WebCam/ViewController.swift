@@ -73,6 +73,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
         
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
+    
         _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
 //        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
         let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
@@ -80,28 +81,23 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let image = CVPixelBufferGetBaseAddress(imageBuffer)
         
         
-        
         // Perform core animation in the main thread
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             // Detect the image
-            self.detectLiveImage(picture: imageBuffer)
-        }
+            //self.detectLiveImage(picture: imageBuffer)
+//        }
     
         // Unlock the buffer
-        _ = CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        
         
         // Send the live image to the server
         let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
-     
+        
+        
         stream.broadcastData(message: imageData)
     }
     
-    
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didDrop sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
-        print("---> Streaming (end?)")
-        stream.broadcast(message: "Message from camera")
-
-    }
     
     /*!
      @method captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error:

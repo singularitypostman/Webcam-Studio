@@ -34,7 +34,7 @@ class Stream {
         
         let chunkSize = 4000
         var dataOffset: Int = 0
-        
+            
         repeat {
             let tmpChunkSize = ((message.length - dataOffset) > chunkSize) ? chunkSize : (message.length - dataOffset)
             let chunk: NSData = message.subdata(with: NSMakeRange(dataOffset, tmpChunkSize)) as NSData
