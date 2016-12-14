@@ -90,10 +90,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Unlock the buffer
         CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
-        
         // Send the live image to the server
         let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
-        
         
         stream.broadcastData(message: imageData)
     }
