@@ -31,7 +31,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         videoOutput = AVCaptureVideoDataOutput()
         // Video file for screen capture
@@ -62,10 +62,10 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         player.play()
         
     }
-
+    
     override var representedObject: Any? {
         didSet {
-        // Update the view, if already loaded.
+            // Update the view, if already loaded.
             print("---> Update the view if it was loaded")
         }
     }
@@ -73,20 +73,20 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
         
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-    
+        
         _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
-//        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
+        //        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
         let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
         let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
         let image = CVPixelBufferGetBaseAddress(imageBuffer)
         
         
         // Perform core animation in the main thread
-//        DispatchQueue.main.async {
-            // Detect the image
-            //self.detectLiveImage(picture: imageBuffer)
-//        }
-    
+        //        DispatchQueue.main.async {
+        // Detect the image
+        //self.detectLiveImage(picture: imageBuffer)
+        //        }
+        
         // Unlock the buffer
         CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
@@ -148,7 +148,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             detectionBoxView?.draw(ciFeature.bounds)
         }
     }
-
+    
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
         if (sessionReady == false){
             // Stop the session
@@ -199,7 +199,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             if videoSession!.canAddInput(input){
                 videoSession!.addInput(input)
                 
-//                videoOutput!.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: Int(kCVPixelFormatType_420YpCbCr8PlanarFullRange)]
+                //                videoOutput!.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: Int(kCVPixelFormatType_420YpCbCr8PlanarFullRange)]
                 videoOutput!.alwaysDiscardsLateVideoFrames = true
                 
                 // Register the sample buffer callback
@@ -216,7 +216,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
                 videoPreviewLayer!.bounds = (self.playerPreview?.frame)!
                 
                 // add the preview to the view
-//                playerPreview?.layer?.addSublayer(videoPreviewLayer!)
+                //                playerPreview?.layer?.addSublayer(videoPreviewLayer!)
                 playerPreview?.layer? = videoPreviewLayer!
                 
                 // Add a detection box on top of the preview layer
@@ -253,7 +253,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             print("---> Error creating a directory at \(videoFileDirectory.absoluteString)")
             print(err)
         }
-
+        
         // Set the screen input
         let displayID: CGDirectDisplayID = CGDirectDisplayID(CGMainDisplayID())
         let input: AVCaptureScreenInput = AVCaptureScreenInput(displayID: displayID)
@@ -267,6 +267,5 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
     }
-
+    
 }
-
