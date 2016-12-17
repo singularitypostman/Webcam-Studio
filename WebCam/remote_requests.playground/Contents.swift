@@ -29,9 +29,19 @@ func sendMessage(message: String){
     }
 }
 
-sendMessage(message: "Message from Swift 3")
+func writeToFile(name: String, message: String){
+    let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.downloadsDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+    let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
+    let filePathValidator: FileManager = FileManager.default
+    let videoFilePath: URL = URL(fileURLWithPath: videoFileDirectory.absoluteString.appending("/session_1.mp4"))
+    
+    print(videoFilePath.absoluteString)
+    
+}
 
 
 
 
 
+//sendMessage(message: "Message from Swift 3")
+writeToFile(name: "writing_test.txt", message: "Hello")
