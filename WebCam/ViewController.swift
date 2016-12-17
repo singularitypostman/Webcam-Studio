@@ -125,6 +125,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     @available(OSX 10.7, *)
     public func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
         
+        print("---> Finish recording to \(outputFileURL.absoluteString)")
+        
         do {
             try FileManager.default.moveItem(at: outputFileURL, to: self.videoFilePath!)
         } catch let err as NSError {
@@ -154,6 +156,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             // Stop the session
             videoPreviewLayer?.session.stopRunning()
             sessionReady = !sessionReady
+            
+            print("---> Stopping camera")
+            
             return
         }
         
