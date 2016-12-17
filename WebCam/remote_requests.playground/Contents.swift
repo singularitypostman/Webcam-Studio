@@ -33,13 +33,16 @@ func writeToFile(name: String, message: String){
     let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.downloadsDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
     let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
     let filePathValidator: FileManager = FileManager.default
-    let videoFilePath: URL = URL(fileURLWithPath: videoFileDirectory.absoluteString.appending("/session_1.mp4"))
+    let videoFilePath: URL = URL(fileURLWithPath: videoFileDirectory.absoluteString.appending("/\(name)"))
+    let outputStream: OutputStream = OutputStream.init(toFileAtPath: videoFilePath.absoluteString, append: true)!
     
     // Create folder if not exists
     do {
         print("---> Setting capture session at \(videoFilePath.absoluteString)")
         if filePathValidator.fileExists(atPath: videoFileDirectory.absoluteString) == false {
             try filePathValidator.createDirectory(at: videoFileDirectory, withIntermediateDirectories: true, attributes: nil)
+            print("---> Created directory \(videoFileDirectory.absoluteString)")
+            
         } else{
             print("---> File path not exists at \(videoFileDirectory.absoluteString)")
         }
@@ -48,6 +51,17 @@ func writeToFile(name: String, message: String){
         print("---> Error creating a directory at \(videoFileDirectory.absoluteString)")
         print(err)
     }
+    
+    // Write to file
+    outputStream.open()
+    let messageLength: Int = message.lengthOfBytes(using: .utf8)
+    var messageData: NSData = message.data(using: .utf8, allowLossyConversion: false)! as NSData
+    let messageBytes: UnsafeRawPointer = messageData.bytes
+    
+//    withUnsafePointer(to: &messageData) { (p) -> Void in
+//        print(p)
+//        outputStream.write(p, maxLength: messageLength)
+//    }
     
 }
 
