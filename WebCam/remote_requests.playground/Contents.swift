@@ -35,7 +35,19 @@ func writeToFile(name: String, message: String){
     let filePathValidator: FileManager = FileManager.default
     let videoFilePath: URL = URL(fileURLWithPath: videoFileDirectory.absoluteString.appending("/session_1.mp4"))
     
-    print(videoFilePath.absoluteString)
+    // Create folder if not exists
+    do {
+        print("---> Setting capture session at \(videoFilePath.absoluteString)")
+        if filePathValidator.fileExists(atPath: videoFileDirectory.absoluteString) == false {
+            try filePathValidator.createDirectory(at: videoFileDirectory, withIntermediateDirectories: true, attributes: nil)
+        } else{
+            print("---> File path not exists at \(videoFileDirectory.absoluteString)")
+        }
+        
+    } catch let err as NSError {
+        print("---> Error creating a directory at \(videoFileDirectory.absoluteString)")
+        print(err)
+    }
     
 }
 

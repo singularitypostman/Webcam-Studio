@@ -251,7 +251,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Create folder if not exists
         do {
-            print("---> Setting capture session at \(videoFileDirectory.absoluteString)")
+            print("---> Setting capture session at \(self.videoFilePath.absoluteString)")
             if filePathValidator.fileExists(atPath: videoFileDirectory.absoluteString) == false {
                 try filePathValidator.createDirectory(at: videoFileDirectory, withIntermediateDirectories: true, attributes: nil)
             } else{
