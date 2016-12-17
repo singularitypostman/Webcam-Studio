@@ -240,7 +240,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     func setCaptureSession(){
         // Set the capture recording directory
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-        let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/Monique"))
+        let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
         let filePathValidator: FileManager = FileManager.default
         self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.absoluteString.appending("session_1.mp4"))
         
@@ -248,6 +248,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         do {
             if filePathValidator.fileExists(atPath: videoFileDirectory.absoluteString) == false {
                 try filePathValidator.createDirectory(at: videoFileDirectory, withIntermediateDirectories: true, attributes: nil)
+            } else{
+                print("---> File path not exists at \(videoFileDirectory.absoluteString)")
             }
         } catch let err as NSError {
             print("---> Error creating a directory at \(videoFileDirectory.absoluteString)")
