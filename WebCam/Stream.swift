@@ -59,7 +59,7 @@ class Stream {
         withUnsafePointer(to: &addr_in) {
             let p = UnsafeRawPointer($0).bindMemory(to: sockaddr.self, capacity: 1)
             let sent = sendto(fd, chunk, messageLength, 0, p, socklen_t(addr_in.sin_len))
-            print("---> (\(messageLength)) Sent? \(sent) = \(messageLength)")
+            //print("---> (\(messageLength)) Sent? \(sent) = \(messageLength)")
             
             if sent == -1{
                 print("Error sending a message: \(errno)")

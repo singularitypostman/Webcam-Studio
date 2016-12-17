@@ -243,6 +243,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
         let filePathValidator: FileManager = FileManager.default
         self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.absoluteString.appending("session_1.mp4"))
+        print("---> Settings capture session at \(videoFileDirectory.absoluteString)")
         
         // Create folder if not exists
         do {
