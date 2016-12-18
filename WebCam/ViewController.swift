@@ -26,6 +26,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     let stream: Stream = Stream()
     
+    var outputStream: OutputStream? = nil
+    
     @IBOutlet weak var playerPreview:NSView?
     @IBOutlet weak var videoPlayerView: NSView!
     
@@ -92,8 +94,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Send the live image to the server
         let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
-        
         stream.broadcastData(message: imageData)
+        
+        // Write to file
+        print("---> Writing to file \(self.videoFilePath?.path)")
+        imageData.write(to: self.videoFilePath!, atomically: false)
+        
     }
     
     
@@ -165,8 +171,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Start the session
         videoPreviewLayer?.session.startRunning()
         
+        // Open the stream
+        self.outputStream?.open()
+        
         // Set the camera state
         sessionReady = !sessionReady
+        
     }
     
     @IBAction func CaptureScreenVideo(_ sender: Any) {
@@ -244,7 +254,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     func setCaptureSession(){
         // Set the capture recording directory
-        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.downloadsDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
         let filePathValidator: FileManager = FileManager.default
         self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
@@ -263,6 +273,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             print(err)
         }
         
+        // Set the output stream
+        self.outputStream = OutputStream.init(toFileAtPath: (self.videoFilePath?.path)!, append: true)!
 
         
         // Set the screen input

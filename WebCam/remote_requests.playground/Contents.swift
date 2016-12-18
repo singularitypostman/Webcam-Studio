@@ -56,7 +56,7 @@ func writeToFile(name: String, message: String){
     outputStream.open()
     let messageData: NSData = NSData(data: message.data(using: .utf8)!)
     let messageLength: Int = messageData.length
-
+    
     message.data(using: .utf8)?.withUnsafeBytes({ (p: UnsafePointer<UInt8>) -> Void in
         outputStream.write(p, maxLength: messageLength)
     })
