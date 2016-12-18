@@ -56,9 +56,10 @@ func writeToFile(name: String, message: String){
     outputStream.open()
     let messageLength: Int = message.lengthOfBytes(using: .utf8)
     var messageData: NSData = message.data(using: .utf8, allowLossyConversion: false)! as NSData
-    let messageBytes: UnsafeRawPointer = messageData.bytes
     
-//    withUnsafePointer(to: &messageData) { (p) -> Void in
+    //withUnsafeBytes(of: &messageData, <#T##body: (UnsafeRawBufferPointer) throws -> Result##(UnsafeRawBufferPointer) throws -> Result#>)
+    
+//    withUnsafePointer(to: &messageData.bytes) { (p) -> Void in
 //        print(p)
 //        outputStream.write(p, maxLength: messageLength)
 //    }
