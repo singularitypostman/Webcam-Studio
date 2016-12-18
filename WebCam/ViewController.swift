@@ -163,6 +163,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             videoPreviewLayer?.session.stopRunning()
             sessionReady = !sessionReady
             
+            // Close the stream
+            self.outputStream?.close()
+            
             print("---> Stopping camera")
             
             return
