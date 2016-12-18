@@ -247,7 +247,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
         let filePathValidator: FileManager = FileManager.default
-        self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.absoluteString.appending("/session_1.mp4"))
+        self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
         
         // Create folder if not exists
         do {
@@ -262,6 +262,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             print("---> Error creating a directory at \(videoFileDirectory.absoluteString)")
             print(err)
         }
+        
+
         
         // Set the screen input
         let displayID: CGDirectDisplayID = CGDirectDisplayID(CGMainDisplayID())

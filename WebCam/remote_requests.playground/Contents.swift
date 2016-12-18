@@ -59,11 +59,7 @@ func writeToFile(name: String, message: String){
 
     message.data(using: .utf8)?.withUnsafeBytes({ (p: UnsafePointer<UInt8>) -> Void in
         outputStream.write(p, maxLength: messageLength)
-        print(outputStream.streamError)
     })
-    
-    outputStream.write("Hello", maxLength: "hello".lengthOfBytes(using: .utf8))
-    print(outputStream.streamError)
     
     outputStream.close()
 }
