@@ -33,8 +33,8 @@ func writeToFile(name: String, message: String){
     let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.downloadsDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
     let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
     let filePathValidator: FileManager = FileManager.default
-    let videoFilePath: URL = URL(fileURLWithPath: videoFileDirectory.absoluteString.appending("/\(name)"))
-    let outputStream: OutputStream = OutputStream.init(toFileAtPath: videoFilePath.absoluteString, append: true)!
+    let videoFilePath: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/\(name)"))
+    let outputStream: OutputStream = OutputStream.init(toFileAtPath: videoFilePath.path, append: true)!
     
     // Create folder if not exists
     do {
@@ -54,16 +54,18 @@ func writeToFile(name: String, message: String){
     
     // Write to file
     outputStream.open()
-    let messageLength: Int = message.lengthOfBytes(using: .utf8)
-    var messageData: NSData = message.data(using: .utf8, allowLossyConversion: false)! as NSData
+    let messageData: NSData = NSData(data: message.data(using: .utf8)!)
+    let messageLength: Int = messageData.length
+
+    message.data(using: .utf8)?.withUnsafeBytes({ (p: UnsafePointer<UInt8>) -> Void in
+        outputStream.write(p, maxLength: messageLength)
+        print(outputStream.streamError)
+    })
     
-    //withUnsafeBytes(of: &messageData, <#T##body: (UnsafeRawBufferPointer) throws -> Result##(UnsafeRawBufferPointer) throws -> Result#>)
+    outputStream.write("Hello", maxLength: "hello".lengthOfBytes(using: .utf8))
+    print(outputStream.streamError)
     
-//    withUnsafePointer(to: &messageData.bytes) { (p) -> Void in
-//        print(p)
-//        outputStream.write(p, maxLength: messageLength)
-//    }
-    
+    outputStream.close()
 }
 
 
