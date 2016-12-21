@@ -98,21 +98,13 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         stream.broadcastData(message: imageData)
         
         // Write to file
-        print("---> Writing to file \(self.videoFilePath?.path)")
-        let res = imageData.write(to: self.videoFilePath!, atomically: false)
-        print(res)
-        
         let rPointer = withUnsafeBytes(of: &imageData) { (p) -> UnsafePointer<UInt8> in
             return (p.baseAddress?.bindMemory(to: UInt8.self, capacity: dataLength))!
         }
-        print(rPointer)
-        
         let written = outputStream?.write(rPointer, maxLength: dataLength)
+        print("---> Writing to file \(self.videoFilePath?.path)")
         print(Mirror(reflecting: written))
-        
-//        let p = withUnsafePointer(to: &imageData, <#T##body: (UnsafePointer<T>) throws -> Result##(UnsafePointer<T>) throws -> Result#>)
-        
-//        outputStream?.write(<#T##buffer: UnsafePointer<UInt8>##UnsafePointer<UInt8>#>, maxLength: <#T##Int#>)
+        print(written)
         
     }
     
