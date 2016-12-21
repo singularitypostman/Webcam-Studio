@@ -93,12 +93,26 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
         // Send the live image to the server
-        let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
+        var imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
         stream.broadcastData(message: imageData)
         
         // Write to file
         print("---> Writing to file \(self.videoFilePath?.path)")
-        imageData.write(to: self.videoFilePath!, atomically: false)
+        let res = imageData.write(to: self.videoFilePath!, atomically: false)
+        print(res)
+        
+        withUnsafeBytes(of: &imageData) { (p) -> Void in
+            
+            print(Mirror(reflecting: p))
+            
+            //outputStream?.write(p, maxLength: 2)
+        }
+        
+//        imageData.write(to: <#T##URL#>, atomically: <#T##Bool#>)
+        
+//        let p = withUnsafePointer(to: &imageData, <#T##body: (UnsafePointer<T>) throws -> Result##(UnsafePointer<T>) throws -> Result#>)
+        
+//        outputStream?.write(<#T##buffer: UnsafePointer<UInt8>##UnsafePointer<UInt8>#>, maxLength: <#T##Int#>)
         
     }
     
@@ -164,7 +178,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             sessionReady = !sessionReady
             
             // Close the stream
-            self.outputStream?.close()
+            let res = self.outputStream!.close()
+            print(self.outputStream)
+            print(res)
             
             print("---> Stopping camera")
             
@@ -175,7 +191,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         videoPreviewLayer?.session.startRunning()
         
         // Open the stream
-        self.outputStream?.open()
+        self.outputStream!.open()
         
         // Set the camera state
         sessionReady = !sessionReady
