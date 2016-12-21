@@ -103,7 +103,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 //            return (p.baseAddress?.bindMemory(to: UInt8.self, capacity: dataLength))!
             let rPointer = p.baseAddress?.bindMemory(to: UInt8.self, capacity: dataLength)
             let written = outputStream?.write(rPointer!, maxLength: dataLength)
-            print(written)
+            print("---> Written? \(written)")
             
             return rPointer!
             
