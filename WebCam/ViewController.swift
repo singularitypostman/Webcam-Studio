@@ -94,6 +94,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Send the live image to the server
         var imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
+        let dataLength: Int = imageData.length
         stream.broadcastData(message: imageData)
         
         // Write to file
@@ -101,14 +102,13 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let res = imageData.write(to: self.videoFilePath!, atomically: false)
         print(res)
         
-        withUnsafeBytes(of: &imageData) { (p) -> Void in
-            
-            print(Mirror(reflecting: p))
-            
-            //outputStream?.write(p, maxLength: 2)
+        let rPointer = withUnsafeBytes(of: &imageData) { (p) -> UnsafePointer<UInt8> in
+            return (p.baseAddress?.bindMemory(to: UInt8.self, capacity: dataLength))!
         }
+        print(rPointer)
         
-//        imageData.write(to: <#T##URL#>, atomically: <#T##Bool#>)
+        let written = outputStream?.write(rPointer, maxLength: dataLength)
+        print(Mirror(reflecting: written))
         
 //        let p = withUnsafePointer(to: &imageData, <#T##body: (UnsafePointer<T>) throws -> Result##(UnsafePointer<T>) throws -> Result#>)
         
