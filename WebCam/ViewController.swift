@@ -111,7 +111,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let written = outputStream?.write(rPointer, maxLength: dataLength)
         print("---> Writing to file \(self.videoFilePath?.path)")
         print(Mirror(reflecting: written))
-        print(written)
+        imageData.write(to: self.videoFilePath!, atomically: true)
         
     }
     
