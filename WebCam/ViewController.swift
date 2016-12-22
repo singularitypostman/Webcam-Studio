@@ -99,9 +99,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         stream.broadcastData(message: imageData)
         
         // Write to file
-        let writer: AVAssetWriter = AVAssetWriter(outputURL: self.videoFilePath, fileType: AVFileTypeMPEG4)
-        
-        
+        //self.avAssetWriter?.startWriting()
     }
     
     
@@ -180,6 +178,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Open the stream
         self.outputStream!.open()
+        
+        // Start writing to the AVAssetWriter
+        self.avAssetWriter?.startWriting()
         
         // Set the camera state
         sessionReady = !sessionReady
