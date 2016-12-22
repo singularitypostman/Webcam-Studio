@@ -27,6 +27,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     let stream: Stream = Stream()
     
     var outputStream: OutputStream? = nil
+    var avAssetWriter: AVAssetWriter? = nil
     
     @IBOutlet weak var playerPreview:NSView?
     @IBOutlet weak var videoPlayerView: NSView!
@@ -98,7 +99,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         stream.broadcastData(message: imageData)
         
         // Write to file
-        //let writer: AVAssetWriter = AVAssetWriter(outputURL: self.videoFilePath, fileType: "")
+        let writer: AVAssetWriter = AVAssetWriter(outputURL: self.videoFilePath, fileType: AVFileTypeMPEG4)
+        
         
     }
     
@@ -280,6 +282,14 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Set the output stream
         self.outputStream = OutputStream.init(toFileAtPath: (self.videoFilePath?.path)!, append: true)!
+        
+        // Set the writer
+        do {
+            try self.avAssetWriter = AVAssetWriter(outputURL: self.videoFilePath!, fileType: AVFileTypeMPEG4)
+        } catch let err as NSError {
+            print("---> Error: Cannot create writer")
+            print(err)
+        }
 
         
         // Set the screen input

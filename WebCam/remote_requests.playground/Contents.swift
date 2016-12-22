@@ -2,6 +2,7 @@
 
 import Cocoa
 import Darwin
+import AVFoundation
 
 func htons(value: CUnsignedShort) -> CUnsignedShort {
     return (value << 8) + (value >> 8)
@@ -69,4 +70,11 @@ func writeToFile(name: String, message: String){
 
 
 //sendMessage(message: "Message from Swift 3")
-writeToFile(name: "writing_test.txt", message: "Hello")
+//writeToFile(name: "writing_test.txt", message: "Hello")
+
+let url: URL = URL(fileURLWithPath: "/Users/Shavit/Downloads/WebCam/test.mp4")
+do {
+    let av: AVAssetWriter = try AVAssetWriter(outputURL: url, fileType: AVFileTypeMPEG4)
+} catch let err as NSError{
+    print("---> Error writing to \(url.path)")
+}
