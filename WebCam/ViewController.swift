@@ -282,8 +282,10 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.outputStream = OutputStream.init(toFileAtPath: (self.videoFilePath?.path)!, append: true)!
         
         // Set the writer
-        self.avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: ["expectsMediaDataInRealTime": true])
-
+        self.avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: nil)
+        self.avAssetWriterInput?.expectsMediaDataInRealTime = true
+        
+        
         
         // Set the screen input
         let displayID: CGDirectDisplayID = CGDirectDisplayID(CGMainDisplayID())
