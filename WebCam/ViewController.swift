@@ -98,8 +98,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let dataLength: Int = imageData.length
         stream.broadcastData(message: imageData)
         
-        // Write to file
-        //self.avAssetWriter?.startWriting()
+        // Append to the asset writer input
+        self.avAssetWriterInput!.append(sampleBuffer)
     }
     
     
