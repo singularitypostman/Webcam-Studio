@@ -76,8 +76,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
         
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-        
         _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        
         //        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
         let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
         let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
@@ -94,12 +94,15 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
         // Send the live image to the server
-        var imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
+        let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
         let dataLength: Int = imageData.length
         stream.broadcastData(message: imageData)
         
         // Append to the asset writer input
-        self.avAssetWriterInput!.append(sampleBuffer)
+        self.avAssetWriterInput?.append(sampleBuffer)
+        print(self.avAssetWriterInput)
+        
+
     }
     
     
@@ -284,8 +287,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Set the writer
         self.avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: nil)
         self.avAssetWriterInput?.expectsMediaDataInRealTime = true
-        
-        
         
         // Set the screen input
         let displayID: CGDirectDisplayID = CGDirectDisplayID(CGMainDisplayID())
