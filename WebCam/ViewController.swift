@@ -206,7 +206,13 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
         
         // Set the writer
-        let avAssetWriterInput: AVAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: nil)
+        let avAssetWriterInputSettings: [String: Any] = [
+            AVVideoCodecKey: AVVideoCodecH264,
+            AVVideoWidthKey: 420,
+            AVVideoHeightKey: 320,
+            AVVideoCompressionPropertiesKey: [AVVideoAverageBitRateKey: 10 * 1000000]
+        ]
+        let avAssetWriterInput: AVAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: avAssetWriterInputSettings)
         avAssetWriterInput.expectsMediaDataInRealTime = true
         
         do {
@@ -216,6 +222,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             } else {
                 print("---> Cannot add avAssetWriterInput")
                 print(self.avAssetWriter!.error)
+                print(avAssetWriterInput)
             }
             
         } catch let err as NSError {

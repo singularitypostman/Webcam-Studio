@@ -78,3 +78,16 @@ do {
 } catch let err as NSError{
     print("---> Error writing to \(url.path)")
 }
+
+let outputSettings = [
+    AVVideoCodecKey: AVVideoCodecH264,
+    AVVideoWidthKey: 420,
+    AVVideoHeightKey: 320,
+    AVVideoCompressionPropertiesKey: [AVVideoAverageBitRateKey: 10 * 1000000]
+    ] as [String : Any]
+let avAssetWriterInput: AVAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: outputSettings)
+
+
+
+
+
