@@ -28,6 +28,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     var outputStream: OutputStream? = nil
     var avAssetWriterInput: AVAssetWriterInput? = nil
+    var avAsset: AVAsset? = nil
     
     @IBOutlet weak var playerPreview:NSView?
     @IBOutlet weak var videoPlayerView: NSView!
@@ -101,6 +102,14 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         //self.avAssetWriterInput?.append(sampleBuffer)
         
         let res = imageData.write(to: self.videoFilePath!, atomically: true)
+        print(res)
+        
+        do {
+            let reader: AVAssetReader = try AVAssetReader(asset: self.avAsset!)
+            print(reader)
+        } catch let err as NSError {
+            print("Error initializing AVAssetReader: \(err)")
+        }
     }
     
     
@@ -264,6 +273,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
         let filePathValidator: FileManager = FileManager.default
         self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
+        self.avAsset = AVAsset(url: self.videoFilePath!)
+        
         
         // Create folder if not exists
         do {
