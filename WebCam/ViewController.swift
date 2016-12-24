@@ -204,12 +204,13 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let avAssetWriterInput: AVAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: nil)
         avAssetWriterInput.expectsMediaDataInRealTime = true
         
-//        do {
-//            self.avAssetWriter = try AVAssetWriter(outputURL: videoFilePath!, fileType: AVFileTypeMPEG4)
-//            //self.avAssetWriter?.add(self.avAssetWriterInput!)
-//        } catch let err as NSError {
-//            print("Error initializing AVAssetWriter: \(err)")
-//        }
+        do {
+            self.avAssetWriter = try AVAssetWriter(outputURL: videoFilePath!, fileType: AVFileTypeMPEG4)
+            //self.avAssetWriter!.add(avAssetWriterInput)
+            
+        } catch let err as NSError {
+            print("Error initializing AVAssetWriter: \(err)")
+        }
         
         let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
         // Pick the first one
