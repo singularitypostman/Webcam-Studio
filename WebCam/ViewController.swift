@@ -95,14 +95,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Send the live image to the server
         let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
-        let dataLength: Int = imageData.length
         stream.broadcastData(message: imageData)
         
         // Append to the asset writer input
-        self.avAssetWriterInput?.append(sampleBuffer)
-        print(self.avAssetWriterInput)
+        //self.avAssetWriterInput?.append(sampleBuffer)
         
-
+        let res = imageData.write(to: self.videoFilePath!, atomically: true)
     }
     
     
