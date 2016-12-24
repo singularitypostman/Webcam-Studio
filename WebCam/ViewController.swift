@@ -179,13 +179,13 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let secondsToCapture: Float64 = 10
         let timeScale: __int32_t = 600
         let cmTime: CMTime = CMTimeMakeWithSeconds(secondsToCapture, timeScale)
-        let res = self.avAssetWriter?.startWriting()
-        print("Start writing? \(res)")
-        print(self.avAssetWriter?.error)
+        if self.avAssetWriter?.startWriting() == false{
+            print(self.avAssetWriter?.error)
+        }
         self.avAssetWriter?.startSession(atSourceTime: cmTime)
         
         // Set the camera state
-        self.sessionReady = true
+        self.sessionReady = !sessionReady
         
     }
     
