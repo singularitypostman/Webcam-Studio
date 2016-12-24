@@ -156,6 +156,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
         print("---> Clicked \(sessionReady)")
+        print(self.avAssetWriter)
         
         if (self.sessionReady == false){
             // Stop the session
@@ -178,6 +179,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let secondsToCapture: Float64 = 10
         let timeScale: __int32_t = 600
         let cmTime: CMTime = CMTimeMakeWithSeconds(secondsToCapture, timeScale)
+        let res = self.avAssetWriter?.startWriting()
+        print("Start writing? \(res)")
+        print(self.avAssetWriter?.error)
         self.avAssetWriter?.startSession(atSourceTime: cmTime)
         
         // Set the camera state
@@ -194,6 +198,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.downloadsDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
+        do {
+            try FileManager.default.createDirectory(at: videoFileDirectory, withIntermediateDirectories: true, attributes: nil)
+        } catch let err as NSError {
+            print("Error creating a directory for the output file \(err)")
+        }
         self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
         
         // Set the writer
@@ -202,13 +211,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         do {
             self.avAssetWriter = try AVAssetWriter(outputURL: videoFilePath!, fileType: AVFileTypeMPEG4)
-            print("AVAssetWriter")
-            print(self.avAssetWriter)
-//            if self.avAssetWriter!.canAdd(avAssetWriterInput) {
-//                self.avAssetWriter!.add(avAssetWriterInput)
-//            } else {
-//                print("---> Cannot add avAssetWriterInput")
-//            }
+            if self.avAssetWriter!.canAdd(avAssetWriterInput) {
+                self.avAssetWriter!.add(avAssetWriterInput)
+            } else {
+                print("---> Cannot add avAssetWriterInput")
+                print(self.avAssetWriter!.error)
+            }
             
         } catch let err as NSError {
             print("Error initializing AVAssetWriter: \(err)")
