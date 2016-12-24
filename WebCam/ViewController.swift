@@ -24,7 +24,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     let stream: Stream = Stream()
     
-    var avAssetWriterInput: AVAssetWriterInput? = nil
     var avAsset: AVAsset? = nil
     var avAssetWriter: AVAssetWriter? = nil
     
@@ -202,14 +201,15 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
         
         // Set the writer
-        self.avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: nil)
-        self.avAssetWriterInput?.expectsMediaDataInRealTime = true
-        do {
-            self.avAssetWriter = try AVAssetWriter(outputURL: videoFilePath!, fileType: AVFileTypeMPEG4)
-            //self.avAssetWriter?.add(self.avAssetWriterInput!)
-        } catch let err as NSError {
-            print("Error initializing AVAssetWriter: \(err)")
-        }
+        let avAssetWriterInput: AVAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: nil)
+        avAssetWriterInput.expectsMediaDataInRealTime = true
+        
+//        do {
+//            self.avAssetWriter = try AVAssetWriter(outputURL: videoFilePath!, fileType: AVFileTypeMPEG4)
+//            //self.avAssetWriter?.add(self.avAssetWriterInput!)
+//        } catch let err as NSError {
+//            print("Error initializing AVAssetWriter: \(err)")
+//        }
         
         let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
         // Pick the first one
