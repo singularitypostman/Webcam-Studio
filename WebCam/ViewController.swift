@@ -196,10 +196,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Microphone
         // let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureHALDevice")
         
-        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.downloadsDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-        let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
+        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+        print("---> Create directory at path \(videoFileDirectory)")
+        
         do {
-            try FileManager.default.createDirectory(at: videoFileDirectory, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(atPath: videoFileDirectory.path, withIntermediateDirectories: false, attributes: nil)
         } catch let err as NSError {
             print("Error creating a directory for the output file \(err)")
         }
