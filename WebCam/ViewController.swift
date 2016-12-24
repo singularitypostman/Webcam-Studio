@@ -69,13 +69,13 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
         
-        let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-        _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        //let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
+        //_ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
         //        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
-        let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
-        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
-        let image = CVPixelBufferGetBaseAddress(imageBuffer)
+        //let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
+        //let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
+        //let image = CVPixelBufferGetBaseAddress(imageBuffer)
         
         
         // Perform core animation in the main thread
@@ -85,19 +85,21 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         //        }
         
         // Unlock the buffer
-        CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
-        
-        // Send the live image to the server
-        let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
-        stream.broadcastData(message: imageData)
-        
-        // Append to the asset writer input
-        self.avAssetWriterInput?.append(sampleBuffer)
+        //CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
         // Write to a file from NSData for debugging
-        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-        let dataOutputFile: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_2.mp4"))
-        imageData.write(to: dataOutputFile, atomically: true)
+        //let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
+        //let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+        //let dataOutputFile: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_2.mp4"))
+        //imageData.write(to: dataOutputFile, atomically: true)
+        
+        // Send the live image to the server
+        //stream.broadcastData(message: imageData)
+        
+        // Append to the asset writer input
+        DispatchQueue.main.async {
+            self.avAssetWriterInput?.append(sampleBuffer)
+        }
     }
     
     
@@ -162,11 +164,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             sessionReady = !sessionReady
             
             //self.avAssetWriter?.cancelWriting()
+//            let secondsToCapture: Float64 = 10
+//            let timeScale: __int32_t = 60
+//            let cmTime: CMTime = CMTimeMakeWithSeconds(secondsToCapture, timeScale)
+//            self.avAssetWriter?.endSession(atSourceTime: cmTime)
             self.avAssetWriter?.finishWriting {
-                let secondsToCapture: Float64 = 10
-                let timeScale: __int32_t = 60
-                let cmTime: CMTime = CMTimeMakeWithSeconds(secondsToCapture, timeScale)
-                self.avAssetWriter?.endSession(atSourceTime: cmTime)
                 print("---> Finish writing")
             }
             
@@ -176,12 +178,15 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
         print("---> Starting camera session")
+        // Set the writer
+        // It can be only use once
+        createWriter()
         
         // Start the session
         videoPreviewLayer?.session.startRunning()
         
         // Start the writing session
-        let secondsToCapture: Float64 = 10
+        let secondsToCapture: Float64 = 4
         let timeScale: __int32_t = 60
         let cmTime: CMTime = CMTimeMakeWithSeconds(secondsToCapture, timeScale)
         self.avAssetWriter?.startWriting()
@@ -210,29 +215,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
         
         // Set the writer
-        let avAssetWriterInputSettings: [String: Any] = [
-            AVVideoCodecKey: AVVideoCodecH264,
-            AVVideoWidthKey: 420,
-            AVVideoHeightKey: 320,
-            AVVideoCompressionPropertiesKey: [AVVideoAverageBitRateKey: 10 * 1000000]
-        ]
-        avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: avAssetWriterInputSettings)
-        avAssetWriterInput?.expectsMediaDataInRealTime = true
-        
-        do {
-            self.avAssetWriter = try AVAssetWriter(outputURL: videoFilePath!, fileType: AVFileTypeMPEG4)
-            if self.avAssetWriter!.canAdd(avAssetWriterInput!) {
-                print("---> Adding input to AVAsset at \(videoFilePath!.path)")
-                self.avAssetWriter!.add(avAssetWriterInput!)
-            } else {
-                print("---> Cannot add avAssetWriterInput")
-                print(self.avAssetWriter!.error)
-                print(avAssetWriterInput)
-            }
-            
-        } catch let err as NSError {
-            print("Error initializing AVAssetWriter: \(err)")
-        }
+        //createWriter()
         
         let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
         // Pick the first one
@@ -284,6 +267,32 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             print("---> Cannot use webcam")
         }
         
+    }
+    
+    private func createWriter(){
+        let avAssetWriterInputSettings: [String: Any] = [
+            AVVideoCodecKey: AVVideoCodecH264,
+            AVVideoWidthKey: 420,
+            AVVideoHeightKey: 320,
+            AVVideoCompressionPropertiesKey: [AVVideoAverageBitRateKey: 10 * 1000000]
+        ]
+        avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: avAssetWriterInputSettings)
+        avAssetWriterInput?.expectsMediaDataInRealTime = true
+        
+        do {
+            self.avAssetWriter = try AVAssetWriter(outputURL: videoFilePath!, fileType: AVFileTypeMPEG4)
+            if self.avAssetWriter!.canAdd(avAssetWriterInput!) {
+                print("---> Adding input to AVAsset at \(videoFilePath!.path)")
+                self.avAssetWriter!.add(avAssetWriterInput!)
+            } else {
+                print("---> Cannot add avAssetWriterInput")
+                print(self.avAssetWriter!.error)
+                print(avAssetWriterInput)
+            }
+            
+        } catch let err as NSError {
+            print("Error initializing AVAssetWriter: \(err)")
+        }
     }
     
 }
