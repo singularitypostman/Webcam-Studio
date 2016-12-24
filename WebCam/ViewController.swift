@@ -155,7 +155,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
-        if (sessionReady == false){
+        print("---> Clicked \(sessionReady)")
+        
+        if (self.sessionReady == false){
             // Stop the session
             videoPreviewLayer?.session.stopRunning()
             sessionReady = !sessionReady
@@ -179,7 +181,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.avAssetWriter?.startSession(atSourceTime: cmTime)
         
         // Set the camera state
-        sessionReady = !sessionReady
+        self.sessionReady = true
         
     }
     
