@@ -17,8 +17,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var videoOutput:AVCaptureVideoDataOutput? = nil
     var videoSession:AVCaptureSession? = nil
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
-    var screenCaptureSession:AVCaptureSession? = nil
-    var videoFileOutput: AVCaptureMovieFileOutput? = nil
     var videoFilePath: URL? = nil
     
     var sessionReady:Bool = true
@@ -26,9 +24,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     let stream: Stream = Stream()
     
-    var outputStream: OutputStream? = nil
     var avAssetWriterInput: AVAssetWriterInput? = nil
     var avAsset: AVAsset? = nil
+    var avAssetWriter: AVAssetWriter? = nil
     
     @IBOutlet weak var playerPreview:NSView?
     @IBOutlet weak var videoPlayerView: NSView!
@@ -38,17 +36,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Do any additional setup after loading the view.
         videoOutput = AVCaptureVideoDataOutput()
-        // Video file for screen capture
-        videoFileOutput = AVCaptureMovieFileOutput()
+        
         // Webcam session
         videoSession = AVCaptureSession()
         videoSession?.sessionPreset = AVCaptureSessionPresetHigh
-        // Screen capture session
-        screenCaptureSession = AVCaptureSession()
-        screenCaptureSession?.sessionPreset = AVCaptureSessionPresetHigh
         
         self.setVideoSession()
-        self.setCaptureSession()
     }
     
     override func viewWillAppear() {
@@ -104,12 +97,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let res = imageData.write(to: self.videoFilePath!, atomically: true)
         print(res)
         
-        do {
-            let reader: AVAssetReader = try AVAssetReader(asset: self.avAsset!)
-            print(reader)
-        } catch let err as NSError {
-            print("Error initializing AVAssetReader: \(err)")
-        }
+        //self.avAssetWriter?.startWriting()
     }
     
     
@@ -173,10 +161,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             videoPreviewLayer?.session.stopRunning()
             sessionReady = !sessionReady
             
-            // Close the stream
-            let res = self.outputStream!.close()
-            print(self.outputStream)
-            print(res)
+            self.avAssetWriter?.cancelWriting()
             
             print("---> Stopping camera")
             
@@ -186,8 +171,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Start the session
         videoPreviewLayer?.session.startRunning()
         
-        // Open the stream
-        self.outputStream!.open()
+        // Start the writing session
+        let cmTime: CMTime = CMTime()
+        self.avAssetWriter?.startSession(atSourceTime: cmTime)
         
         // Set the camera state
         sessionReady = !sessionReady
@@ -201,10 +187,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             return
         }
         
-        print("---> Capturing screen")
-        self.screenCaptureSession?.startRunning()
-        self.videoFileOutput?.startRecording(toOutputFileURL: self.videoFilePath, recordingDelegate: self)
-        
         sessionReady = !sessionReady
     }
     
@@ -214,6 +196,20 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         //let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureDALDevice")
         // Microphone
         // let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureHALDevice")
+        
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.downloadsDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
+        self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
+        
+        // Set the writer
+        self.avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: nil)
+        self.avAssetWriterInput?.expectsMediaDataInRealTime = true
+        do {
+            self.avAssetWriter = try AVAssetWriter(outputURL: videoFilePath!, fileType: AVFileTypeMPEG4)
+            //self.avAssetWriter?.add(self.avAssetWriterInput!)
+        } catch let err as NSError {
+            print("Error initializing AVAssetWriter: \(err)")
+        }
         
         let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
         // Pick the first one
@@ -263,50 +259,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         catch {
             print("---> Cannot use webcam")
-        }
-        
-    }
-    
-    func setCaptureSession(){
-        // Set the capture recording directory
-        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.downloadsDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-        let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
-        let filePathValidator: FileManager = FileManager.default
-        self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
-        self.avAsset = AVAsset(url: self.videoFilePath!)
-        
-        
-        // Create folder if not exists
-        do {
-            print("---> Setting capture session at \(self.videoFilePath?.absoluteString)")
-            if filePathValidator.fileExists(atPath: videoFileDirectory.absoluteString) == false {
-                try filePathValidator.createDirectory(at: videoFileDirectory, withIntermediateDirectories: true, attributes: nil)
-            } else{
-                print("---> File path not exists at \(videoFileDirectory.absoluteString)")
-            }
-            
-        } catch let err as NSError {
-            print("---> Error creating a directory at \(videoFileDirectory.absoluteString)")
-            print(err)
-        }
-        
-        // Set the output stream
-        self.outputStream = OutputStream.init(toFileAtPath: (self.videoFilePath?.path)!, append: true)!
-        
-        // Set the writer
-        self.avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: nil)
-        self.avAssetWriterInput?.expectsMediaDataInRealTime = true
-        
-        // Set the screen input
-        let displayID: CGDirectDisplayID = CGDirectDisplayID(CGMainDisplayID())
-        let input: AVCaptureScreenInput = AVCaptureScreenInput(displayID: displayID)
-        
-        if self.screenCaptureSession?.canAddInput(input) != nil {
-            self.screenCaptureSession?.addInput(input)
-        }
-        
-        if (self.screenCaptureSession?.canAddOutput(self.videoFileOutput))! {
-            self.screenCaptureSession?.addOutput(self.videoFileOutput)
         }
         
     }
