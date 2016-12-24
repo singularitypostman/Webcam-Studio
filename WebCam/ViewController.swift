@@ -219,6 +219,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         do {
             self.avAssetWriter = try AVAssetWriter(outputURL: videoFilePath!, fileType: AVFileTypeMPEG4)
             if self.avAssetWriter!.canAdd(avAssetWriterInput) {
+                print("---> Adding input to AVAsset at \(videoFilePath!.path)")
                 self.avAssetWriter!.add(avAssetWriterInput)
             } else {
                 print("---> Cannot add avAssetWriterInput")
