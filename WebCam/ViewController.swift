@@ -26,6 +26,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     var avAsset: AVAsset? = nil
     var avAssetWriter: AVAssetWriter? = nil
+    var avAssetWriterInput: AVAssetWriterInput? = nil
     
     @IBOutlet weak var playerPreview:NSView?
     @IBOutlet weak var videoPlayerView: NSView!
@@ -91,12 +92,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         stream.broadcastData(message: imageData)
         
         // Append to the asset writer input
-        //self.avAssetWriterInput?.append(sampleBuffer)
+        self.avAssetWriterInput?.append(sampleBuffer)
         
-        let res = imageData.write(to: self.videoFilePath!, atomically: true)
-        //print(res)
-        
-        //self.avAssetWriter?.startWriting()
+        // Write to a file from NSData for debugging
+        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+        let dataOutputFile: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_2.mp4"))
+        imageData.write(to: dataOutputFile, atomically: true)
     }
     
     
@@ -210,14 +211,14 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             AVVideoHeightKey: 320,
             AVVideoCompressionPropertiesKey: [AVVideoAverageBitRateKey: 10 * 1000000]
         ]
-        let avAssetWriterInput: AVAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: avAssetWriterInputSettings)
-        avAssetWriterInput.expectsMediaDataInRealTime = true
+        avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: avAssetWriterInputSettings)
+        avAssetWriterInput?.expectsMediaDataInRealTime = true
         
         do {
             self.avAssetWriter = try AVAssetWriter(outputURL: videoFilePath!, fileType: AVFileTypeMPEG4)
-            if self.avAssetWriter!.canAdd(avAssetWriterInput) {
+            if self.avAssetWriter!.canAdd(avAssetWriterInput!) {
                 print("---> Adding input to AVAsset at \(videoFilePath!.path)")
-                self.avAssetWriter!.add(avAssetWriterInput)
+                self.avAssetWriter!.add(avAssetWriterInput!)
             } else {
                 print("---> Cannot add avAssetWriterInput")
                 print(self.avAssetWriter!.error)
