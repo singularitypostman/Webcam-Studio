@@ -94,7 +94,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         //self.avAssetWriterInput?.append(sampleBuffer)
         
         let res = imageData.write(to: self.videoFilePath!, atomically: true)
-        print(res)
+        //print(res)
         
         //self.avAssetWriter?.startWriting()
     }
@@ -162,31 +162,25 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             
             self.avAssetWriter?.cancelWriting()
             
-            print("---> Stopping camera")
+            print("---> Stopping camera session")
             
             return
         }
+        
+        print("---> Starting camera session")
         
         // Start the session
         videoPreviewLayer?.session.startRunning()
         
         // Start the writing session
-        let cmTime: CMTime = CMTime()
+        let secondsToCapture: Float64 = 10
+        let timeScale: __int32_t = 600
+        let cmTime: CMTime = CMTimeMakeWithSeconds(secondsToCapture, timeScale)
         self.avAssetWriter?.startSession(atSourceTime: cmTime)
         
         // Set the camera state
         sessionReady = !sessionReady
         
-    }
-    
-    @IBAction func CaptureScreenVideo(_ sender: Any) {
-        if (sessionReady == false){
-            // Stop the session
-            sessionReady = !sessionReady
-            return
-        }
-        
-        sessionReady = !sessionReady
     }
     
     
