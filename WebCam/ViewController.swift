@@ -155,9 +155,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
-        print("---> Clicked \(sessionReady)")
-        print(self.avAssetWriter)
-        
         if (self.sessionReady == false){
             // Stop the session
             videoPreviewLayer?.session.stopRunning()
