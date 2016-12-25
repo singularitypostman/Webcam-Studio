@@ -23,6 +23,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var sessionReady:Bool = true
     var detectionBoxView: NSView?
     
+    let videoWriterQueue: DispatchQueue = DispatchQueue(label: "videoWriter")
+    
     var avAsset: AVAsset? = nil
     var avAssetWriter: AVAssetWriter? = nil
     var avAssetWriterInput: AVAssetWriterInput? = nil
@@ -100,7 +102,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
         
         // Append to the asset writer input
-        DispatchQueue.main.async {
+        videoWriterQueue.async {
             self.avAssetWriterInput?.append(sampleBuffer)
         }
     }
