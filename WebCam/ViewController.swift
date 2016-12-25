@@ -15,6 +15,7 @@ import CoreMedia
 class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
     var webcam:AVCaptureDevice? = nil
     var videoOutput:AVCaptureVideoDataOutput? = nil
+    var audioOutput:AVCaptureAudioDataOutput? = nil
     var videoSession:AVCaptureSession? = nil
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
     var videoFilePath: URL? = nil
@@ -36,6 +37,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Do any additional setup after loading the view.
         videoOutput = AVCaptureVideoDataOutput()
+        audioOutput = AVCaptureAudioDataOutput()
         
         // Webcam session
         videoSession = AVCaptureSession()
@@ -95,6 +97,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Send the live image to the server
         //stream.broadcastData(message: imageData)
+        
+        // Audio
+        //print(CMSampleBufferGetFormatDescription(sampleBuffer))
         
         // Append to the asset writer input
         DispatchQueue.main.async {
@@ -227,9 +232,10 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
         do {
-            let input = try AVCaptureDeviceInput(device: webcam)
-            if videoSession!.canAddInput(input){
-                videoSession!.addInput(input)
+            //let microphoneInput: AVCaptureAudioChannel = try AVCaptureConnection(inputPort: <#T##AVCaptureInputPort!#>, videoPreviewLayer: <#T##AVCaptureVideoPreviewLayer!#>)
+            let webcamInput: AVCaptureDeviceInput = try AVCaptureDeviceInput(device: webcam)
+            if videoSession!.canAddInput(webcamInput){
+                videoSession!.addInput(webcamInput)
                 
                 //                videoOutput!.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: Int(kCVPixelFormatType_420YpCbCr8PlanarFullRange)]
                 videoOutput!.alwaysDiscardsLateVideoFrames = true
@@ -259,6 +265,10 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
                 if videoSession!.canAddOutput(videoOutput){
                     videoSession!.addOutput(videoOutput)
                 }
+                if videoSession!.canAddOutput(audioOutput){
+                    videoSession!.addOutput(audioOutput)
+                }
+                
                 
             }
             
