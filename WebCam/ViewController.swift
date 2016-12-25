@@ -29,7 +29,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var avAssetWriter: AVAssetWriter? = nil
     var avAssetWriterInput: AVAssetWriterInput? = nil
     
-    let cmTimeScale: Int32 = 24
+    let cmTimeScale: Int32 = 1000000000
     var currentRecordingTime: Int64 = 0
     
     @IBOutlet weak var playerPreview:NSView?
@@ -172,6 +172,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             sessionReady = !sessionReady
             
             
+            // Not needed
             //let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
             //self.avAssetWriter?.endSession(atSourceTime: cmTime)
             self.avAssetWriter?.finishWriting {
@@ -290,7 +291,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     private func createWriter(){
         
         let numPixels: Float64 = 480*320
-        let bitsPerPixel: Float64 = 10.1
+        //let bitsPerPixel: Float64 = 10.1
+        let bitsPerPixel: Float64 = 4
         let bitsPerSecond: Float64 = numPixels * bitsPerPixel
         let avAssetWriterInputSettings: [String: Any] = [
             AVVideoCodecKey: AVVideoCodecH264,
@@ -298,8 +300,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             AVVideoHeightKey: 320,
             AVVideoCompressionPropertiesKey: [
                 AVVideoAverageBitRateKey: bitsPerSecond,
-                AVVideoExpectedSourceFrameRateKey: 24,
-                AVVideoMaxKeyFrameIntervalKey: 60
+                AVVideoExpectedSourceFrameRateKey: 30,
+                AVVideoMaxKeyFrameIntervalKey: 30
             ]
         ]
         avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: avAssetWriterInputSettings)
