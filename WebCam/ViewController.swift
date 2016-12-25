@@ -29,6 +29,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var avAssetWriter: AVAssetWriter? = nil
     var avAssetWriterInput: AVAssetWriterInput? = nil
     
+    let cmTimeScale: Int32 = 24
+    var currentRecordingTime: Int64 = 0
+    
     @IBOutlet weak var playerPreview:NSView?
     @IBOutlet weak var videoPlayerView: NSView!
     
@@ -70,7 +73,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
-        
+        currentRecordingTime = Int64(CMSampleBufferGetPresentationTimeStamp(sampleBuffer).seconds)
         //let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
         //_ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
@@ -105,7 +108,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         videoWriterQueue.async {
             self.avAssetWriterInput?.append(sampleBuffer)
         }
-}
+    }
     
     
     /*!
@@ -169,10 +172,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             sessionReady = !sessionReady
             
             //self.avAssetWriter?.cancelWriting()
-//            let secondsToCapture: Float64 = 10
-//            let timeScale: __int32_t = 60
-//            let cmTime: CMTime = CMTimeMakeWithSeconds(secondsToCapture, timeScale)
-//            self.avAssetWriter?.endSession(atSourceTime: cmTime)
+            //let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
+            //self.avAssetWriter?.endSession(atSourceTime: cmTime)
             self.avAssetWriter?.finishWriting {
                 print("---> Finish writing")
             }
@@ -191,10 +192,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         videoPreviewLayer?.session.startRunning()
         
         // Start the writing session
-        let cmSeconds: Int64 = 1
-        let timeScale: Int32 = 24
-        let cmTime: CMTime = CMTimeMake(cmSeconds, timeScale)
         self.avAssetWriter?.startWriting()
+        let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
         self.avAssetWriter?.startSession(atSourceTime: cmTime)
         
         // Set the camera state
@@ -232,61 +231,58 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
         do {
-            //let microphoneInput: AVCaptureAudioChannel = try AVCaptureConnection(inputPort: <#T##AVCaptureInputPort!#>, videoPreviewLayer: <#T##AVCaptureVideoPreviewLayer!#>)
             let webcamInput: AVCaptureDeviceInput = try AVCaptureDeviceInput(device: webcam)
             if videoSession!.canAddInput(webcamInput){
                 videoSession!.addInput(webcamInput)
-                
-                //                videoOutput!.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: Int(kCVPixelFormatType_420YpCbCr8PlanarFullRange)]
-                videoOutput!.alwaysDiscardsLateVideoFrames = true
-                
-                // Register the sample buffer callback
-                let videoOutputQueue = DispatchQueue(label: "WebcamVideo")
-                videoOutput!.setSampleBufferDelegate(self, queue: videoOutputQueue)
-                
-                videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoSession)
-                // resize the video to fill
-                videoPreviewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
-                videoPreviewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.portrait
-                
-                // position the layer
-                videoPreviewLayer!.position = CGPoint(x: (self.playerPreview?.frame.width)!/2, y: (self.playerPreview?.frame.height)!/2)
-                videoPreviewLayer!.bounds = (self.playerPreview?.frame)!
-                
-                // add the preview to the view
-                //                playerPreview?.layer?.addSublayer(videoPreviewLayer!)
-                playerPreview?.layer? = videoPreviewLayer!
-                
-                // Add a detection box on top of the preview layer
-                self.detectionBoxView = DetectionBoxView()
-                playerPreview?.addSubview(self.detectionBoxView!)
-                
-//                audioOutput?.audioSettings = [
-//                    AVSampleRateKey: 44100,
-//                    AVFormatIDKey: kAudioFormatLinearPCM,
-//                    AVNumberOfChannelsKey: 2,
-//                    AVLinearPCMBitDepthKey: 16,
-//                    AVLinearPCMIsNonInterleaved: false,
-//                    AVLinearPCMIsBigEndianKey: false,
-//                    AVLinearPCMIsFloatKey: false
-//                ]
-                let audioOutputQueue = DispatchQueue(label: "WebcamAudio")
-                audioOutput?.setSampleBufferDelegate(self, queue: audioOutputQueue)
-                
-                // Output data
-                if videoSession!.canAddOutput(videoOutput){
-                    videoSession!.addOutput(videoOutput)
-                }
-                if videoSession!.canAddOutput(audioOutput){
-                    videoSession!.addOutput(audioOutput)
-                }
-                
-                
             }
             
         }
         catch {
             print("---> Cannot use webcam")
+        }
+        
+        //                videoOutput!.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: Int(kCVPixelFormatType_420YpCbCr8PlanarFullRange)]
+        videoOutput!.alwaysDiscardsLateVideoFrames = true
+        
+        // Register the sample buffer callback
+        let videoOutputQueue = DispatchQueue(label: "WebcamVideo")
+        videoOutput!.setSampleBufferDelegate(self, queue: videoOutputQueue)
+        
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoSession)
+        // resize the video to fill
+        videoPreviewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
+        videoPreviewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.portrait
+        
+        // position the layer
+        videoPreviewLayer!.position = CGPoint(x: (self.playerPreview?.frame.width)!/2, y: (self.playerPreview?.frame.height)!/2)
+        videoPreviewLayer!.bounds = (self.playerPreview?.frame)!
+        
+        // add the preview to the view
+        //                playerPreview?.layer?.addSublayer(videoPreviewLayer!)
+        playerPreview?.layer? = videoPreviewLayer!
+        
+        // Add a detection box on top of the preview layer
+        self.detectionBoxView = DetectionBoxView()
+        playerPreview?.addSubview(self.detectionBoxView!)
+        
+        //                audioOutput?.audioSettings = [
+        //                    AVSampleRateKey: 44100,
+        //                    AVFormatIDKey: kAudioFormatLinearPCM,
+        //                    AVNumberOfChannelsKey: 2,
+        //                    AVLinearPCMBitDepthKey: 16,
+        //                    AVLinearPCMIsNonInterleaved: false,
+        //                    AVLinearPCMIsBigEndianKey: false,
+        //                    AVLinearPCMIsFloatKey: false
+        //                ]
+        let audioOutputQueue = DispatchQueue(label: "WebcamAudio")
+        audioOutput?.setSampleBufferDelegate(self, queue: audioOutputQueue)
+        
+        // Output data
+        if videoSession!.canAddOutput(videoOutput){
+            videoSession!.addOutput(videoOutput)
+        }
+        if videoSession!.canAddOutput(audioOutput){
+            videoSession!.addOutput(audioOutput)
         }
         
     }
