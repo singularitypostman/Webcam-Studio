@@ -23,8 +23,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var sessionReady:Bool = true
     var detectionBoxView: NSView?
     
-    let stream: Stream = Stream()
-    
     var avAsset: AVAsset? = nil
     var avAssetWriter: AVAssetWriter? = nil
     var avAssetWriterInput: AVAssetWriterInput? = nil
@@ -291,7 +289,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             AVVideoCompressionPropertiesKey: [
                 AVVideoAverageBitRateKey: bitsPerSecond,
                 AVVideoExpectedSourceFrameRateKey: 24,
-                AVVideoMaxKeyFrameIntervalKey: 24
+                AVVideoMaxKeyFrameIntervalKey: 60
             ]
         ]
         avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: avAssetWriterInputSettings)
@@ -302,10 +300,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             if self.avAssetWriter!.canAdd(avAssetWriterInput!) {
                 print("---> Adding input to AVAsset at \(videoFilePath!.path)")
                 self.avAssetWriter!.add(avAssetWriterInput!)
-            } else {
-                print("---> Cannot add avAssetWriterInput")
-                print(self.avAssetWriter!.error)
-                print(avAssetWriterInput)
             }
             
         } catch let err as NSError {
