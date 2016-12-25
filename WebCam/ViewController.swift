@@ -186,9 +186,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         videoPreviewLayer?.session.startRunning()
         
         // Start the writing session
-        let cmSeconds: Float64 = 0
-        let timeScale: __int32_t = 10000
-        let cmTime: CMTime = CMTimeMakeWithSeconds(cmSeconds, timeScale)
+        let cmSeconds: Int64 = 0
+        let timeScale: Int32 = 24
+        let cmTime: CMTime = CMTimeMake(cmSeconds, timeScale)
         self.avAssetWriter?.startWriting()
         self.avAssetWriter?.startSession(atSourceTime: cmTime)
         
