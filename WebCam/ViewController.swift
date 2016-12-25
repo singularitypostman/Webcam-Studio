@@ -171,7 +171,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             videoPreviewLayer?.session.stopRunning()
             sessionReady = !sessionReady
             
-            //self.avAssetWriter?.cancelWriting()
+            
             //let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
             //self.avAssetWriter?.endSession(atSourceTime: cmTime)
             self.avAssetWriter?.finishWriting {
@@ -265,15 +265,15 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.detectionBoxView = DetectionBoxView()
         playerPreview?.addSubview(self.detectionBoxView!)
         
-        //                audioOutput?.audioSettings = [
-        //                    AVSampleRateKey: 44100,
-        //                    AVFormatIDKey: kAudioFormatLinearPCM,
-        //                    AVNumberOfChannelsKey: 2,
-        //                    AVLinearPCMBitDepthKey: 16,
-        //                    AVLinearPCMIsNonInterleaved: false,
-        //                    AVLinearPCMIsBigEndianKey: false,
-        //                    AVLinearPCMIsFloatKey: false
-        //                ]
+//        audioOutput?.audioSettings = [
+//            AVSampleRateKey: 44100,
+//            AVFormatIDKey: kAudioFormatLinearPCM,
+//            AVNumberOfChannelsKey: 2,
+//            AVLinearPCMBitDepthKey: 16,
+//            AVLinearPCMIsNonInterleaved: false,
+//            AVLinearPCMIsBigEndianKey: false,
+//            AVLinearPCMIsFloatKey: false
+//        ]
         let audioOutputQueue = DispatchQueue(label: "WebcamAudio")
         audioOutput?.setSampleBufferDelegate(self, queue: audioOutputQueue)
         
