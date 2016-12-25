@@ -12,7 +12,7 @@ import AVFoundation
 import CoreMedia
 
 
-class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
+class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
     var webcam:AVCaptureDevice? = nil
     var videoOutput:AVCaptureVideoDataOutput? = nil
     var audioOutput:AVCaptureAudioDataOutput? = nil
@@ -241,8 +241,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
                 videoOutput!.alwaysDiscardsLateVideoFrames = true
                 
                 // Register the sample buffer callback
-                let queue = DispatchQueue(label: "Streaming")
-                videoOutput!.setSampleBufferDelegate(self, queue: queue)
+                let videoOutputQueue = DispatchQueue(label: "WebcamVideo")
+                videoOutput!.setSampleBufferDelegate(self, queue: videoOutputQueue)
                 
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoSession)
                 // resize the video to fill
@@ -260,6 +260,18 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
                 // Add a detection box on top of the preview layer
                 self.detectionBoxView = DetectionBoxView()
                 playerPreview?.addSubview(self.detectionBoxView!)
+                
+//                audioOutput?.audioSettings = [
+//                    AVSampleRateKey: 44100,
+//                    AVFormatIDKey: kAudioFormatLinearPCM,
+//                    AVNumberOfChannelsKey: 2,
+//                    AVLinearPCMBitDepthKey: 16,
+//                    AVLinearPCMIsNonInterleaved: false,
+//                    AVLinearPCMIsBigEndianKey: false,
+//                    AVLinearPCMIsFloatKey: false
+//                ]
+                let audioOutputQueue = DispatchQueue(label: "WebcamAudio")
+                audioOutput?.setSampleBufferDelegate(self, queue: audioOutputQueue)
                 
                 // Output data
                 if videoSession!.canAddOutput(videoOutput){
