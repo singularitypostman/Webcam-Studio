@@ -102,7 +102,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Send the live image to the server
         stream.broadcastData(message: imageData)
-        print("---> Capture output")
         
         // Audio
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
