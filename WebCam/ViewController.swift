@@ -32,6 +32,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     let cmTimeScale: Int32 = 1000000000
     var currentRecordingTime: Int64 = 0
     
+    let stream: Stream = Stream()
+    
     @IBOutlet weak var playerPreview:NSView?
     @IBOutlet weak var videoPlayerView: NSView!
     
@@ -74,13 +76,13 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
         currentRecordingTime = Int64(CMSampleBufferGetPresentationTimeStamp(sampleBuffer).seconds)
-        //let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-        //_ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
+        _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
-        //        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
-        //let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
-        //let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
-        //let image = CVPixelBufferGetBaseAddress(imageBuffer)
+        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
+        let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
+        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
+        let image = CVPixelBufferGetBaseAddress(imageBuffer)
         
         
         // Perform core animation in the main thread
@@ -93,13 +95,14 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         //CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
         // Write to a file from NSData for debugging
-        //let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
-        //let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-        //let dataOutputFile: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_2.mp4"))
-        //imageData.write(to: dataOutputFile, atomically: true)
+        let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
+        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+        let dataOutputFile: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_2.mp4"))
+        imageData.write(to: dataOutputFile, atomically: true)
         
         // Send the live image to the server
-        //stream.broadcastData(message: imageData)
+        stream.broadcastData(message: imageData)
+        print("---> Capture output")
         
         // Audio
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
