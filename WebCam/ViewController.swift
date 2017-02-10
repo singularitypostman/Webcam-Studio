@@ -94,10 +94,10 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         //CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
         // Write to a file from NSData for debugging
-        let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
-        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-        let dataOutputFile: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_2.mp4"))
-        imageData.write(to: dataOutputFile, atomically: true)
+//        let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
+//        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+//        let dataOutputFile: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_2.mp4"))
+//        imageData.write(to: dataOutputFile, atomically: true)
         
         // Send the live image to the server
         //stream.broadcastData(message: imageData)
@@ -109,6 +109,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 //        videoWriterQueue.async {
 //            self.avAssetWriterInput?.append(sampleBuffer)
 //        }
+        
         self.avAssetWriterInput?.append(sampleBuffer)
     }
     
@@ -169,8 +170,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
         if (self.sessionReady == false){
-            // Stop the session
-            videoPreviewLayer?.session.stopRunning()
             sessionReady = !sessionReady
             
             
@@ -190,9 +189,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Set the writer
         // It can be only use once
         createWriter()
-        
-        // Start the session
-        videoPreviewLayer?.session.startRunning()
         
         // Start the writing session
         self.avAssetWriter?.startWriting()
@@ -263,6 +259,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // add the preview to the view
         //                playerPreview?.layer?.addSublayer(videoPreviewLayer!)
         playerPreview?.layer? = videoPreviewLayer!
+        // Start the video preview session
+        videoPreviewLayer?.session.startRunning()
         
         // Add a detection box on top of the preview layer
         self.detectionBoxView = DetectionBoxView()
