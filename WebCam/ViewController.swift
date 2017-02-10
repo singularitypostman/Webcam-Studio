@@ -174,13 +174,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             
             
             // Not needed
-            //let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
-            //self.avAssetWriter?.endSession(atSourceTime: cmTime)
+            let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
+            self.avAssetWriter?.endSession(atSourceTime: cmTime)
+            print("---> Stopping camera session")
             self.avAssetWriter?.finishWriting {
                 print("---> Finish writing")
             }
-            
-            print("---> Stopping camera session")
             
             return
         }
