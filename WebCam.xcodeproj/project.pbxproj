@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		DE9023931DD96211003A3D14 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9023921DD96211003A3D14 /* Stream.swift */; };
 		DEB6904B1DDCE2F20038BF5E /* DetectionBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB6904A1DDCE2F20038BF5E /* DetectionBoxView.swift */; };
+		DEBF36F21E4E0974000999B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA13E1DB714A40013BEC0 /* ViewController.swift */; };
+		DEBF36F31E4E0975000999B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA13E1DB714A40013BEC0 /* ViewController.swift */; };
 		DEFAA13D1DB714A40013BEC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA13C1DB714A40013BEC0 /* AppDelegate.swift */; };
 		DEFAA13F1DB714A40013BEC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA13E1DB714A40013BEC0 /* ViewController.swift */; };
 		DEFAA1411DB714A40013BEC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFAA1401DB714A40013BEC0 /* Assets.xcassets */; };
@@ -284,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEBF36F21E4E0974000999B8 /* ViewController.swift in Sources */,
 				DEFAA14F1DB714A50013BEC0 /* WebCamTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEBF36F31E4E0975000999B8 /* ViewController.swift in Sources */,
 				DEFAA15A1DB714A50013BEC0 /* WebCamUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
