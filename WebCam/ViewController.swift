@@ -84,7 +84,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
         let image = CVPixelBufferGetBaseAddress(imageBuffer)
         
-        
         // Perform core animation in the main thread
         //        DispatchQueue.main.async {
         // Detect the image
