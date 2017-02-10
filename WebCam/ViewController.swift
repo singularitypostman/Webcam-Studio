@@ -106,11 +106,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
         
         // Append to the asset writer input
-//        videoWriterQueue.async {
-//            self.avAssetWriterInput?.append(sampleBuffer)
-//        }
+        videoWriterQueue.async {
+            self.avAssetWriterInput?.append(sampleBuffer)
+        }
         
-        self.avAssetWriterInput?.append(sampleBuffer)
+        //self.avAssetWriterInput?.append(sampleBuffer)
     }
     
     
