@@ -307,6 +307,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             ]
         ]
         avAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: avAssetWriterInputSettings)
+        // Set it to true, to ensure that readyForMoreMediaData is calculated appropriatley
         avAssetWriterInput?.expectsMediaDataInRealTime = true
         
         do {
