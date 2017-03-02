@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE7FD4201E683F01007C339A /* CameraStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7FD41F1E683F01007C339A /* CameraStreamer.swift */; };
+		DE7FD4211E683F01007C339A /* CameraStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7FD41F1E683F01007C339A /* CameraStreamer.swift */; };
+		DE7FD4221E683F01007C339A /* CameraStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7FD41F1E683F01007C339A /* CameraStreamer.swift */; };
 		DE9023931DD96211003A3D14 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9023921DD96211003A3D14 /* Stream.swift */; };
 		DEB6904B1DDCE2F20038BF5E /* DetectionBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB6904A1DDCE2F20038BF5E /* DetectionBoxView.swift */; };
 		DEBF36F21E4E0974000999B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFAA13E1DB714A40013BEC0 /* ViewController.swift */; };
@@ -39,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE7FD41F1E683F01007C339A /* CameraStreamer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraStreamer.swift; sourceTree = "<group>"; };
 		DE9023921DD96211003A3D14 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
 		DEB68C481DDC0DC500F4B096 /* WebCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebCam.entitlements; sourceTree = "<group>"; };
 		DEB6904A1DDCE2F20038BF5E /* DetectionBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetectionBoxView.swift; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 		DEFAA1301DB714A40013BEC0 = {
 			isa = PBXGroup;
 			children = (
+				DE7FD41F1E683F01007C339A /* CameraStreamer.swift */,
 				DEFAA13B1DB714A40013BEC0 /* WebCam */,
 				DEFAA14D1DB714A50013BEC0 /* WebCamTests */,
 				DEFAA1581DB714A50013BEC0 /* WebCamUITests */,
@@ -277,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE7FD4201E683F01007C339A /* CameraStreamer.swift in Sources */,
 				DEB6904B1DDCE2F20038BF5E /* DetectionBoxView.swift in Sources */,
 				DEFAA13F1DB714A40013BEC0 /* ViewController.swift in Sources */,
 				DE9023931DD96211003A3D14 /* Stream.swift in Sources */,
@@ -291,6 +297,7 @@
 				DEBF36F41E4E0C28000999B8 /* DetectionBoxView.swift in Sources */,
 				DEBF36F21E4E0974000999B8 /* ViewController.swift in Sources */,
 				DEFAA14F1DB714A50013BEC0 /* WebCamTests.swift in Sources */,
+				DE7FD4211E683F01007C339A /* CameraStreamer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +308,7 @@
 				DEBF36F51E4E0C28000999B8 /* DetectionBoxView.swift in Sources */,
 				DEBF36F31E4E0975000999B8 /* ViewController.swift in Sources */,
 				DEFAA15A1DB714A50013BEC0 /* WebCamUITests.swift in Sources */,
+				DE7FD4221E683F01007C339A /* CameraStreamer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
