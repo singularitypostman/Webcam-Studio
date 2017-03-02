@@ -41,11 +41,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        let view = NSView(frame: NSMakeRect(0, 0, 320, 320))
-        view.wantsLayer = true
-        view.layer?.borderWidth = 4
-        view.layer?.borderColor = NSColor.darkGray.cgColor
-        self.view = view
+//        let view = NSView(frame: NSMakeRect(0, 0, 320, 320))
+//        view.wantsLayer = true
+//        view.layer?.borderWidth = 4
+//        view.layer?.borderColor = NSColor.darkGray.cgColor
+//        self.view = view
         
         // Set video output
         videoOutput = AVCaptureVideoDataOutput()
