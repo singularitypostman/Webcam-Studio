@@ -14,10 +14,10 @@ import CoreMedia
 
 class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
     var webcam:AVCaptureDevice? = nil
-    var videoOutput:AVCaptureVideoDataOutput? = nil
-    var audioOutput:AVCaptureAudioDataOutput? = nil
-    var videoSession:AVCaptureSession? = nil
-    var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
+    let videoOutput:AVCaptureVideoDataOutput = AVCaptureVideoDataOutput()
+    let audioOutput:AVCaptureAudioDataOutput = AVCaptureAudioDataOutput()
+    let videoSession:AVCaptureSession = AVCaptureSession()
+    let videoPreviewLayer:AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer()
     var videoFilePath: URL? = nil
     
     var sessionReady:Bool = true
@@ -180,12 +180,22 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     
     func setVideoSession(){
-        // Set video output
-        videoOutput = AVCaptureVideoDataOutput()
-        audioOutput = AVCaptureAudioDataOutput()
+        // Set the device
+        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)!
+        webcam = devices[0] as? AVCaptureDevice
+        
+        do {
+            let webcamInput: AVCaptureDeviceInput = try AVCaptureDeviceInput(device: webcam)
+            if videoSession.canAddInput(webcamInput){
+                videoSession.addInput(webcamInput)
+            }
+        } catch let err as NSError {
+            print("---> Error using the webcam: \(err)")
+        }
         // Webcam session
-        videoSession = AVCaptureSession()
-        videoSession?.sessionPreset = AVCaptureSessionPresetHigh
+        videoSession.sessionPreset = AVCaptureSessionPresetHigh
+        videoSession.addOutput(videoOutput)
+        videoSession.addOutput(audioOutput)
         
         // Web cameras
         //let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureDALDevice")
@@ -205,58 +215,24 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Set the writer
         //createWriter()
         
-        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
-        // Pick the first one
-        if (devices?.count)! > 0 {
-            webcam = devices?[0] as? AVCaptureDevice
-        } else{
-            print("---> No available devices")
-            return
-        }
-        
-        do {
-            let webcamInput: AVCaptureDeviceInput = try AVCaptureDeviceInput(device: webcam)
-            if videoSession!.canAddInput(webcamInput){
-                videoSession!.addInput(webcamInput)
-            }
-            
-        }
-        catch {
-            print("---> Cannot use webcam")
-        }
-        
-        //                videoOutput!.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable: Int(kCVPixelFormatType_420YpCbCr8PlanarFullRange)]
-        videoOutput!.alwaysDiscardsLateVideoFrames = true
-        
+        videoOutput.alwaysDiscardsLateVideoFrames = true
         // Register the sample buffer callback
-        let videoOutputQueue = DispatchQueue(label: "WebcamVideo")
-        videoOutput!.setSampleBufferDelegate(self, queue: videoOutputQueue)
-        
-        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoSession)
-        // resize the video to fill
-        videoPreviewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
-        videoPreviewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.portrait
-        
-        // position the layer
-        videoPreviewLayer!.position = CGPoint(x: (self.playerPreview?.frame.width)!/2, y: (self.playerPreview?.frame.height)!/2)
-        videoPreviewLayer!.bounds = (self.playerPreview?.frame)!
-        
-        // add the preview to the view
-        //                playerPreview?.layer?.addSublayer(videoPreviewLayer!)
-        playerPreview?.layer? = videoPreviewLayer!
-        // Start the video preview session
-        videoPreviewLayer?.session.startRunning()
-        
+        videoOutput.setSampleBufferDelegate(self, queue: videoPreviewQueue)
         // Audio
-        audioOutput?.setSampleBufferDelegate(self, queue: webcamAudioQueue)
+        audioOutput.setSampleBufferDelegate(self, queue: webcamAudioQueue)
         
-        // Output data
-        if videoSession!.canAddOutput(videoOutput){
-            videoSession!.addOutput(videoOutput)
-        }
-        if videoSession!.canAddOutput(audioOutput){
-            videoSession!.addOutput(audioOutput)
-        }
+        // Preview layer
+        videoPreviewLayer.setSessionWithNoConnection(videoSession)
+        // Resize the preview
+        videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        videoPreviewLayer.connection.videoOrientation = AVCaptureVideoOrientation.portrait
+        // position the layer
+        videoPreviewLayer.position = CGPoint(x: (self.playerPreview?.frame.width)!/2, y: (self.playerPreview?.frame.height)!/2)
+        videoPreviewLayer.bounds = (self.playerPreview?.frame)!
+        // add the preview to the view
+        playerPreview?.layer? = videoPreviewLayer
+        // Start the video preview session
+        videoPreviewLayer.session.startRunning()
         
     }
     
