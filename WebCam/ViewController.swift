@@ -90,8 +90,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
         _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
-        print("---> Capturing output")
-        
         let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
         let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
         let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
@@ -118,6 +116,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 //        }
         
         //self.avAssetWriterInput?.append(sampleBuffer)
+        
+        // Detection
+        if self.detectionBoxActive {
+            startImageDetection(imageBuffer: imageBuffer)
+        }
     }
     
     
