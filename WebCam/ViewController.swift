@@ -26,6 +26,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     let webcamDetectionQueue: DispatchQueue = DispatchQueue(label: "webcamDetection")
     let webcamWriterQueue: DispatchQueue = DispatchQueue(label: "writer")
+    let webcamAudioQueue: DispatchQueue = DispatchQueue(label: "webcamAudio")
     let videoStreamerQueue: DispatchQueue = DispatchQueue(label: "streamer")
     let videoPreviewQueue: DispatchQueue = DispatchQueue(label: "preview")
     let videoPlayerQueue: DispatchQueue = DispatchQueue(label: "player")
@@ -47,21 +48,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-//        let view = NSView(frame: NSMakeRect(0, 0, 320, 320))
-//        view.wantsLayer = true
-//        view.layer?.borderWidth = 4
-//        view.layer?.borderColor = NSColor.darkGray.cgColor
-//        self.view = view
-        
-        // Set video output
-        videoOutput = AVCaptureVideoDataOutput()
-        audioOutput = AVCaptureAudioDataOutput()
-        
-        // Webcam session
-        videoSession = AVCaptureSession()
-        videoSession?.sessionPreset = AVCaptureSessionPresetHigh
         
         self.setVideoSession()
         
@@ -90,10 +76,10 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
         _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
-        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
-        let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
-        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
-        let image = CVPixelBufferGetBaseAddress(imageBuffer)
+//        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
+//        let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
+//        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
+//        let image = CVPixelBufferGetBaseAddress(imageBuffer)
         
         // Unlock the buffer
         //CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
@@ -194,20 +180,27 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     
     func setVideoSession(){
+        // Set video output
+        videoOutput = AVCaptureVideoDataOutput()
+        audioOutput = AVCaptureAudioDataOutput()
+        // Webcam session
+        videoSession = AVCaptureSession()
+        videoSession?.sessionPreset = AVCaptureSessionPresetHigh
+        
         // Web cameras
         //let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureDALDevice")
         // Microphone
         // let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureHALDevice")
         
-        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-        print("---> Create directory at path \(videoFileDirectory.path)")
-        
-        do {
-            try FileManager.default.createDirectory(atPath: videoFileDirectory.path, withIntermediateDirectories: true, attributes: nil)
-        } catch let err as NSError {
-            print("Error creating a directory for the output file \(err)")
-        }
-        self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
+//        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+//        print("---> Create directory at path \(videoFileDirectory.path)")
+//        
+//        do {
+//            try FileManager.default.createDirectory(atPath: videoFileDirectory.path, withIntermediateDirectories: true, attributes: nil)
+//        } catch let err as NSError {
+//            print("Error creating a directory for the output file \(err)")
+//        }
+//        self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
         
         // Set the writer
         //createWriter()
@@ -254,17 +247,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Start the video preview session
         videoPreviewLayer?.session.startRunning()
         
-//        audioOutput?.audioSettings = [
-//            AVSampleRateKey: 44100,
-//            AVFormatIDKey: kAudioFormatLinearPCM,
-//            AVNumberOfChannelsKey: 2,
-//            AVLinearPCMBitDepthKey: 16,
-//            AVLinearPCMIsNonInterleaved: false,
-//            AVLinearPCMIsBigEndianKey: false,
-//            AVLinearPCMIsFloatKey: false
-//        ]
-        let audioOutputQueue = DispatchQueue(label: "WebcamAudio")
-        audioOutput?.setSampleBufferDelegate(self, queue: audioOutputQueue)
+        // Audio
+        audioOutput?.setSampleBufferDelegate(self, queue: webcamAudioQueue)
         
         // Output data
         if videoSession!.canAddOutput(videoOutput){
