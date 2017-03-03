@@ -308,16 +308,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
     }
     
+    // Switch the state of the detection box
     @IBAction func startImageDetectionAction(_ sender: AnyObject){
-        // Switch the state of the detection box
         self.detectionBoxActive = !self.detectionBoxActive
-        print("---> Detection box is active? \(self.detectionBoxActive)")
-        
-        if self.detectionBoxActive {
-            print("---> Starting detection")
-        } else {
-            print("---> Stopping detection")
-        }
     }
     
     // Image detection box
