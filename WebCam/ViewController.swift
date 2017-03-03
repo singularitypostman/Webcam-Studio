@@ -23,7 +23,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var sessionReady:Bool = true
     var detectionBoxView: NSView?
     
-    let videoWriterQueue: DispatchQueue = DispatchQueue(label: "videoWriter")
+    let videoWriterQueue: DispatchQueue = DispatchQueue(label: "writer")
+    let videoStreamerQueue: DispatchQueue = DispatchQueue(label: "streamer")
+    let videoPreviewQueue: DispatchQueue = DispatchQueue(label: "preview")
     let videoPlayerQueue: DispatchQueue = DispatchQueue(label: "player")
     
     var avAsset: AVAsset? = nil
@@ -114,7 +116,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Append to the asset writer input
         videoWriterQueue.async {
-            self.avAssetWriterInput?.append(sampleBuffer)
+//            self.avAssetWriterInput?.append(sampleBuffer)
         }
         
         //self.avAssetWriterInput?.append(sampleBuffer)
