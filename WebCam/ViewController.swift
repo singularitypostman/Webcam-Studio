@@ -96,6 +96,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Audio
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
         
+//        Should start writing before the append
+//        self.avAssetWriter?.startWriting()
+        
         // Append to the asset writer input
 //        webcamWriterQueue.async {
 //            self.avAssetWriterInput?.append(sampleBuffer)
