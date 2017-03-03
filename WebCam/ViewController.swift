@@ -227,8 +227,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Preview layer
         videoPreviewLayer.setSessionWithNoConnection(videoSession)
         // Resize the preview
-        videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-        videoPreviewLayer.connection.videoOrientation = AVCaptureVideoOrientation.portrait
+        //videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        //videoPreviewLayer.connection.videoOrientation = AVCaptureVideoOrientation.portrait
         // position the layer
         videoPreviewLayer.position = CGPoint(x: (self.playerPreview?.frame.width)!/2, y: (self.playerPreview?.frame.height)!/2)
         videoPreviewLayer.bounds = (self.playerPreview?.frame)!
