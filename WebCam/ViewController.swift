@@ -24,10 +24,14 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var detectionBoxView: NSView?
     
     let videoWriterQueue: DispatchQueue = DispatchQueue(label: "videoWriter")
+    let videoPlayerQueue: DispatchQueue = DispatchQueue(label: "player")
     
     var avAsset: AVAsset? = nil
     var avAssetWriter: AVAssetWriter? = nil
     var avAssetWriterInput: AVAssetWriterInput? = nil
+    
+    // Player
+    let player:AVPlayer = AVPlayer()
     
     let cmTimeScale: Int32 = 1000000000
     var currentRecordingTime: Int64 = 0
@@ -56,22 +60,16 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         videoSession?.sessionPreset = AVCaptureSessionPresetHigh
         
         self.setVideoSession()
-    }
-    
-    override func viewWillAppear() {
-        // Use a m3u8 playlist of live video
-        let streamURL:URL = URL(string: "http://localhost:3000/videos/live/playlist")!
-        let player:AVPlayer = AVPlayer(url: streamURL)
         
+        // Video player preview
         let playerView = AVPlayerView()
         playerView.frame = videoPlayerView.frame
         playerView.player = player
         videoPlayerView.addSubview(playerView)
         
-        // Start streaming
-        print("---> Playing video from \(streamURL.absoluteURL.absoluteString)")
-        player.play()
-        
+        // Use a m3u8 playlist of live video
+        let streamURL:URL = URL(string: "http://localhost:3000/videos/live/playlist")!
+        startPlaying(from: streamURL)
     }
     
     override var representedObject: Any? {
@@ -325,5 +323,15 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             print("Error initializing AVAssetWriter: \(err)")
         }
     }
-    
+ 
+    // Play video on a different thread
+    private func startPlaying(from url: URL){
+        let playerResourceItem: AVPlayerItem = AVPlayerItem(url: url)
+        player.replaceCurrentItem(with: playerResourceItem)
+        
+        videoPlayerQueue.async {
+            print("---> Playing video from \(url.absoluteString)")
+            self.player.play()
+        }
+    }
 }
