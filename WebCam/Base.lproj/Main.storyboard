@@ -671,7 +671,7 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                     </window>
                     <connections>
-                        <segue destination="Z69-Uw-qFY" kind="relationship" relationship="window.shadowedContentViewController" id="XF4-Jb-tKD"/>
+                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="WJG-sv-lbc"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -716,19 +716,6 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="853.5"/>
-        </scene>
-        <!--Camera Streamer-->
-        <scene sceneID="lO0-p7-6nU">
-            <objects>
-                <viewController id="Z69-Uw-qFY" customClass="CameraStreamer" customModule="WebCam" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="I0t-zN-gz9">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="MXx-e9-Num" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="649" y="641"/>
         </scene>
     </scenes>
 </document>
