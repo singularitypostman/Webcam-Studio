@@ -68,7 +68,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         videoPlayerView.addSubview(playerView)
         
         // Use a m3u8 playlist of live video
-        let streamURL:URL = URL(string: "http://localhost:3000/videos/live/playlist")!
+        //let streamURL:URL = URL(string: "http://localhost:3000/videos/live/playlist")!
+        // Encode and stream
+        let streamURL: URL = URL(string: "http://localhost:3000/playlists/1")!
         startPlaying(from: streamURL)
     }
     
