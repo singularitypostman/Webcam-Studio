@@ -321,7 +321,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     private func startImageDetection(imageBuffer: CVImageBuffer){
         let context = CIContext()
         let detector = CIDetector(ofType: CIDetectorTypeFace, context: context, options: nil)
-        let image: CIImage = CIImage(cvImageBuffer: picture)
+        let image: CIImage = CIImage(cvImageBuffer: imageBuffer)
         let features = detector?.features(in: image) // [CIFeature]
         // Add a detection box on top of the preview layer
         self.detectionBoxView = DetectionBoxView()
