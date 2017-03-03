@@ -22,8 +22,10 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     var sessionReady:Bool = true
     var detectionBoxView: NSView?
+    var detectionBoxActive: Bool = false
     
-    let videoWriterQueue: DispatchQueue = DispatchQueue(label: "writer")
+    let webcamDetectionQueue: DispatchQueue = DispatchQueue(label: "webcamDetection")
+    let webcamWriterQueue: DispatchQueue = DispatchQueue(label: "writer")
     let videoStreamerQueue: DispatchQueue = DispatchQueue(label: "streamer")
     let videoPreviewQueue: DispatchQueue = DispatchQueue(label: "preview")
     let videoPlayerQueue: DispatchQueue = DispatchQueue(label: "player")
@@ -88,16 +90,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
         _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
+        print("---> Capturing output")
+        
         let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
         let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
         let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
         let image = CVPixelBufferGetBaseAddress(imageBuffer)
-        
-        // Perform core animation in the main thread
-        //        DispatchQueue.main.async {
-        // Detect the image
-        //self.detectLiveImage(picture: imageBuffer)
-        //        }
         
         // Unlock the buffer
         //CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
@@ -115,9 +113,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
         
         // Append to the asset writer input
-        videoWriterQueue.async {
+//        webcamWriterQueue.async {
 //            self.avAssetWriterInput?.append(sampleBuffer)
-        }
+//        }
         
         //self.avAssetWriterInput?.append(sampleBuffer)
     }
@@ -157,23 +155,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             try FileManager.default.moveItem(at: outputFileURL, to: self.videoFilePath!)
         } catch let err as NSError {
             print("Error moving video file: \(err)")
-        }
-    }
-    
-    func detectLiveImage(picture: CVImageBuffer){
-        
-        let context = CIContext()
-        let detector = CIDetector(ofType: CIDetectorTypeFace, context: context, options: nil)
-        let image: CIImage = CIImage(cvImageBuffer: picture)
-        let features = detector?.features(in: image) // [CIFeature]
-        
-        print("---> Detecting")
-        print("---> Image: \(image)")
-        
-        for ciFeature in features! {
-            // Display a rectangle
-            print("---> Features bounds: \(ciFeature.bounds)")
-            detectionBoxView?.draw(ciFeature.bounds)
         }
     }
     
@@ -270,10 +251,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Start the video preview session
         videoPreviewLayer?.session.startRunning()
         
-        // Add a detection box on top of the preview layer
-        self.detectionBoxView = DetectionBoxView()
-        playerPreview?.addSubview(self.detectionBoxView!)
-        
 //        audioOutput?.audioSettings = [
 //            AVSampleRateKey: 44100,
 //            AVFormatIDKey: kAudioFormatLinearPCM,
@@ -326,6 +303,42 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         } catch let err as NSError {
             print("Error initializing AVAssetWriter: \(err)")
         }
+    }
+    
+    @IBAction func startImageDetectionAction(_ sender: AnyObject){
+        // Switch the state of the detection box
+        self.detectionBoxActive = !self.detectionBoxActive
+        print("---> Detection box is active? \(self.detectionBoxActive)")
+        
+        if self.detectionBoxActive {
+            print("---> Starting detection")
+        } else {
+            print("---> Stopping detection")
+        }
+    }
+    
+    // Image detection box
+    private func startImageDetection(imageBuffer: CVImageBuffer){
+        let context = CIContext()
+        let detector = CIDetector(ofType: CIDetectorTypeFace, context: context, options: nil)
+        let image: CIImage = CIImage(cvImageBuffer: picture)
+        let features = detector?.features(in: image) // [CIFeature]
+        // Add a detection box on top of the preview layer
+        self.detectionBoxView = DetectionBoxView()
+        playerPreview?.addSubview(self.detectionBoxView!)
+        
+        webcamDetectionQueue.async {
+            
+            print("---> Detecting")
+            print("---> Image: \(image)")
+            
+            for ciFeature in features! {
+                // Display a rectangle
+                print("---> Features bounds: \(ciFeature.bounds)")
+                self.detectionBoxView?.draw(ciFeature.bounds)
+            }
+        }
+        
     }
  
     // Play video on a different thread
