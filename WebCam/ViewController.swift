@@ -59,8 +59,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Use a m3u8 playlist of live video
         //let streamURL:URL = URL(string: "http://localhost:3000/videos/live/playlist")!
         // Encode and stream
-        //let streamURL: URL = URL(string: "http://localhost:3000/playlists/1")!
-        //startPlaying(from: streamURL)
+        let streamURL: URL = URL(string: "http://localhost:3000/playlists/1")!
+        startPlaying(from: streamURL)
+        
+        // Create the video writer
+        createWriter()
     }
     
     override var representedObject: Any? {
@@ -94,9 +97,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Audio
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
-        
-//        Should start writing before the append
-//        self.avAssetWriter?.startWriting()
         
         // Append to the asset writer input
 //        webcamWriterQueue.async {
@@ -166,17 +166,14 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
         print("---> Starting camera session")
-        // Set the writer
-        // It can be only use once
-        //createWriter()
-        
+        // Should start writing before the append
+        self.avAssetWriter?.startWriting()
         // Start the writing session
-//        self.avAssetWriter?.startWriting()
-//        let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
-//        self.avAssetWriter?.startSession(atSourceTime: cmTime)
+        let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
+        self.avAssetWriter?.startSession(atSourceTime: cmTime)
         
         // Set the camera state
-//        self.sessionReady = !sessionReady
+        self.sessionReady = !sessionReady
         
     }
     
@@ -216,24 +213,21 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.videoPreviewLayer!.session.startRunning()
         }
         
-        
-//        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-//        print("---> Create directory at path \(videoFileDirectory.path)")
-//        
-//        do {
-//            try FileManager.default.createDirectory(atPath: videoFileDirectory.path, withIntermediateDirectories: true, attributes: nil)
-//        } catch let err as NSError {
-//            print("Error creating a directory for the output file \(err)")
-//        }
-//        self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
-        
-        // Set the writer
-        //createWriter()
-        
     }
     
     private func createWriter(){
         
+        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+        print("---> Create directory at path \(videoFileDirectory.path)")
+
+        do {
+            try FileManager.default.createDirectory(atPath: videoFileDirectory.path, withIntermediateDirectories: true, attributes: nil)
+        } catch let err as NSError {
+            print("Error creating a directory for the output file \(err)")
+        }
+        self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
+        
+        // Video recording settings
         let numPixels: Float64 = 480*320
         //let bitsPerPixel: Float64 = 10.1
         let bitsPerPixel: Float64 = 4
@@ -257,6 +251,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             if self.avAssetWriter!.canAdd(avAssetWriterInput!) {
                 print("---> Adding input to AVAsset at \(videoFilePath!.path)")
                 self.avAssetWriter!.add(avAssetWriterInput!)
+                
             }
             
         } catch let err as NSError {
