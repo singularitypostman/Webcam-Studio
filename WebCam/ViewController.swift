@@ -22,6 +22,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     var webcamSessionStarted:Bool = false
     var webcamSessionReady:Bool = false
+    var webcamWritesCounter: Int = 0
     var detectionBoxView: NSView?
     var detectionBoxActive: Bool = false
     
@@ -82,16 +83,10 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Unlock the buffer
         CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
 
-        // Another write
-        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
-        let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
-        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
-        let image = CVPixelBufferGetBaseAddress(imageBuffer)
-        // Write to a file from NSData for debugging
-        let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
-        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-        let dataOutputFile: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_2.mp4"))
-        imageData.write(to: dataOutputFile, atomically: true)
+        if webcamSessionReady {
+            // Another write
+            //saveToFile(file: "saved_session_\(webcamWritesCounter).mp4", image: imageBuffer)
+        }
         
         // Send the live image to the server
         //stream.broadcastData(message: imageData)
@@ -99,7 +94,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Audio
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
         
-        if webcamSessionReady == true {
+        if webcamSessionReady {
             // Append to the asset writer input
             webcamWriterQueue.async {
                 self.avAssetWriterInput?.append(sampleBuffer)
@@ -171,6 +166,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
         print("---> Starting camera session")
+
+        avAssetWriter?.outputURL = getVideoFilePath()
         webcamSessionStarted = true
         // Start the writing session
         let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
@@ -218,16 +215,13 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     private func createWriter(){
+        videoFilePath = getVideoFilePath()
         
-        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-        print("---> Create directory at path \(videoFileDirectory.path)")
-
         do {
             try FileManager.default.createDirectory(atPath: videoFileDirectory.path, withIntermediateDirectories: true, attributes: nil)
         } catch let err as NSError {
             print("Error creating a directory for the output file \(err)")
         }
-        self.videoFilePath = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_1.mp4"))
         
         // Video recording settings
         let numPixels: Float64 = 480*320
@@ -302,5 +296,23 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             print("---> Playing video from \(url.absoluteString)")
             self.player.play()
         }
+    }
+    
+    private func saveToFile(file name: String, image buffer: CVImageBuffer!){
+        let bytes: size_t = CVPixelBufferGetBytesPerRow(buffer)
+        let image = CVPixelBufferGetBaseAddress(buffer)
+        // Write to a file from NSData for debugging
+        let imageData: NSData = NSData(bytes: image, length: bytes)
+        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam/")
+        let dataOutputFile: URL = URL(fileURLWithPath: videoFileDirectory.path.appending(name))
+        imageData.write(to: dataOutputFile, atomically: true)
+    }
+    
+    private func getVideoFilePath() -> URL{
+        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+        webcamWritesCounter += 1
+        print("---> Create directory at path \(videoFileDirectory.path)")
+        
+        return URL(fileURLWithPath: videoFileDirectory.path.appending("/session_\(webcamWritesCounter).mp4"))
     }
 }
