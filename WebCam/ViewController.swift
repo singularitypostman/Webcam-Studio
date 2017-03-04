@@ -147,33 +147,31 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
-        // Set the camera state
-        webcamSessionReady = !webcamSessionReady
-        
         // Not in session and there is data
-        if (self.webcamSessionReady == true && webcamSessionStarted == true){
-            webcamSessionStarted = false
+        if (self.webcamSessionReady == false && webcamSessionStarted == true){
             // Not needed
             let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
             self.avAssetWriter?.endSession(atSourceTime: cmTime)
-            print("---> Stopping camera session")
             self.avAssetWriter?.finishWriting {
-                print("---> Finish writing")
+                print("---> Finish session at \(self.currentRecordingTime)")
             }
             btnCaptureWebcam.layer?.backgroundColor = NSColor.white.cgColor
             btnCaptureWebcam.title = "Ready"
+            webcamSessionReady = true
+            webcamSessionStarted = false
             
             return
         }
         
         print("---> Starting camera session")
         createWriter()
-        webcamSessionStarted = true
         // Start the writing session
         let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
         avAssetWriter!.startSession(atSourceTime: cmTime)
         btnCaptureWebcam.layer?.backgroundColor = NSColor.red.cgColor
         btnCaptureWebcam.title = "Recording"
+        webcamSessionReady = false
+        webcamSessionStarted = true
     }
     
     
