@@ -45,6 +45,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     @IBOutlet weak var playerPreview:NSView!
     @IBOutlet weak var videoPlayerView: NSView!
+    @IBOutlet weak var recordingIndicator: NSLevelIndicator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,8 +99,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Audio
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
         
-        
-        print(self.sessionReady)
         if sessionReady == true {
             // Append to the asset writer input
             webcamWriterQueue.async {
@@ -165,15 +164,16 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.avAssetWriter?.finishWriting {
                 print("---> Finish writing")
             }
+            recordingIndicator.tickMarkValue(at: 0)
             
             return
         }
         
         print("---> Starting camera session")
-        
         // Start the writing session
-        let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
+        let cmTime: CMTime = CMTimeMake(0, cmTimeScale)
         avAssetWriter!.startSession(atSourceTime: cmTime)
+        recordingIndicator.tickMarkValue(at: 1)
     }
     
     
@@ -250,13 +250,14 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             if self.avAssetWriter!.canAdd(avAssetWriterInput!) {
                 print("---> Adding input to AVAsset at \(videoFilePath!.path)")
                 avAssetWriter!.add(avAssetWriterInput!)
-                // Need to be set once before starting the session
-                avAssetWriter!.startWriting()
             }
             
         } catch let err as NSError {
             print("Error initializing AVAssetWriter: \(err)")
         }
+        
+        // Need to be set once before starting the session
+        avAssetWriter!.startWriting()
         
     }
     
