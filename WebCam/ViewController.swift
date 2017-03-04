@@ -79,20 +79,19 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         currentRecordingTime = Int64(CMSampleBufferGetPresentationTimeStamp(sampleBuffer).seconds)
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
         _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
-        
-//        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
-//        let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
-//        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
-//        let image = CVPixelBufferGetBaseAddress(imageBuffer)
-        
         // Unlock the buffer
         CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
-        
+
+        // Another write
+        let imageWidth: size_t = CVPixelBufferGetWidth(imageBuffer)
+        let imageHeight: size_t = CVPixelBufferGetHeight(imageBuffer)
+        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
+        let image = CVPixelBufferGetBaseAddress(imageBuffer)
         // Write to a file from NSData for debugging
-//        let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
-//        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-//        let dataOutputFile: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_2.mp4"))
-//        imageData.write(to: dataOutputFile, atomically: true)
+        let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
+        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+        let dataOutputFile: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/session_2.mp4"))
+        imageData.write(to: dataOutputFile, atomically: true)
         
         // Send the live image to the server
         //stream.broadcastData(message: imageData)
