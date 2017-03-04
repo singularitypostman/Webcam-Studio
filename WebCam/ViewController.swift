@@ -20,7 +20,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
     var videoFilePath: URL? = nil
     
-    var sessionReady:Bool = true
+    var sessionReady:Bool = false
     var detectionBoxView: NSView?
     var detectionBoxActive: Bool = false
     
@@ -98,12 +98,15 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Audio
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
         
-        // Append to the asset writer input
-//        webcamWriterQueue.async {
-//            self.avAssetWriterInput?.append(sampleBuffer)
-//        }
         
-        //self.avAssetWriterInput?.append(sampleBuffer)
+        print(self.sessionReady)
+        if sessionReady == true {
+            // Append to the asset writer input
+            webcamWriterQueue.async {
+                self.avAssetWriterInput?.append(sampleBuffer)
+            }
+        }
+      
         
         // Detection
         if self.detectionBoxActive {
