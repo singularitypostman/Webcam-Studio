@@ -20,7 +20,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
     var videoFilePath: URL? = nil
     
-    var sessionReady:Bool = false
+    var webcamSessionStarted:Bool = false
+    var webcamSessionReady:Bool = false
     var detectionBoxView: NSView?
     var detectionBoxActive: Bool = false
     
@@ -99,7 +100,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Audio
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
         
-        if sessionReady == true {
+        if webcamSessionReady == true {
             // Append to the asset writer input
             webcamWriterQueue.async {
                 self.avAssetWriterInput?.append(sampleBuffer)
@@ -153,10 +154,10 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
         // Set the camera state
-        self.sessionReady = !sessionReady
+        webcamSessionReady = !webcamSessionReady
         
-        // Not in session
-        if (self.sessionReady == true){
+        // Not in session and there is data
+        if (self.webcamSessionReady == true && webcamSessionStarted == true){
             // Not needed
             let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
             self.avAssetWriter?.endSession(atSourceTime: cmTime)
@@ -170,8 +171,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
         print("---> Starting camera session")
+        webcamSessionStarted = true
         // Start the writing session
-        let cmTime: CMTime = CMTimeMake(0, cmTimeScale)
+        let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
         avAssetWriter!.startSession(atSourceTime: cmTime)
         recordingIndicator.tickMarkValue(at: 1)
     }
