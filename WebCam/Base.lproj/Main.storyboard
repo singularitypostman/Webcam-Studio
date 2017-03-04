@@ -712,34 +712,25 @@
                                     <action selector="startImageDetectionAction" target="XfG-lQ-9wD" id="XU7-M3-3Ml"/>
                                 </connections>
                             </button>
-                            <levelIndicator verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="10q-01-E42">
-                                <rect key="frame" x="138" y="326" width="51" height="16"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="51" id="RcJ-WC-jnz"/>
-                                </constraints>
-                                <levelIndicatorCell key="cell" alignment="left" doubleValue="1" minValue="1" maxValue="4" warningValue="2" criticalValue="4" levelIndicatorStyle="continuousCapacity" id="Y6d-Pu-rpk"/>
-                            </levelIndicator>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="IvV-WZ-6dQ" firstAttribute="top" secondItem="5v3-Ff-loK" secondAttribute="bottom" constant="3" id="2AC-sv-v4x"/>
-                            <constraint firstItem="Urc-MN-c6c" firstAttribute="leading" secondItem="tJi-3s-627" secondAttribute="leading" id="3mi-fs-a2f"/>
-                            <constraint firstItem="10q-01-E42" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="283" id="3sc-uf-wXc"/>
-                            <constraint firstAttribute="trailing" secondItem="5v3-Ff-loK" secondAttribute="trailing" id="8zR-Ub-Zcj"/>
-                            <constraint firstAttribute="bottom" secondItem="IvV-WZ-6dQ" secondAttribute="bottom" id="BCW-VE-lVZ"/>
-                            <constraint firstItem="Urc-MN-c6c" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="CIR-JG-zzH"/>
-                            <constraint firstItem="tJi-3s-627" firstAttribute="trailing" secondItem="5v3-Ff-loK" secondAttribute="trailing" id="Fcu-QU-jw3"/>
-                            <constraint firstItem="Urc-MN-c6c" firstAttribute="leading" secondItem="IvV-WZ-6dQ" secondAttribute="leading" id="Hvh-cY-VZM"/>
-                            <constraint firstItem="tJi-3s-627" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="MxF-Gr-qfg"/>
-                            <constraint firstItem="Urc-MN-c6c" firstAttribute="baseline" secondItem="5v3-Ff-loK" secondAttribute="baseline" id="RN2-1o-9BX"/>
-                            <constraint firstItem="10q-01-E42" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="138" id="gvS-dQ-Swg"/>
-                            <constraint firstItem="10q-01-E42" firstAttribute="top" secondItem="tJi-3s-627" secondAttribute="bottom" id="lyD-4p-l1k"/>
-                            <constraint firstItem="IvV-WZ-6dQ" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="305" id="okE-AZ-7MM"/>
-                            <constraint firstItem="IvV-WZ-6dQ" firstAttribute="trailing" secondItem="5v3-Ff-loK" secondAttribute="trailing" id="us5-pr-9qu"/>
+                            <constraint firstItem="Urc-MN-c6c" firstAttribute="leading" secondItem="IvV-WZ-6dQ" secondAttribute="leading" id="4ft-cu-nML"/>
+                            <constraint firstItem="IvV-WZ-6dQ" firstAttribute="top" secondItem="Urc-MN-c6c" secondAttribute="bottom" constant="3" id="64r-rC-arc"/>
+                            <constraint firstItem="tJi-3s-627" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="Fl2-7z-NXA"/>
+                            <constraint firstItem="tJi-3s-627" firstAttribute="leading" secondItem="Urc-MN-c6c" secondAttribute="leading" id="G81-Fx-aFr"/>
+                            <constraint firstItem="IvV-WZ-6dQ" firstAttribute="top" secondItem="tJi-3s-627" secondAttribute="bottom" constant="22" id="Lgu-TA-bB5"/>
+                            <constraint firstAttribute="bottom" secondItem="IvV-WZ-6dQ" secondAttribute="bottom" id="SKW-SG-JaX"/>
+                            <constraint firstItem="5v3-Ff-loK" firstAttribute="trailing" secondItem="IvV-WZ-6dQ" secondAttribute="trailing" id="U5u-rD-ugA"/>
+                            <constraint firstItem="Urc-MN-c6c" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="281" id="Wvr-3V-j1N"/>
+                            <constraint firstItem="tJi-3s-627" firstAttribute="trailing" secondItem="5v3-Ff-loK" secondAttribute="trailing" id="cW0-pY-W4Z"/>
+                            <constraint firstAttribute="trailing" secondItem="tJi-3s-627" secondAttribute="trailing" id="e6i-X1-3cz"/>
+                            <constraint firstItem="Urc-MN-c6c" firstAttribute="baseline" secondItem="5v3-Ff-loK" secondAttribute="baseline" id="jai-Nq-TlH"/>
+                            <constraint firstItem="tJi-3s-627" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="n5Z-S5-tx4"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnCaptureWebcam" destination="Urc-MN-c6c" id="Yt7-6Q-7fh"/>
                         <outlet property="playerPreview" destination="tJi-3s-627" id="8sS-q9-poz"/>
-                        <outlet property="recordingIndicator" destination="10q-01-E42" id="KTM-Pp-zR0"/>
                         <outlet property="videoPlayer" destination="IvV-WZ-6dQ" id="O8v-T3-IXI"/>
                         <outlet property="videoPlayerView" destination="IvV-WZ-6dQ" id="lNB-qL-bZT"/>
                     </connections>

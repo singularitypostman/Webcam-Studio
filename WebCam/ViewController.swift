@@ -46,7 +46,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     @IBOutlet weak var playerPreview:NSView!
     @IBOutlet weak var videoPlayerView: NSView!
-    @IBOutlet weak var recordingIndicator: NSLevelIndicator!
+    @IBOutlet weak var btnCaptureWebcam: NSButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,7 +165,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.avAssetWriter?.finishWriting {
                 print("---> Finish writing")
             }
-            recordingIndicator.tickMarkValue(at: 1)
+            btnCaptureWebcam.layer?.backgroundColor = NSColor.white.cgColor
+            btnCaptureWebcam.title = "Ready"
             
             return
         }
@@ -175,7 +176,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Start the writing session
         let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
         avAssetWriter!.startSession(atSourceTime: cmTime)
-        recordingIndicator.tickMarkValue(at: 4)
+        btnCaptureWebcam.layer?.backgroundColor = NSColor.red.cgColor
+        btnCaptureWebcam.title = "Recording"
     }
     
     
