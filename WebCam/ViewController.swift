@@ -17,7 +17,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     let videoOutput:AVCaptureVideoDataOutput = AVCaptureVideoDataOutput()
     let audioOutput:AVCaptureAudioDataOutput = AVCaptureAudioDataOutput()
     let videoSession:AVCaptureSession = AVCaptureSession()
-    let videoPreviewLayer:AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer()
+    var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
     var videoFilePath: URL? = nil
     
     var sessionReady:Bool = true
@@ -43,12 +43,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     let stream: Stream = Stream()
     
-    @IBOutlet weak var playerPreview:NSView?
+    @IBOutlet weak var playerPreview:NSView!
     @IBOutlet weak var videoPlayerView: NSView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // Webcam broadcast and preview
         self.setVideoSession()
         
         // Video player preview
@@ -56,12 +56,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         playerView.frame = videoPlayerView.frame
         playerView.player = player
         videoPlayerView.addSubview(playerView)
-        
         // Use a m3u8 playlist of live video
         //let streamURL:URL = URL(string: "http://localhost:3000/videos/live/playlist")!
         // Encode and stream
-        let streamURL: URL = URL(string: "http://localhost:3000/playlists/1")!
-        startPlaying(from: streamURL)
+        //let streamURL: URL = URL(string: "http://localhost:3000/playlists/1")!
+        //startPlaying(from: streamURL)
     }
     
     override var representedObject: Any? {
@@ -169,15 +168,15 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         print("---> Starting camera session")
         // Set the writer
         // It can be only use once
-        createWriter()
+        //createWriter()
         
         // Start the writing session
-        self.avAssetWriter?.startWriting()
-        let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
-        self.avAssetWriter?.startSession(atSourceTime: cmTime)
+//        self.avAssetWriter?.startWriting()
+//        let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
+//        self.avAssetWriter?.startSession(atSourceTime: cmTime)
         
         // Set the camera state
-        self.sessionReady = !sessionReady
+//        self.sessionReady = !sessionReady
         
     }
     
@@ -191,6 +190,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             let webcamInput: AVCaptureDeviceInput = try AVCaptureDeviceInput(device: webcam)
             if videoSession.canAddInput(webcamInput){
                 videoSession.addInput(webcamInput)
+                print("---> Adding webcam input")
             }
         } catch let err as NSError {
             print("---> Error using the webcam: \(err)")
@@ -199,11 +199,23 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         videoSession.sessionPreset = AVCaptureSessionPresetHigh
         videoSession.addOutput(videoOutput)
         videoSession.addOutput(audioOutput)
+        // Register the sample buffer callback
+        videoOutput.setSampleBufferDelegate(self, queue: videoPreviewQueue)
+        // Audio
+        audioOutput.setSampleBufferDelegate(self, queue: webcamAudioQueue)
+        // Preview layer
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoSession)
+        // Attach the preview to the view
+        playerPreview.layer = videoPreviewLayer
+        // Resize the preview
+        videoPreviewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
+        videoPreviewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.portrait
         
-        // Web cameras
-        //let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureDALDevice")
-        // Microphone
-        // let devices = AVCaptureDevice.devices(withMediaType: "AVCaptureHALDevice")
+        // Start the video preview session
+        videoPreviewQueue.async {
+            self.videoPreviewLayer!.session.startRunning()
+        }
+        
         
 //        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
 //        print("---> Create directory at path \(videoFileDirectory.path)")
@@ -217,25 +229,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Set the writer
         //createWriter()
-        
-        videoOutput.alwaysDiscardsLateVideoFrames = true
-        // Register the sample buffer callback
-        videoOutput.setSampleBufferDelegate(self, queue: videoPreviewQueue)
-        // Audio
-        audioOutput.setSampleBufferDelegate(self, queue: webcamAudioQueue)
-        
-        // Preview layer
-        videoPreviewLayer.setSessionWithNoConnection(videoSession)
-        // Resize the preview
-        //videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-        //videoPreviewLayer.connection.videoOrientation = AVCaptureVideoOrientation.portrait
-        // position the layer
-        videoPreviewLayer.position = CGPoint(x: (self.playerPreview?.frame.width)!/2, y: (self.playerPreview?.frame.height)!/2)
-        videoPreviewLayer.bounds = (self.playerPreview?.frame)!
-        // add the preview to the view
-        playerPreview?.layer? = videoPreviewLayer
-        // Start the video preview session
-        videoPreviewLayer.session.startRunning()
         
     }
     
@@ -284,7 +277,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let features = detector?.features(in: image) // [CIFeature]
         // Add a detection box on top of the preview layer
         self.detectionBoxView = DetectionBoxView()
-        playerPreview?.addSubview(self.detectionBoxView!)
+        playerPreview.addSubview(self.detectionBoxView!)
         
         webcamDetectionQueue.async {
             
