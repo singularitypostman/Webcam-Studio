@@ -84,7 +84,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 //        let image = CVPixelBufferGetBaseAddress(imageBuffer)
         
         // Unlock the buffer
-        //CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
         // Write to a file from NSData for debugging
 //        let imageData: NSData = NSData(bytes: image, length: (bytes * imageHeight))
@@ -153,10 +153,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
-        if (self.sessionReady == false){
-            sessionReady = !sessionReady
-            
-            
+        // Set the camera state
+        self.sessionReady = !sessionReady
+        
+        // Not in session
+        if (self.sessionReady == true){
             // Not needed
             let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
             self.avAssetWriter?.endSession(atSourceTime: cmTime)
@@ -169,15 +170,10 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
         print("---> Starting camera session")
-        // Should start writing before the append
-        self.avAssetWriter?.startWriting()
+        
         // Start the writing session
         let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
-        self.avAssetWriter?.startSession(atSourceTime: cmTime)
-        
-        // Set the camera state
-        self.sessionReady = !sessionReady
-        
+        avAssetWriter!.startSession(atSourceTime: cmTime)
     }
     
     
@@ -253,13 +249,15 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.avAssetWriter = try AVAssetWriter(outputURL: videoFilePath!, fileType: AVFileTypeMPEG4)
             if self.avAssetWriter!.canAdd(avAssetWriterInput!) {
                 print("---> Adding input to AVAsset at \(videoFilePath!.path)")
-                self.avAssetWriter!.add(avAssetWriterInput!)
-                
+                avAssetWriter!.add(avAssetWriterInput!)
+                // Need to be set once before starting the session
+                avAssetWriter!.startWriting()
             }
             
         } catch let err as NSError {
             print("Error initializing AVAssetWriter: \(err)")
         }
+        
     }
     
     // Switch the state of the detection box
