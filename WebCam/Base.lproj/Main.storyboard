@@ -717,7 +717,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="51" id="RcJ-WC-jnz"/>
                                 </constraints>
-                                <levelIndicatorCell key="cell" alignment="left" doubleValue="1" maxValue="2" warningValue="1" criticalValue="1" levelIndicatorStyle="continuousCapacity" id="Y6d-Pu-rpk"/>
+                                <levelIndicatorCell key="cell" alignment="left" doubleValue="1" minValue="1" maxValue="4" warningValue="2" criticalValue="4" levelIndicatorStyle="continuousCapacity" id="Y6d-Pu-rpk"/>
                             </levelIndicator>
                         </subviews>
                         <constraints>

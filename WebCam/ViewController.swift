@@ -165,7 +165,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.avAssetWriter?.finishWriting {
                 print("---> Finish writing")
             }
-            recordingIndicator.tickMarkValue(at: 0)
+            recordingIndicator.tickMarkValue(at: 1)
             
             return
         }
@@ -175,7 +175,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Start the writing session
         let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
         avAssetWriter!.startSession(atSourceTime: cmTime)
-        recordingIndicator.tickMarkValue(at: 1)
+        recordingIndicator.tickMarkValue(at: 4)
     }
     
     
