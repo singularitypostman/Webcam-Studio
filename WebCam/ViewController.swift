@@ -152,6 +152,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Not in session and there is data
         if (self.webcamSessionReady == true && webcamSessionStarted == true){
+            webcamSessionStarted = false
             // Not needed
             let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
             self.avAssetWriter?.endSession(atSourceTime: cmTime)
@@ -166,8 +167,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
         print("---> Starting camera session")
-
-        avAssetWriter?.outputURL = getVideoFilePath()
+        createWriter()
         webcamSessionStarted = true
         // Start the writing session
         let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
@@ -216,12 +216,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     private func createWriter(){
         videoFilePath = getVideoFilePath()
-        
-        do {
-            try FileManager.default.createDirectory(atPath: videoFileDirectory.path, withIntermediateDirectories: true, attributes: nil)
-        } catch let err as NSError {
-            print("Error creating a directory for the output file \(err)")
-        }
         
         // Video recording settings
         let numPixels: Float64 = 480*320
@@ -310,6 +304,13 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     private func getVideoFilePath() -> URL{
         let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+        
+        do {
+            try FileManager.default.createDirectory(atPath: videoFileDirectory.path, withIntermediateDirectories: true, attributes: nil)
+        } catch let err as NSError {
+            print("Error creating a directory for the output file \(err)")
+        }
+        
         webcamWritesCounter += 1
         print("---> Create directory at path \(videoFileDirectory.path)")
         
