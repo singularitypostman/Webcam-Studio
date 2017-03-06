@@ -16,6 +16,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var webcam:AVCaptureDevice? = nil
     let videoOutput:AVCaptureVideoDataOutput = AVCaptureVideoDataOutput()
     let audioOutput:AVCaptureAudioDataOutput = AVCaptureAudioDataOutput()
+    let movieOutput:AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
     let videoSession:AVCaptureSession = AVCaptureSession()
     var videoPreviewLayer:AVCaptureVideoPreviewLayer? = nil
     var videoFilePath: URL? = nil
@@ -149,7 +150,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
         // Not in session and there is data
         if (self.webcamSessionReady == false && webcamSessionStarted == true){
-            // Not needed
+            // Stop recording
+            self.movieOutput.stopRecording()
             let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
             self.avAssetWriter?.endSession(atSourceTime: cmTime)
             self.avAssetWriterInput?.markAsFinished()
@@ -165,10 +167,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
         print("---> Starting camera session")
-        createWriter()
         // Start the writing session
         let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
         avAssetWriter!.startSession(atSourceTime: cmTime)
+        // Start recording to file
+        createWriter()
+        movieOutput.startRecording(toOutputFileURL: getVideoFilePath(), recordingDelegate: self)
         btnCaptureWebcam.layer?.backgroundColor = NSColor.red.cgColor
         btnCaptureWebcam.title = "Recording"
         webcamSessionReady = false
@@ -194,10 +198,12 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         videoSession.sessionPreset = AVCaptureSessionPresetHigh
         videoSession.addOutput(videoOutput)
         videoSession.addOutput(audioOutput)
+        videoSession.addOutput(movieOutput)
         // Register the sample buffer callback
         videoOutput.setSampleBufferDelegate(self, queue: videoPreviewQueue)
         // Audio
         audioOutput.setSampleBufferDelegate(self, queue: webcamAudioQueue)
+        // Movie
         // Preview layer
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoSession)
         // Attach the preview to the view
