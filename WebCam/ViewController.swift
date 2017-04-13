@@ -320,8 +320,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
         webcamWritesCounter += 1
+        let uid = NSUUID().uuidString
         print("---> Create directory at path \(videoFileDirectory.path)")
         
-        return URL(fileURLWithPath: videoFileDirectory.path.appending("/session_\(webcamWritesCounter).mp4"))
+        return URL(fileURLWithPath: videoFileDirectory.path.appending("/session_\(webcamWritesCounter)_\(uid).mp4"))
     }
 }
