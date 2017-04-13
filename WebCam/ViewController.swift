@@ -141,11 +141,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         print("---> Finish recording to \(outputFileURL.absoluteString)")
         
-        do {
-            try FileManager.default.moveItem(at: outputFileURL, to: self.videoFilePath!)
-        } catch let err as NSError {
-            print("Error moving video file: \(err)")
-        }
+//        do {
+//            try FileManager.default.moveItem(at: outputFileURL, to: self.videoFilePath!)
+//        } catch let err as NSError {
+//            print("Error moving video file: \(err)")
+//        }
     }
     
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
@@ -223,7 +223,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     private func createWriter(){
-        videoFilePath = getVideoFilePath()
+        self.videoFilePath = getVideoFilePath()
         
         // Video recording settings
         let numPixels: Float64 = 480*320
