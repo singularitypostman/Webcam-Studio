@@ -81,17 +81,24 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
         currentRecordingTime = Int64(CMSampleBufferGetPresentationTimeStamp(sampleBuffer).seconds)
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-        _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         // Unlock the buffer
-        CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        // Bytes per row
+        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
+        let image = CVPixelBufferGetBaseAddress(imageBuffer)
 
-        if webcamSessionReady {
+        if (self.webcamSessionReady == false && webcamSessionStarted == true){
             // Another write
             //saveToFile(file: "saved_session_\(webcamWritesCounter).mp4", image: imageBuffer)
+            
+            // Send the live image to the server
+            print("---> Image Data")
+            let imageData: NSData = NSData(bytes: image, length: bytes)
+            print(imageData)
+            webcamWriterQueue.async {
+                self.stream.broadcastData(message: imageData)
+            }
         }
-        
-        // Send the live image to the server
-        //stream.broadcastData(message: imageData)
         
         // Audio
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
