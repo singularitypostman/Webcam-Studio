@@ -92,9 +92,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             //saveToFile(file: "saved_session_\(webcamWritesCounter).mp4", image: imageBuffer)
             
             // Send the live image to the server
-            print("---> Image Data")
             let imageData: NSData = NSData(bytes: image, length: bytes)
-            print(imageData)
             webcamWriterQueue.async {
                 self.stream.broadcastData(message: imageData)
             }
