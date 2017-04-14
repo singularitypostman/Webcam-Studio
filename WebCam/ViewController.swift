@@ -160,6 +160,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
             self.avAssetWriter?.endSession(atSourceTime: cmTime)
             self.avAssetWriterInput?.markAsFinished()
+            // Stop streaming interval
+            streamingTimer?.invalidate()
             // Stop recording
             self.movieOutput.stopRecording()
             self.avAssetWriter?.finishWriting {
@@ -175,6 +177,14 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         print("---> Starting camera session")
         createWriter()
+        
+        if streamingTimer == nil {
+            streamingTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (timer) in
+                print("---> Timer ")
+                print(timer)
+            })
+        }
+        
         // Start the writing session
         let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
         self.avAssetWriter!.startSession(atSourceTime: cmTime)
