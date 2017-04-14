@@ -177,20 +177,36 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         print("---> Starting camera session")
         createWriter()
+        let cmTime: CMTime = CMTimeMake(self.currentRecordingTime, self.cmTimeScale)
+        self.avAssetWriter!.startSession(atSourceTime: cmTime)
+        self.movieOutput.startRecording(toOutputFileURL: self.getVideoFilePath(), recordingDelegate: self)
         if streamingTimer == nil {
             streamingTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (timer) in
                 print("---> Timer ")
                 print(timer.timeInterval)
                 // Write in intervals
                 
+                let cmTime: CMTime = CMTimeMake(self.currentRecordingTime, self.cmTimeScale)
+                self.avAssetWriter?.endSession(atSourceTime: cmTime)
+                self.avAssetWriterInput?.markAsFinished()
+                // Stop recording
+                self.movieOutput.stopRecording()
+                self.avAssetWriter?.finishWriting {
+                    print("---> Finish session at \(self.currentRecordingTime)")
+                }
+                
+                // Start the writing session
+                self.avAssetWriter!.startSession(atSourceTime: cmTime)
+                // Start recording to file
+                self.movieOutput.startRecording(toOutputFileURL: self.getVideoFilePath(), recordingDelegate: self)
             })
         }
         
-        // Start the writing session
-        let cmTime: CMTime = CMTimeMake(self.currentRecordingTime, self.cmTimeScale)
-        self.avAssetWriter!.startSession(atSourceTime: cmTime)
-        // Start recording to file
-        self.movieOutput.startRecording(toOutputFileURL: self.getVideoFilePath(), recordingDelegate: self)
+//        // Start the writing session
+//        let cmTime: CMTime = CMTimeMake(self.currentRecordingTime, self.cmTimeScale)
+//        self.avAssetWriter!.startSession(atSourceTime: cmTime)
+//        // Start recording to file
+//        self.movieOutput.startRecording(toOutputFileURL: self.getVideoFilePath(), recordingDelegate: self)
         
         self.btnCaptureWebcam.layer?.backgroundColor = NSColor.red.cgColor
         self.btnCaptureWebcam.title = "Recording"
