@@ -84,7 +84,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         currentRecordingTime = Int64(CMSampleBufferGetPresentationTimeStamp(sampleBuffer).seconds)
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
         // Unlock the buffer
-        _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        //_ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
         // Bytes per row
 //        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
 //        let image = CVPixelBufferGetBaseAddress(imageBuffer)
@@ -175,44 +175,41 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             return
         }
         
-        print("---> Starting camera session")
+        // Create writer and start session
         createWriter()
+        print("---> Starting camera session")
         let cmTime: CMTime = CMTimeMake(self.currentRecordingTime, self.cmTimeScale)
         self.avAssetWriter!.startSession(atSourceTime: cmTime)
         self.movieOutput.startRecording(toOutputFileURL: self.getVideoFilePath(), recordingDelegate: self)
-        if streamingTimer == nil {
-            streamingTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (timer) in
-                print("---> Timer ")
-                print(timer.timeInterval)
-                // Write in intervals
-                
-                let cmTime: CMTime = CMTimeMake(self.currentRecordingTime, self.cmTimeScale)
-                self.avAssetWriter?.endSession(atSourceTime: cmTime)
-                self.avAssetWriterInput?.markAsFinished()
-                // Stop recording
-                self.movieOutput.stopRecording()
-                self.avAssetWriter?.finishWriting {
-                    print("---> Finish session at \(self.currentRecordingTime)")
-                }
-                
-                // Start the writing session
-                self.avAssetWriter!.startSession(atSourceTime: cmTime)
-                // Start recording to file
-                self.movieOutput.startRecording(toOutputFileURL: self.getVideoFilePath(), recordingDelegate: self)
-            })
-        }
-        
-//        // Start the writing session
-//        let cmTime: CMTime = CMTimeMake(self.currentRecordingTime, self.cmTimeScale)
-//        self.avAssetWriter!.startSession(atSourceTime: cmTime)
-//        // Start recording to file
-//        self.movieOutput.startRecording(toOutputFileURL: self.getVideoFilePath(), recordingDelegate: self)
         
         self.btnCaptureWebcam.layer?.backgroundColor = NSColor.red.cgColor
         self.btnCaptureWebcam.title = "Recording"
-        
         self.webcamSessionReady = false
         self.webcamSessionStarted = true
+        
+        // Write in intervals
+        streamingTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (timer) in
+            print("---> Timer ")
+            print(timer.timeInterval)
+            // Write in intervals
+            print("---> Video path")
+            print(self.videoFilePath)
+            
+            let cmTime: CMTime = CMTimeMake(self.currentRecordingTime, self.cmTimeScale)
+            self.avAssetWriter?.endSession(atSourceTime: cmTime)
+            self.avAssetWriterInput?.markAsFinished()
+            // Stop recording
+            self.movieOutput.stopRecording()
+            self.avAssetWriter?.finishWriting {
+                print("---> Finish session at \(self.currentRecordingTime)")
+                //self.videoFilePath
+            }
+            
+            // Start the writing session
+            self.avAssetWriter!.startSession(atSourceTime: cmTime)
+            // Start recording to file
+            self.movieOutput.startRecording(toOutputFileURL: self.getVideoFilePath(), recordingDelegate: self)
+        })
     }
     
     
@@ -357,6 +354,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let uid = NSUUID().uuidString
         print("---> Create directory at path \(videoFileDirectory.path)")
         
-        return URL(fileURLWithPath: videoFileDirectory.path.appending("/session_\(webcamWritesCounter)_\(uid).mp4"))
+        videoFilePath =  URL(fileURLWithPath: videoFileDirectory.path.appending("/session_\(webcamWritesCounter)_\(uid).mp4"))
+        
+        return videoFilePath!
     }
 }
