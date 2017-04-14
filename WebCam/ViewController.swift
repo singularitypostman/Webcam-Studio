@@ -85,29 +85,28 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
         // Unlock the buffer
         _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        // Bytes per row
+//        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
+//        let image = CVPixelBufferGetBaseAddress(imageBuffer)
 
-        if (self.webcamSessionReady == false && webcamSessionStarted == true){
-            // Another write
-            //saveToFile(file: "saved_session_\(webcamWritesCounter).mp4", image: imageBuffer)
-            
-            // Send the live image to the server
-            // Bytes per row
-            let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
-            let image = CVPixelBufferGetBaseAddress(imageBuffer)
-            let imageData: NSData = NSData(bytes: image, length: bytes)
-            webcamWriterQueue.async {
-                self.stream.broadcastData(message: imageData)
-            }
-        }
+//        if (self.webcamSessionReady == false && webcamSessionStarted == true){
+//            // Another write
+//            //saveToFile(file: "saved_session_\(webcamWritesCounter).mp4", image: imageBuffer)
+//            
+//            // Send the live image to the server
+//            let imageData: NSData = NSData(bytes: image, length: bytes)
+//            webcamWriterQueue.async {
+//                
+//                self.stream.broadcastData(message: imageData)
+//            }
+//        }
         
         // Audio
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
         
-        if webcamSessionReady {
-            // Append to the asset writer input
-            videoStreamerQueue.async {
-                self.avAssetWriterInput?.append(sampleBuffer)
-            }
+        // Add to the buffer
+        if (self.webcamSessionReady == false && webcamSessionStarted == true){
+            self.avAssetWriterInput?.append(sampleBuffer)
         }
       
         
@@ -294,11 +293,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
                 self.detectionBoxView?.draw(ciFeature.bounds)
             }
         }
-        
-    }
-    
-    // Stream segments to the server
-    private func streamInIntervals(){
         
     }
  
