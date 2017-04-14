@@ -35,6 +35,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     let videoPreviewQueue: DispatchQueue = DispatchQueue(label: "preview")
     let videoPlayerQueue: DispatchQueue = DispatchQueue(label: "player")
     
+    var streamingTimer: Timer?
+    
     var avAsset: AVAsset? = nil
     var avAssetWriter: AVAssetWriter? = nil
     var avAssetWriterInput: AVAssetWriterInput? = nil
@@ -83,15 +85,15 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
         // Unlock the buffer
         _ = CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
-        // Bytes per row
-        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
-        let image = CVPixelBufferGetBaseAddress(imageBuffer)
 
         if (self.webcamSessionReady == false && webcamSessionStarted == true){
             // Another write
             //saveToFile(file: "saved_session_\(webcamWritesCounter).mp4", image: imageBuffer)
             
             // Send the live image to the server
+            // Bytes per row
+            let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
+            let image = CVPixelBufferGetBaseAddress(imageBuffer)
             let imageData: NSData = NSData(bytes: image, length: bytes)
             webcamWriterQueue.async {
                 self.stream.broadcastData(message: imageData)
@@ -146,11 +148,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         print("---> Finish recording to \(outputFileURL.absoluteString)")
         
-//        do {
-//            try FileManager.default.moveItem(at: outputFileURL, to: self.videoFilePath!)
-//        } catch let err as NSError {
-//            print("Error moving video file: \(err)")
-//        }
+        //do {
+        //    try FileManager.default.moveItem(at: outputFileURL, to: self.videoFilePath!)
+        //} catch let err as NSError {
+        //    print("Error moving video file: \(err)")
+        //}
     }
     
     @IBAction func CaptureWebCamVideo(_ sender: AnyObject) {
@@ -204,6 +206,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         // Webcam session
         videoSession.sessionPreset = AVCaptureSessionPresetHigh
+
         videoSession.addOutput(videoOutput)
         videoSession.addOutput(audioOutput)
         videoSession.addOutput(movieOutput)
@@ -293,6 +296,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
     }
+    
+    // Stream segments to the server
+    private func streamInIntervals(){
+        
+    }
  
     // Play video on a different thread
     private func startPlaying(from url: URL){
@@ -301,7 +309,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         videoPlayerQueue.async {
             print("---> Playing video from \(url.absoluteString)")
-            self.player.play()
+            //self.player.play()
         }
     }
     
