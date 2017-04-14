@@ -177,19 +177,20 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         print("---> Starting camera session")
         createWriter()
-        
         if streamingTimer == nil {
             streamingTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (timer) in
                 print("---> Timer ")
-                print(timer)
+                print(timer.timeInterval)
+                // Write in intervals
+                
             })
         }
         
         // Start the writing session
-        let cmTime: CMTime = CMTimeMake(currentRecordingTime, cmTimeScale)
+        let cmTime: CMTime = CMTimeMake(self.currentRecordingTime, self.cmTimeScale)
         self.avAssetWriter!.startSession(atSourceTime: cmTime)
         // Start recording to file
-        movieOutput.startRecording(toOutputFileURL: getVideoFilePath(), recordingDelegate: self)
+        self.movieOutput.startRecording(toOutputFileURL: self.getVideoFilePath(), recordingDelegate: self)
         
         self.btnCaptureWebcam.layer?.backgroundColor = NSColor.red.cgColor
         self.btnCaptureWebcam.title = "Recording"
