@@ -166,6 +166,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.movieOutput.stopRecording()
             self.avAssetWriter?.finishWriting {
                 print("---> Finish session at \(self.currentRecordingTime)")
+                self.stream.broadcastData(url: self.videoFilePath)
             }
             btnCaptureWebcam.layer?.backgroundColor = NSColor.white.cgColor
             btnCaptureWebcam.title = "Ready"
@@ -203,6 +204,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.avAssetWriter?.finishWriting {
                 print("---> Finish session at \(self.currentRecordingTime)")
                 //self.videoFilePath
+                self.stream.broadcastData(url: self.videoFilePath)
             }
             
             // Start the writing session

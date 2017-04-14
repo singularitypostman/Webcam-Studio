@@ -49,6 +49,15 @@ class Stream {
         
     }
     
+    func broadcastData(url: URL?){
+        do {
+            let data: NSData = try NSData(contentsOf: url!)
+            broadcastData(message: data)
+        } catch let err as NSError {
+            print("Error streaming file: \(err)")
+        }
+    }
+    
     private func htons(value: CUnsignedShort) -> CUnsignedShort {
         return (value << 8) + (value >> 8)
     }
