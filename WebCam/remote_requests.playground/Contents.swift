@@ -80,26 +80,32 @@ func writeToFile(name: String, message: String){
     outputStream.close()
 }
 
+func sendPictureFile(){
+    let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+    let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/picture.jpg"))
+    do {
+        let fileData: NSData = try NSData(contentsOf: fileURL)
+        //let messageBytes: [Int32] = [2412,1,1292,0]
+        let messageBytes: [Int32] = [2412,1,149,0,2,3,2,4,1]
+        let mutableData: NSMutableData = NSMutableData()
+        mutableData.append(messageBytes, length: messageBytes.count)
+        mutableData.append(fileData.bytes, length: fileData.length)
+        sendMessage(message: mutableData)
+        
+    } catch let err as NSError {
+        print(err)
+    }
+}
+
+// Need to send chunks of the file
+func sendVideoFile(){
+    
+}
+
 
 
 //sendMessage(message: "10024000Message from Swift 3")
 //sendMessage(message: "123M")
-
-let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/picture.jpg"))
-//let fileURL: URL = URL(string: "http://i.imgur.com/enarCUcg.jpg")!
-do {
-    let fileData: NSData = try NSData(contentsOf: fileURL)
-    //let messageBytes: [Int32] = [2412,1,1292,0]
-    let messageBytes: [Int32] = [2412,1,149,0,2,3,2,4,1]
-    let mutableData: NSMutableData = NSMutableData()
-    mutableData.append(messageBytes, length: messageBytes.count)
-    mutableData.append(fileData.bytes, length: fileData.length)
-    sendMessage(message: mutableData)
-
-} catch let err as NSError {
-    print(err)
-}
 
 //let messageBytes: [Int32] = [3432,2,124,4315,6,22,4999,2,2,3,4,5,6]
 //let messageData: NSData = NSData(bytes: messageBytes, length: messageBytes.count)

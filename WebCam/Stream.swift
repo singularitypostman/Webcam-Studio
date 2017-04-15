@@ -29,19 +29,33 @@ class Stream {
         }
     }
     
-    func broadcastData(message: NSData){
+    func broadcastData(channel: Int32, resolution: Int32, message: NSData){
         //var addr_in = sockaddr_in(sin_len: __uint8_t(MemoryLayout<sockaddr_in>.size), sin_family: sa_family_t(AF_INET), sin_port: self.htons(value: port), sin_addr: INADDR_ANY, sin_zero: (0,0,0,0, 0,0,0,0))
         
-        let chunkSize = 4000
+        let messageSize: Int32 = 256
+        let header: [Int32] = [channel,resolution,messageSize,0,2,3,2,4,1]
+//        let mutableData: NSMutableData = NSMutableData()
+//        mutableData.append(header, length: header.count)
+//        mutableData.append(message.bytes, length: message.length)
+        
+        //let chunkSize = 4000
+        let chunkSize = 4000-header.count
         var dataOffset: Int = 0
+        
             
         repeat {
             let tmpChunkSize = ((message.length - dataOffset) > chunkSize) ? chunkSize : (message.length - dataOffset)
-            let chunk: NSData = message.subdata(with: NSMakeRange(dataOffset, tmpChunkSize)) as NSData
+            //let chunk: NSData = message.subdata(with: NSMakeRange(dataOffset, tmpChunkSize)) as NSData
+            let chunk: NSData = message.subdata(with: NSMakeRange(dataOffset, tmpChunkSize+header.count)) as NSData
+            
+            let mutableData: NSMutableData = NSMutableData()
+            mutableData.append(header, length: header.count)
+            mutableData.append(chunk.bytes, length: chunk.length)
             
             // Send chunk of data
             //sendChunk(chunk: message.bytes, messageLength: tmpChunkSize)
-            sendChunk(chunk: chunk.bytes, messageLength: tmpChunkSize)
+            //sendChunk(chunk: chunk.bytes, messageLength: tmpChunkSize)
+            sendChunk(chunk: mutableData.bytes, messageLength: mutableData.length)
             
             // Update the offset
             dataOffset = dataOffset + tmpChunkSize
@@ -51,8 +65,13 @@ class Stream {
     
     func broadcastData(url: URL?){
         do {
-            let data: NSData = try NSData(contentsOf: url!)
-            broadcastData(message: data)
+            let fileData: NSData = try NSData(contentsOf: url!)
+            let channel: Int32 = 1200
+            let resolution: Int32 = 2
+            broadcastData(channel: channel, resolution: resolution, message: fileData)
+            
+            //broadcastData(message: data)
+            
         } catch let err as NSError {
             print("Error streaming file: \(err)")
         }
