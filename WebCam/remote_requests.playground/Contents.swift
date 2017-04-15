@@ -113,7 +113,8 @@ func sendPictureFile(){
 
 // Need to send chunks of the file
 func sendVideoFile(){
-    let header: [Int32] = [2412,1,149,0,0,0,0,0,0]
+    //let header: [Int32] = [2414,1,149,0,0,0,0,0,0]
+    let header: [Int32] = [2414,1,149,0,0,0,0,0,0]
     let chunkSize = 4000-header.count
     var dataOffset: Int = 0
     
@@ -145,7 +146,14 @@ func sendVideoFile(){
 }
 sendVideoFile()
 
-
+let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/video-small.mp4"))
+do {
+    let fileData: NSData = try NSData(contentsOf: fileURL)
+    print(fileData.length)
+} catch let err as NSError {
+    print(err)
+}
 
 //sendMessage(message: "10024000Message from Swift 3")
 //sendMessage(message: "123M")
