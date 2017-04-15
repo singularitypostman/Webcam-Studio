@@ -90,7 +90,8 @@ let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/pict
 //let fileURL: URL = URL(string: "http://i.imgur.com/enarCUcg.jpg")!
 do {
     let fileData: NSData = try NSData(contentsOf: fileURL)
-    let messageBytes: [Int32] = [3432,2,124]
+    //let messageBytes: [Int32] = [2412,1,1292,0]
+    let messageBytes: [Int32] = [2412,1,149,0,2,3,2,4,1]
     let mutableData: NSMutableData = NSMutableData()
     mutableData.append(messageBytes, length: messageBytes.count)
     mutableData.append(fileData.bytes, length: fileData.length)
