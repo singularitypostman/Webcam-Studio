@@ -9,6 +9,20 @@ func htons(value: CUnsignedShort) -> CUnsignedShort {
 }
 
 // There is a limit for the message size
+func sendChunk(chunk: UnsafeRawPointer, messageLength: Int){
+    let INADDR_ANY = in_addr(s_addr: 0)
+    let fd = socket(AF_INET, SOCK_DGRAM, 0)
+    var addr_in = sockaddr_in(sin_len: __uint8_t(MemoryLayout<sockaddr_in>.size), sin_family: sa_family_t(AF_INET), sin_port: htons(value: 3001), sin_addr: INADDR_ANY, sin_zero: (0,0,0,0,0,0,0,0))
+    
+    withUnsafePointer(to: &addr_in) {
+        let p = UnsafeRawPointer($0).bindMemory(to: sockaddr.self, capacity: 1)
+        let res = sendto(fd, chunk, messageLength, 0, p, socklen_t(addr_in.sin_len))
+        
+        print("Send? \(res)")
+    }
+    
+}
+
 func sendMessage(message: NSData){
     let INADDR_ANY = in_addr(s_addr: 0)
     let fd = socket(AF_INET, SOCK_DGRAM, 0)
@@ -99,8 +113,37 @@ func sendPictureFile(){
 
 // Need to send chunks of the file
 func sendVideoFile(){
+    let header: [Int32] = [2412,1,149,0,0,0,0,0,0]
+    let chunkSize = 4000-header.count
+    var dataOffset: Int = 0
+    
+    let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+    let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/video-small.mp4"))
+    
+    do {
+        let fileData: NSData = try NSData(contentsOf: fileURL)
+        repeat {
+            print("---> Chunk \(dataOffset)")
+            
+            let tmpChunkSize = ((fileData.length - dataOffset) > chunkSize) ? chunkSize : (fileData.length - dataOffset)
+            let chunk: NSData = fileData.subdata(with: NSMakeRange(dataOffset, tmpChunkSize+header.count)) as NSData
+            
+            let mutableData: NSMutableData = NSMutableData()
+            mutableData.append(header, length: header.count)
+            mutableData.append(chunk.bytes, length: chunk.length)
+            
+            sendChunk(chunk: mutableData.bytes, messageLength: mutableData.length)
+            
+            dataOffset = dataOffset + tmpChunkSize
+        } while dataOffset < fileData.length
+
+        
+    } catch let err as NSError {
+        print(err)
+    }
     
 }
+sendVideoFile()
 
 
 
