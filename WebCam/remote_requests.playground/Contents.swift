@@ -114,8 +114,6 @@ func sendPictureFile(){
 // Need to send chunks of the file
 func sendVideoFile(){
     //let header: [Int32] = [2414,1,149,0,0,0,0,0,0]
-    let header: [Int32] = [2414,1,149,0,0,0,0,0,0]
-    let chunkSize = 4000-header.count
     var dataOffset: Int = 0
     
     let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
@@ -123,6 +121,9 @@ func sendVideoFile(){
     
     do {
         let fileData: NSData = try NSData(contentsOf: fileURL)
+        let header: [Int32] = [2414,1,fileData.length,0,0,0,0,0,0]
+        let chunkSize = 4000-header.count
+        print("---> Chunk size is \(chunkSize)")
         repeat {
             print("---> Chunk \(dataOffset)")
             
