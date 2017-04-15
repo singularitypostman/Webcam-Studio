@@ -8,6 +8,7 @@ func htons(value: CUnsignedShort) -> CUnsignedShort {
     return (value << 8) + (value >> 8)
 }
 
+// There is a limit for the message size
 func sendMessage(message: NSData){
     let INADDR_ANY = in_addr(s_addr: 0)
     let fd = socket(AF_INET, SOCK_DGRAM, 0)
@@ -21,7 +22,6 @@ func sendMessage(message: NSData){
     }
     
 }
-
 
 func sendMessage(message: String){
     //let message = "Message from Swift 3"
