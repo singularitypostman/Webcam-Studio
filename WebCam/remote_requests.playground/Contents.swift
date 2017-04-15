@@ -30,6 +30,7 @@ func sendMessage(message: String){
     }
 }
 
+
 func writeToFile(name: String, message: String){
     let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.downloadsDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
     let videoFileDirectory = URL(fileURLWithPath: paths[0].appending("/WebCam"))
@@ -69,25 +70,23 @@ func writeToFile(name: String, message: String){
 
 
 
-//sendMessage(message: "Message from Swift 3")
+sendMessage(message: "10024000Message from Swift 3")
 //writeToFile(name: "writing_test.txt", message: "Hello")
 
-let url: URL = URL(fileURLWithPath: "/Users/Shavit/Downloads/WebCam/test.mp4")
-do {
-    let av: AVAssetWriter = try AVAssetWriter(outputURL: url, fileType: AVFileTypeMPEG4)
-} catch let err as NSError{
-    print("---> Error writing to \(url.path)")
+func writeVideoFile(){
+    let url: URL = URL(fileURLWithPath: "/Users/Shavit/Downloads/WebCam/test.mp4")
+    do {
+        let av: AVAssetWriter = try AVAssetWriter(outputURL: url, fileType: AVFileTypeMPEG4)
+    } catch let err as NSError{
+        print("---> Error writing to \(url.path)")
+    }
+    
+    let outputSettings = [
+        AVVideoCodecKey: AVVideoCodecH264,
+        AVVideoWidthKey: 420,
+        AVVideoHeightKey: 320,
+        AVVideoCompressionPropertiesKey: [AVVideoAverageBitRateKey: 10 * 1000000]
+        ] as [String : Any]
+    let avAssetWriterInput: AVAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: outputSettings)
+
 }
-
-let outputSettings = [
-    AVVideoCodecKey: AVVideoCodecH264,
-    AVVideoWidthKey: 420,
-    AVVideoHeightKey: 320,
-    AVVideoCompressionPropertiesKey: [AVVideoAverageBitRateKey: 10 * 1000000]
-    ] as [String : Any]
-let avAssetWriterInput: AVAssetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: outputSettings)
-
-
-
-
-
