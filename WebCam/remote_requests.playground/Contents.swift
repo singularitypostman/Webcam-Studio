@@ -12,11 +12,17 @@ func sendMessage(message: NSData){
     let INADDR_ANY = in_addr(s_addr: 0)
     let fd = socket(AF_INET, SOCK_DGRAM, 0)
     var addr_in = sockaddr_in(sin_len: __uint8_t(MemoryLayout<sockaddr_in>.size), sin_family: sa_family_t(AF_INET), sin_port: htons(value: 3001), sin_addr: INADDR_ANY, sin_zero: (0,0,0,0,0,0,0,0))
+    
+    print(message)
+    print(message.bytes)
 
     withUnsafePointer(to: &addr_in) {
         let p = UnsafeRawPointer($0).bindMemory(to: sockaddr.self, capacity: 1)
         let res = sendto(fd, message.bytes, message.length, 0, p, socklen_t(addr_in.sin_len))
+        
+        print("Send? \(res)")
     }
+    
 }
 
 
@@ -79,12 +85,11 @@ func writeToFile(name: String, message: String){
 
 
 
-
-
 //sendMessage(message: "10024000Message from Swift 3")
 //sendMessage(message: "123M")
 
-let messageBytes: [Int32] = [100,2,4000,4]
+let messageBytes: [Int32] = [3432,2,124,4315,6,22,4999,2,2,3,4,5,6]
+
 let messageData: NSData = NSData(bytes: messageBytes, length: messageBytes.count)
 sendMessage(message: messageData)
 
