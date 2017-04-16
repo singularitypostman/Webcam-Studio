@@ -117,30 +117,33 @@ func sendVideoFile(){
     var dataOffset: Int = 0
     
     let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-    let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/video-small.mp4"))
+//    let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/video-small.mp4"))
+    let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/picture.jpg"))
+    
     
     do {
         let fileData: NSData = try NSData(contentsOf: fileURL)
         let dataSize: Int32 = Int32(fileData.length)
-        let header: [Int32] = [2414,1,dataSize,0,0,0,0,0,0]
-        let chunkSize = 4000-header.count
+        let header: [Int32] = [2418,1,dataSize,0,0,0,0,0,0]
+        var chunkSize: Int = 4000-header.count
+        if Int(dataSize) < (4000 - header.count) {
+            chunkSize = Int(dataSize)
+        }
         print("---> Chunk size is \(chunkSize) of \(dataSize)")
         
         repeat {
-            print("---> Chunk \(dataOffset)")
-            
-            let tmpChunkSize = ((fileData.length - dataOffset) > chunkSize) ? chunkSize : (fileData.length - dataOffset)
-            let chunk: NSData = fileData.subdata(with: NSMakeRange(dataOffset, tmpChunkSize+header.count)) as NSData
-            
+            // This does not include the header
+            let tmpChunkSize: Int = ((fileData.length - dataOffset) > chunkSize) ? (chunkSize) : (fileData.length - dataOffset)
+            let chunk: NSData = fileData.subdata(with: NSMakeRange(0, 2580)) as NSData
+            print("---> Sending \(chunk.length) of \(fileData.length) (\(fileData.length + header.count))")
             let mutableData: NSMutableData = NSMutableData()
             mutableData.append(header, length: header.count)
             mutableData.append(chunk.bytes, length: chunk.length)
-            
             sendChunk(chunk: mutableData.bytes, messageLength: mutableData.length)
             
             dataOffset = dataOffset + tmpChunkSize
-        } while dataOffset < fileData.length
-
+        } while Int32(dataOffset) < (dataSize - Int32(header.count))
+    
         
     } catch let err as NSError {
         print(err)
@@ -149,14 +152,6 @@ func sendVideoFile(){
 }
 sendVideoFile()
 
-let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/video-small.mp4"))
-do {
-    let fileData: NSData = try NSData(contentsOf: fileURL)
-    print(fileData.length)
-} catch let err as NSError {
-    print(err)
-}
 
 //sendMessage(message: "10024000Message from Swift 3")
 //sendMessage(message: "123M")
