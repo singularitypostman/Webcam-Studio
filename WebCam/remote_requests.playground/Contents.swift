@@ -119,10 +119,10 @@ func sendVideoFile(){
     
     do {
         let fileData: NSData = try NSData(contentsOf: fileURL)
-        let dataSize: Int32 = Int32(fileData.length)
+        let dataSize: Int = fileData.length
         //let header: [Int32] = [2418,1,dataSize,0,0,0,0,0,0]
         let headerSize: Int = 5
-        let header: String = "6242" + "4"
+        let header: String = "2462" + "2"
         
         var chunkSize: Int = 4000-headerSize
         if Int(dataSize) < (4000 - headerSize) {
@@ -132,9 +132,9 @@ func sendVideoFile(){
         
         print("---> Chunk size is \(chunkSize) of \(dataSize)")
         
-        while Int32(dataOffset) < dataSize {
+        while dataOffset < dataSize {
             // This does not include the header
-            let tmpChunkSize: Int = ((fileData.length - dataOffset) > chunkSize) ? (chunkSize) : (fileData.length - dataOffset)
+            let tmpChunkSize: Int = ((dataSize - dataOffset) > chunkSize) ? (chunkSize) : (dataSize - dataOffset)
             let chunk: NSData = fileData.subdata(with: NSMakeRange(dataOffset, tmpChunkSize)) as NSData
             print("---> Sending \(chunk.length) (\(dataOffset+chunk.length)) \(dataOffset)/\(dataSize)")
             let mutableData: NSMutableData = NSMutableData()
@@ -150,8 +150,9 @@ func sendVideoFile(){
     }
     
 }
-sendVideoFile()
+//sendVideoFile()
 // Wrote 2860886
+// Wrote 2880861
 
 //sendMessage(message: "10024000Message from Swift 3")
 //sendMessage(message: "123M")

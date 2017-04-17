@@ -29,18 +29,36 @@ class Stream {
         }
     }
     
-    func broadcastData(channel: Int32, resolution: Int32, message: NSData){
+    func broadcastData(channel: String, resolution: String, message: NSData){
         //var addr_in = sockaddr_in(sin_len: __uint8_t(MemoryLayout<sockaddr_in>.size), sin_family: sa_family_t(AF_INET), sin_port: self.htons(value: port), sin_addr: INADDR_ANY, sin_zero: (0,0,0,0, 0,0,0,0))
         
         let messageSize: Int32 = 256
-        let header: [Int32] = [channel,resolution,messageSize,0,2,3,2,4,1]
+        let header: String = channel+resolution
+        //let header: [Int32] = [channel,resolution,messageSize,0,2,3,2,4,1]
 //        let mutableData: NSMutableData = NSMutableData()
 //        mutableData.append(header, length: header.count)
 //        mutableData.append(message.bytes, length: message.length)
         
-        //let chunkSize = 4000
-        let chunkSize = 4000-header.count
+        let dataSize: Int = Int32(message.length)
+        var chunkSize: Int = 4000-headerSize
+        if Int(dataSize) < (4000 - headerSize) {
+            chunkSize = Int(dataSize)
+        }
         var dataOffset: Int = 0
+        
+        print("---> Chunk size is \(chunkSize) of \(dataSize)")
+        
+        while dataOffset < dataSize {
+            let tmpChunkSize: Int = ((dataSize - dataOffset) > chunkSize)
+                ? (chunkSize)
+                : (dataSize - dataOffset)
+            let chunk: NSData = fileData.subdata(with: NSMakeRange(dataOffset, tmpChunkSize)) as NSData
+            mutableData.append(header, length: headerSize)
+            mutableData.append(chunk.bytes, length: chunk.length)
+            sendChunk(chunk: mutableData.bytes, messageLength: mutableData.length)
+            
+            dataOffset = dataOffset + chunk.length
+        }
         
             
         repeat {
@@ -66,8 +84,8 @@ class Stream {
     func broadcastData(url: URL?){
         do {
             let fileData: NSData = try NSData(contentsOf: url!)
-            let channel: Int32 = 1200
-            let resolution: Int32 = 2
+            let channel: String = "1200"
+            let resolution: String = "2"
             broadcastData(channel: channel, resolution: resolution, message: fileData)
             
             //broadcastData(message: data)
