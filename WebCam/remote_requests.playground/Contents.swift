@@ -120,26 +120,28 @@ func sendVideoFile(){
 //    let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/video-small.mp4"))
     let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/picture.jpg"))
     
-    
     do {
         let fileData: NSData = try NSData(contentsOf: fileURL)
         let dataSize: Int32 = Int32(fileData.length)
         //let header: [Int32] = [2418,1,dataSize,0,0,0,0,0,0]
-        let header: [Int32] = [2418,1,0,0,0]
+        //let header: [Int32] = [2418,1,1234,0,0,0,0,0,0]
+        let header: String = "1264" + "1"
+        
         var chunkSize: Int = 4000-header.count
         if Int(dataSize) < (4000 - header.count) {
             chunkSize = Int(dataSize)
         }
         print("---> Chunk size is \(chunkSize) of \(dataSize)")
-        
+    
         repeat {
             // This does not include the header
             let tmpChunkSize: Int = ((fileData.length - dataOffset) > chunkSize) ? (chunkSize) : (fileData.length - dataOffset)
             let chunk: NSData = fileData.subdata(with: NSMakeRange(0, 2580)) as NSData
             print("---> Sending \(chunk.length) of \(fileData.length) (\(fileData.length + header.count))")
             let mutableData: NSMutableData = NSMutableData()
-            mutableData.append(header, length: header.count)
-            mutableData.append(chunk.bytes, length: chunk.length)
+            mutableData.append(header, length: 5)
+            //mutableData.append(header, length: header.count)
+            //mutableData.append(chunk.bytes, length: chunk.length)
             sendChunk(chunk: mutableData.bytes, messageLength: mutableData.length)
             
             dataOffset = dataOffset + tmpChunkSize
