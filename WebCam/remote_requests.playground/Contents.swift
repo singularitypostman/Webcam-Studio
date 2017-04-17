@@ -113,9 +113,6 @@ func sendPictureFile(){
 
 // Need to send chunks of the file
 func sendVideoFile(){
-    //let header: [Int32] = [2414,1,149,0,0,0,0,0,0]
-    var dataOffset: Int = 0
-    
     let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
     let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/video-small.mp4"))
     //let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/picture.jpg"))
@@ -125,20 +122,21 @@ func sendVideoFile(){
         let dataSize: Int32 = Int32(fileData.length)
         //let header: [Int32] = [2418,1,dataSize,0,0,0,0,0,0]
         let headerSize: Int = 5
-        let header: String = "6240" + "2"
+        let header: String = "6220" + "1"
         
         var chunkSize: Int = 4000-headerSize
         if Int(dataSize) < (4000 - headerSize) {
             chunkSize = Int(dataSize)
         }
+        var dataOffset: Int = 0
         
         print("---> Chunk size is \(chunkSize) of \(dataSize)")
     
         repeat {
             // This does not include the header
             let tmpChunkSize: Int = ((fileData.length - dataOffset) > chunkSize) ? (chunkSize) : (fileData.length - dataOffset)
-            let chunk: NSData = fileData.subdata(with: NSMakeRange(0, tmpChunkSize)) as NSData
-            print("---> Sending \(chunk.length) \(dataOffset)/\(dataSize)")
+            let chunk: NSData = fileData.subdata(with: NSMakeRange(dataOffset, tmpChunkSize)) as NSData
+            print("---> Sending \(chunk.length) (\(dataOffset+chunk.length)) \(dataOffset)/\(dataSize)")
             let mutableData: NSMutableData = NSMutableData()
             mutableData.append(header, length: headerSize)
             mutableData.append(chunk.bytes, length: chunk.length)
@@ -153,7 +151,6 @@ func sendVideoFile(){
     
 }
 sendVideoFile()
-
 
 //sendMessage(message: "10024000Message from Swift 3")
 //sendMessage(message: "123M")
