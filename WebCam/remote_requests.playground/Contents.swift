@@ -124,7 +124,6 @@ func sendVideoFile(){
         let fileData: NSData = try NSData(contentsOf: fileURL)
         let dataSize: Int32 = Int32(fileData.length)
         //let header: [Int32] = [2418,1,dataSize,0,0,0,0,0,0]
-        //let header: [Int32] = [2418,1,1234,0,0,0,0,0,0]
         let headerSize: Int = 5
         let header: String = "1264" + "1"
         
@@ -141,8 +140,7 @@ func sendVideoFile(){
             print("---> Sending \(chunk.length) of \(fileData.length) (\(fileData.length + headerSize))")
             let mutableData: NSMutableData = NSMutableData()
             mutableData.append(header, length: headerSize)
-            //mutableData.append(header, length: header.count)
-            //mutableData.append(chunk.bytes, length: chunk.length)
+            mutableData.append(chunk.bytes, length: chunk.length)
             sendChunk(chunk: mutableData.bytes, messageLength: mutableData.length)
             
             dataOffset = dataOffset + tmpChunkSize
