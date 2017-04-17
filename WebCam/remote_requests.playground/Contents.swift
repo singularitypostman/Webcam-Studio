@@ -125,7 +125,7 @@ func sendVideoFile(){
         let dataSize: Int32 = Int32(fileData.length)
         //let header: [Int32] = [2418,1,dataSize,0,0,0,0,0,0]
         let headerSize: Int = 5
-        let header: String = "1264" + "1"
+        let header: String = "1264" + "4"
         
         var chunkSize: Int = 4000-headerSize
         if Int(dataSize) < (4000 - headerSize) {
