@@ -117,8 +117,8 @@ func sendVideoFile(){
     var dataOffset: Int = 0
     
     let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-//    let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/video-small.mp4"))
-    let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/picture.jpg"))
+    let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/video-small.mp4"))
+    //let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/picture.jpg"))
     
     do {
         let fileData: NSData = try NSData(contentsOf: fileURL)
