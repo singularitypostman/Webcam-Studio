@@ -151,6 +151,7 @@ func sendVideoFile(){
     
 }
 //sendVideoFile()
+// some packets are missing
 // Wrote 2860886
 // Wrote 2880861
 
