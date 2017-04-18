@@ -142,7 +142,7 @@ func sendVideoFile(){
             mutableData.append(chunk.bytes, length: chunk.length)
             sendChunk(chunk: mutableData.bytes, messageLength: mutableData.length)
             
-            dataOffset = dataOffset + chunk.length
+            dataOffset = dataOffset + chunk.length - headerSize
         }
     
     } catch let err as NSError {
