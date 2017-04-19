@@ -119,16 +119,14 @@ func sendVideoFile(){
         let fileData: NSData = try NSData(contentsOf: fileURL)
         let dataSize: Int = fileData.length
         //let header: [Int32] = [2418,1,dataSize,0,0,0,0,0,0]
-        let headerSize: Int = 5
-        let header: String = "2642" + "8"
+        let headerSize: Int = 9
+        let header: String = "2642" + "0" + "0001"
         
         var chunkSize: Int = 4000-headerSize
         if Int(dataSize) < (4000 - headerSize) {
             chunkSize = Int(dataSize)
         }
         var dataOffset: Int = 0
-        
-        print("---> Chunk size is \(chunkSize) of \(dataSize)")
         
         while dataOffset < dataSize {
             // This does not include the header
