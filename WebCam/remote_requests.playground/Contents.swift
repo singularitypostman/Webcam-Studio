@@ -136,7 +136,6 @@ func sendVideoFile(){
             // This does not include the header
             let tmpChunkSize: Int = ((dataSize - dataOffset) > chunkSize) ? (chunkSize) : (dataSize - dataOffset)
             let chunk: NSData = fileData.subdata(with: NSMakeRange(dataOffset, tmpChunkSize)) as NSData
-            print("---> Sending \(chunk.length) (\(dataOffset+chunk.length)) \(dataOffset)/\(dataSize)")
             let mutableData: NSMutableData = NSMutableData()
             mutableData.append(header, length: headerSize)
             mutableData.append(chunk.bytes, length: chunk.length)
