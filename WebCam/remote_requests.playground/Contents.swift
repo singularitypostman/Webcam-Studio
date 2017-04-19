@@ -16,9 +16,7 @@ func sendChunk(chunk: UnsafeRawPointer, messageLength: Int){
     
     withUnsafePointer(to: &addr_in) {
         let p = UnsafeRawPointer($0).bindMemory(to: sockaddr.self, capacity: 1)
-        let res = sendto(fd, chunk, messageLength, 0, p, socklen_t(addr_in.sin_len))
-        
-        print("Send? \(res)")
+        sendto(fd, chunk, messageLength, 0, p, socklen_t(addr_in.sin_len))
     }
     
 }
@@ -114,7 +112,7 @@ func sendPictureFile(){
 // Need to send chunks of the file
 func sendVideoFile(){
     let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
-    let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/video-small.mp4"))
+    let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/video-small-01.mp4"))
     //let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/picture.jpg"))
     
     do {
@@ -122,7 +120,7 @@ func sendVideoFile(){
         let dataSize: Int = fileData.length
         //let header: [Int32] = [2418,1,dataSize,0,0,0,0,0,0]
         let headerSize: Int = 5
-        let header: String = "2462" + "2"
+        let header: String = "2642" + "8"
         
         var chunkSize: Int = 4000-headerSize
         if Int(dataSize) < (4000 - headerSize) {
