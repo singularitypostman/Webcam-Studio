@@ -132,7 +132,7 @@ func sendVideoFile(){
         
         print("---> Chunk size is \(chunkSize) of \(dataSize)")
         
-        while dataOffset < dataSize {
+        while dataOffset =< dataSize {
             // This does not include the header
             let tmpChunkSize: Int = ((dataSize - dataOffset) > chunkSize) ? (chunkSize) : (dataSize - dataOffset)
             let chunk: NSData = fileData.subdata(with: NSMakeRange(dataOffset, tmpChunkSize)) as NSData
