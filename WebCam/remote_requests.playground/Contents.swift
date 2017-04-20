@@ -120,7 +120,7 @@ func sendVideoFile(){
         let dataSize: Int = fileData.length
         //let header: [Int32] = [2418,1,dataSize,0,0,0,0,0,0]
         let headerSize: Int = 9
-        let header: String = "2642" + "0" + "0001"
+        let header: String = "4402" + "0" + "0001"
         
         var chunkSize: Int = 4000-headerSize
         if Int(dataSize) < (4000 - headerSize) {
@@ -148,12 +148,6 @@ func sendVideoFile(){
     
 }
 sendVideoFile()
-// some packets are missing
-// Wrote 2860886
-// Wrote 2880861
-
-//sendMessage(message: "10024000Message from Swift 3")
-//sendMessage(message: "123M")
 
 //let messageBytes: [Int32] = [3432,2,124,4315,6,22,4999,2,2,3,4,5,6]
 //let messageData: NSData = NSData(bytes: messageBytes, length: messageBytes.count)
