@@ -178,7 +178,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.webcamSessionStarted = true
         
         // Write in intervals of 6 seconds
-        streamingTimer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true, block: { (timer) in
+        streamingTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (timer) in
             let cmTime: CMTime = CMTimeMake(self.currentRecordingTime, self.cmTimeScale)
             self.avAssetWriter?.endSession(atSourceTime: cmTime)
             self.avAssetWriterInput?.markAsFinished()
