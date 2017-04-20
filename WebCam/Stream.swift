@@ -55,7 +55,7 @@ class Stream {
         print ("---> Finished \(dataOffset)/\(dataSize)")
     }
     
-    func broadcastData(url: URL?, message id: String){
+    func broadcastData(url: URL?, id: String){
         print("---> Broadcasting URL: \(url?.absoluteString)")
         do {
             let fileData: NSData = try NSData(contentsOf: url!)
