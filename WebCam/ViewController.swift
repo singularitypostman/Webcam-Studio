@@ -177,7 +177,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.webcamSessionStarted = true
         
         // Write in intervals of 6 seconds
-        streamingTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (timer) in
+        streamingTimer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true, block: { (timer) in
             let cmTime: CMTime = CMTimeMake(self.currentRecordingTime, self.cmTimeScale)
             self.avAssetWriter?.endSession(atSourceTime: cmTime)
             self.avAssetWriterInput?.markAsFinished()
@@ -337,10 +337,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         
         webcamWritesCounter += 1
+        let fileNumber = String(format: "%04d", webcamWritesCounter)
         let uid = NSUUID().uuidString
         print("---> Create directory at path \(videoFileDirectory.path)")
         
-        videoFilePath =  URL(fileURLWithPath: videoFileDirectory.path.appending("/session_\(webcamWritesCounter)_\(uid).mp4"))
+        videoFilePath =  URL(fileURLWithPath: videoFileDirectory.path.appending("/session_\(fileNumber)_\(uid).mp4"))
         
         return videoFilePath!
     }
