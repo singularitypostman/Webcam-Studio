@@ -33,8 +33,8 @@ class Stream {
         let headerSize: Int = 9
         let header: String = channel + resolution + id
         let dataSize: Int = message.length
-        var chunkSize: Int = 3800-headerSize
-        if dataSize < (3800-headerSize) {
+        var chunkSize: Int = 4000-headerSize
+        if dataSize < (4000-headerSize) {
             chunkSize = dataSize
         }
         var dataOffset: Int = 0
@@ -50,17 +50,20 @@ class Stream {
             mutableData.append(chunk.bytes, length: chunk.length)
             sendChunk(chunk: mutableData.bytes, messageLength: mutableData.length)
             
+            // Move the pointer forward
             dataOffset = dataOffset + chunk.length
+            // Don't flood the UDP stream
+            // 1,000,000 = 1 second
+            usleep(10)
         }
         
         print ("---> Finished \(dataOffset)/\(dataSize)")
     }
     
-    func broadcastData(url: URL?, id: String){
+    func broadcastData(url: URL?, channel: String, id: String){
         do {
             let fileData: NSData = try NSData(contentsOf: url!)
-            let channel: String = "1200"
-            let resolution: String = "2"
+            let resolution: String = "1"
             broadcastData(channel: channel, resolution: resolution, id: id, message: fileData)
             
         } catch let err as NSError {

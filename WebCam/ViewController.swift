@@ -40,6 +40,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var avAssetWriter: AVAssetWriter? = nil
     var avAssetWriterInput: AVAssetWriterInput? = nil
     var streamFileCounter: Int = 0
+    var streamingChannel: String = "0001"
     
     // Player
     let player:AVPlayer = AVPlayer()
@@ -70,7 +71,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         startPlaying(from: streamURL)
         
         // Create the video writer
-        createWriter()
+        //createWriter()
     }
     
     override var representedObject: Any? {
@@ -153,7 +154,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.movieOutput.stopRecording()
             self.avAssetWriter?.finishWriting {
                 self.videoStreamerQueue.async {
-                    self.stream.broadcastData(url: self.videoFilePath, id: self.createMessageId())
+                    self.stream.broadcastData(url: self.videoFilePath, channel: self.streamingChannel, id: self.createMessageId())
                 }
             }
             btnCaptureWebcam.layer?.backgroundColor = NSColor.white.cgColor
@@ -186,7 +187,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.avAssetWriter?.finishWriting {
                 print("---> Finish session at \(self.currentRecordingTime)")
                 self.videoStreamerQueue.async {
-                    self.stream.broadcastData(url: self.videoFilePath, id: self.createMessageId())
+                    self.stream.broadcastData(url: self.videoFilePath, channel: self.streamingChannel, id: self.createMessageId())
                 }
             }
             
@@ -241,6 +242,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     private func createWriter(){
         self.videoFilePath = getVideoFilePath()
+        self.streamingChannel = String(format: "%04d", Int(arc4random_uniform(1000)+1))
         
         // Video recording settings
         let numPixels: Float64 = 480*320
