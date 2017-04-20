@@ -40,6 +40,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var avAsset: AVAsset? = nil
     var avAssetWriter: AVAssetWriter? = nil
     var avAssetWriterInput: AVAssetWriterInput? = nil
+    var streamFileCounter: Int = 0
     
     // Player
     let player:AVPlayer = AVPlayer()
@@ -165,7 +166,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             // Stop recording
             self.movieOutput.stopRecording()
             self.avAssetWriter?.finishWriting {
-                //self.stream.broadcastData(url: self.videoFilePath)
+                self.stream.broadcastData(url: self.videoFilePath, id: createMessageId())
             }
             btnCaptureWebcam.layer?.backgroundColor = NSColor.white.cgColor
             btnCaptureWebcam.title = "Ready"
@@ -202,8 +203,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.movieOutput.stopRecording()
             self.avAssetWriter?.finishWriting {
                 print("---> Finish session at \(self.currentRecordingTime)")
-                //self.videoFilePath
-                //self.stream.broadcastData(url: self.videoFilePath)
+                self.stream.broadcastData(url: self.videoFilePath, id: createMessageId())
             }
             
             // Start the writing session
@@ -212,8 +212,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.movieOutput.startRecording(toOutputFileURL: self.getVideoFilePath(), recordingDelegate: self)
         })
         
-        print("---> Wrote session video at \(self.currentRecordingTime)")
-        self.stream.broadcastData(url: self.videoFilePath)
     }
     
     
@@ -361,5 +359,10 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         videoFilePath =  URL(fileURLWithPath: videoFileDirectory.path.appending("/session_\(webcamWritesCounter)_\(uid).mp4"))
         
         return videoFilePath!
+    }
+    
+    private func createMessageId() -> String {
+        self.streamFileCounter += 1
+        return String(format: "%04d", self.streamFileCounter)
     }
 }

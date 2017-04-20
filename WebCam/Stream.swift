@@ -55,15 +55,13 @@ class Stream {
         print ("---> Finished \(dataOffset)/\(dataSize)")
     }
     
-    func broadcastData(url: URL?){
+    func broadcastData(url: URL?, message id: String){
         print("---> Broadcasting URL: \(url?.absoluteString)")
         do {
             let fileData: NSData = try NSData(contentsOf: url!)
             let channel: String = "1200"
             let resolution: String = "2"
-            let id: String = "0001"
             broadcastData(channel: channel, resolution: resolution, id: id, message: fileData)
-            //broadcastData(message: data)
             
         } catch let err as NSError {
             print("Error streaming file: \(err)")
