@@ -338,13 +338,13 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         let image = CVPixelBufferGetBaseAddress(buffer)
         // Write to a file from NSData for debugging
         let imageData: NSData = NSData(bytes: image, length: bytes)
-        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam/")
+        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam/sessions")
         let dataOutputFile: URL = URL(fileURLWithPath: videoFileDirectory.path.appending(name))
         imageData.write(to: dataOutputFile, atomically: true)
     }
     
     private func getVideoFilePath() -> URL{
-        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
+        let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam/sessions")
         
         do {
             try FileManager.default.createDirectory(atPath: videoFileDirectory.path, withIntermediateDirectories: true, attributes: nil)
