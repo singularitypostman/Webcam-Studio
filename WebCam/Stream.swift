@@ -48,6 +48,7 @@ class Stream {
             let mutableData: NSMutableData = NSMutableData()
             mutableData.append(header, length: headerSize)
             mutableData.append(chunk.bytes, length: chunk.length)
+            sendChunk(chunk: mutableData.bytes, messageLength: mutableData.length)
             
             dataOffset = dataOffset + chunk.length
         }
@@ -56,7 +57,6 @@ class Stream {
     }
     
     func broadcastData(url: URL?, id: String){
-        print("---> Broadcasting URL: \(url?.absoluteString)")
         do {
             let fileData: NSData = try NSData(contentsOf: url!)
             let channel: String = "1200"
