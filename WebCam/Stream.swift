@@ -54,7 +54,7 @@ class Stream {
             dataOffset = dataOffset + chunk.length
             // Don't flood the UDP stream
             // 1,000,000 = 1 second
-            usleep(10)
+            //usleep(10)
         }
         
         print ("---> Finished \(dataOffset)/\(dataSize)")
