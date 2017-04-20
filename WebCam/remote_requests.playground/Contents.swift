@@ -123,8 +123,8 @@ func sendVideoFile(){
         let header: String = "4402" + "0" + "0001"
         
         var chunkSize: Int = 4000-headerSize
-        if Int(dataSize) < (4000 - headerSize) {
-            chunkSize = Int(dataSize)
+        if dataSize < (4000 - headerSize) {
+            chunkSize = dataSize
         }
         var dataOffset: Int = 0
         
@@ -147,7 +147,7 @@ func sendVideoFile(){
     }
     
 }
-sendVideoFile()
+//sendVideoFile()
 
 //let messageBytes: [Int32] = [3432,2,124,4315,6,22,4999,2,2,3,4,5,6]
 //let messageData: NSData = NSData(bytes: messageBytes, length: messageBytes.count)
