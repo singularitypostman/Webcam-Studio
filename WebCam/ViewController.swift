@@ -28,8 +28,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
     var detectionBoxActive: Bool = false
     
     let webcamDetectionQueue: DispatchQueue = DispatchQueue(label: "webcamDetection")
-    let webcamWriterQueue: DispatchQueue = DispatchQueue(label: "webCamWriter")
-    let videoWriterQueue: DispatchQueue = DispatchQueue(label: "videoWriter")
+    //let webcamWriterQueue: DispatchQueue = DispatchQueue(label: "webCamWriter")
     let webcamAudioQueue: DispatchQueue = DispatchQueue(label: "webcamAudio")
     let videoStreamerQueue: DispatchQueue = DispatchQueue(label: "streamer")
     let videoPreviewQueue: DispatchQueue = DispatchQueue(label: "preview")
@@ -89,18 +88,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         // Bytes per row
 //        let bytes: size_t = CVPixelBufferGetBytesPerRow(imageBuffer)
 //        let image = CVPixelBufferGetBaseAddress(imageBuffer)
-
-//        if (self.webcamSessionReady == false && webcamSessionStarted == true){
-//            // Another write
-//            //saveToFile(file: "saved_session_\(webcamWritesCounter).mp4", image: imageBuffer)
-//            
-//            // Send the live image to the server
-//            let imageData: NSData = NSData(bytes: image, length: bytes)
-//            webcamWriterQueue.async {
-//                
-//                self.stream.broadcastData(message: imageData)
-//            }
-//        }
         
         // Audio
         //print(CMSampleBufferGetFormatDescription(sampleBuffer))
@@ -109,7 +96,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         if (self.webcamSessionReady == false && webcamSessionStarted == true){
             self.avAssetWriterInput?.append(sampleBuffer)
         }
-      
         
         // Detection
         if self.detectionBoxActive {
@@ -190,12 +176,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Write in intervals of 6 seconds
         streamingTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (timer) in
-            print("---> Timer ")
-            print(timer.timeInterval)
-            // Write in intervals
-            print("---> Video path")
-            print(self.videoFilePath)
-            
             let cmTime: CMTime = CMTimeMake(self.currentRecordingTime, self.cmTimeScale)
             self.avAssetWriter?.endSession(atSourceTime: cmTime)
             self.avAssetWriterInput?.markAsFinished()
@@ -203,7 +183,9 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.movieOutput.stopRecording()
             self.avAssetWriter?.finishWriting {
                 print("---> Finish session at \(self.currentRecordingTime)")
-                self.stream.broadcastData(url: self.videoFilePath, id: self.createMessageId())
+                self.videoStreamerQueue.sync {
+                    self.stream.broadcastData(url: self.videoFilePath, id: self.createMessageId())
+                }
             }
             
             // Start the writing session
