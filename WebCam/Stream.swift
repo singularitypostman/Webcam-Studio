@@ -56,6 +56,7 @@ class Stream {
     }
     
     func broadcastData(url: URL?){
+        print("---> Broadcasting URL: \(url?.absoluteString)")
         do {
             let fileData: NSData = try NSData(contentsOf: url!)
             let channel: String = "1200"
