@@ -186,7 +186,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.movieOutput.stopRecording()
             self.avAssetWriter?.finishWriting {
                 print("---> Finish session at \(self.currentRecordingTime)")
-                self.videoStreamerQueue.async {
+                self.videoStreamerQueue.sync {
+                    usleep(1)
                     self.stream.broadcastData(url: self.videoFilePath, channel: self.streamingChannel, id: self.createMessageId())
                 }
             }

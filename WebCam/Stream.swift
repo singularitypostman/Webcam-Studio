@@ -33,8 +33,8 @@ class Stream {
         let headerSize: Int = 9
         let header: String = channel + resolution + id
         let dataSize: Int = message.length
-        var chunkSize: Int = 8000-headerSize
-        if dataSize < (8000-headerSize) {
+        var chunkSize: Int = 12000-headerSize
+        if dataSize < (12000-headerSize) {
             chunkSize = dataSize
         }
         var dataOffset: Int = 0
@@ -54,7 +54,7 @@ class Stream {
             dataOffset = dataOffset + chunk.length
             // Don't flood the UDP stream
             // 1,000,000 = 1 second
-            usleep(10)
+            usleep(1)
         }
         
         print ("---> Finished \(dataOffset)/\(dataSize)")
