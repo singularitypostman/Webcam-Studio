@@ -33,8 +33,8 @@ class Stream {
         let headerSize: Int = 9
         let header: String = channel + resolution + id
         let dataSize: Int = message.length
-        var chunkSize: Int = 12000-headerSize
-        if dataSize < (12000-headerSize) {
+        var chunkSize: Int = 4000-headerSize
+        if dataSize < (4000-headerSize) {
             chunkSize = dataSize
         }
         var dataOffset: Int = 0
