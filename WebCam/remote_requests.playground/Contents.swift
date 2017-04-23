@@ -150,7 +150,7 @@ func sendVideoFile(){
     }
     
 }
-sendVideoFile()
+//sendVideoFile()
 
 //let messageBytes: [Int32] = [3432,2,124,4315,6,22,4999,2,2,3,4,5,6]
 //let messageData: NSData = NSData(bytes: messageBytes, length: messageBytes.count)
