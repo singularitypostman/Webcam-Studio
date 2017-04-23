@@ -113,7 +113,7 @@ func sendPictureFile(){
 func sendVideoFile(){
     let videoFileDirectory: URL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent("Webcam")
     let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/video-small-01.mp4"))
-    //let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/picture.jpg"))
+//    let fileURL: URL = URL(fileURLWithPath: videoFileDirectory.path.appending("/picture.jpg"))
     
     do {
         let fileData: NSData = try NSData(contentsOf: fileURL)
@@ -137,7 +137,10 @@ func sendVideoFile(){
             mutableData.append(chunk.bytes, length: chunk.length)
             sendChunk(chunk: mutableData.bytes, messageLength: mutableData.length)
             
-            dataOffset = dataOffset + chunk.length 
+            dataOffset = dataOffset + chunk.length
+            // Don't flood the UDP stream
+            // 1,000,000 = 1 second
+            usleep(1)
         }
         
         print("---> Finished \(dataOffset)/\(dataSize)")
@@ -147,7 +150,7 @@ func sendVideoFile(){
     }
     
 }
-//sendVideoFile()
+sendVideoFile()
 
 //let messageBytes: [Int32] = [3432,2,124,4315,6,22,4999,2,2,3,4,5,6]
 //let messageData: NSData = NSData(bytes: messageBytes, length: messageBytes.count)
