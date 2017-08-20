@@ -1,4 +1,4 @@
 osx_image: xcode9
 language: objective-c
 script:
-  - xcodebuild clean build -project Monique.xcodeproj
+  - xcodebuild test -project Monique.xcodeproj -scheme Monique
