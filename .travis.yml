@@ -1,4 +1,4 @@
 osx_image: xcode9
 xcode_project: Monique.xcodeproj
 xcode_scheme: MoniqueTests
-language: swift
+language: objective-c
