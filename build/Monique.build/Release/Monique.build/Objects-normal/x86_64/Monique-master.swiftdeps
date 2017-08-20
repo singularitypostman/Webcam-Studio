@@ -1,0 +1,10 @@
+version: "Apple Swift version 4.0 (swiftlang-900.0.43 clang-900.0.22.8)"
+options: "a0f726186692ccd8ead88d6b0668231b"
+build_time: [1503193745, 712900000]
+inputs:
+  "/Users/shavit/Applications/Monique/Monique/Webcam/MFileWriterProtocol.swift": [9223372036, 854775807]
+  "/Users/shavit/Applications/Monique/Monique/Webcam/MFileWriter.swift": [9223372036, 854775807]
+  "/Users/shavit/Applications/Monique/Monique/ViewController.swift": [9223372036, 854775807]
+  "/Users/shavit/Applications/Monique/Monique/Webcam/MWebcamLocalPreviewContainer.swift": [9223372036, 854775807]
+  "/Users/shavit/Applications/Monique/Monique/Webcam/MVideoPlayerContainer.swift": [9223372036, 854775807]
+  "/Users/shavit/Applications/Monique/Monique/AppDelegate.swift": [9223372036, 854775807]
