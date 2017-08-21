@@ -29,6 +29,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DEFE17441F48AFDC00155215"
+               BuildableName = "MoniqueTests.xctest"
+               BlueprintName = "MoniqueTests"
+               ReferencedContainer = "container:Monique.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DEFE174F1F48AFDC00155215"
+               BuildableName = "MoniqueUITests.xctest"
+               BlueprintName = "MoniqueUITests"
+               ReferencedContainer = "container:Monique.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
