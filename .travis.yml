@@ -2,3 +2,5 @@ osx_image: xcode9
 language: objective-c
 xcode_project: Monique.xcodeproj
 xcode_scheme: MoniqueCI
+script:
+  - xcodebuild clean build -project Monique.xcodeproj -scheme MoniqueCI CODE_SIGNING_REQUIRED=NO
