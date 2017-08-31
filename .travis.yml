@@ -11,8 +11,7 @@ before_script:
   - security import ./certs/dist.p12 -k ~/Library/Keychains/mac-build.keychain -P $KEY_PASSWORD -T /usr/bin/codesign
 
 script:
-  - xcodebuild clean test -project Monique.xcodeproj -scheme MoniqueCI CODE_SIGNING_REQUIRED=NO
-  CODE_SIGN_IDENTITY=""
+  - xcodebuild clean test -project Monique.xcodeproj -scheme MoniqueCI CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
 
 after_script:
   - security delete-keychain ios-build.keychain
