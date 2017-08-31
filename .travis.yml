@@ -3,19 +3,19 @@ os: osx
 osx_image: xcode9
 xcode_project: Monique.xcodeproj
 xcode_scheme: MoniqueCI
-
 before_script:
-  - security create-keychain -p travis mac-build.keychain
-  - security import ./certs/apple.cer -k ~/Library/Keychains/mac-build.keychain -T /usr/bin/codesign
-  - security import ./certs/dist.cer -k ~/Library/Keychains/mac-build.keychain -T /usr/bin/codesign
-  - security import ./certs/dist.p12 -k ~/Library/Keychains/mac-build.keychain -P $KEY_PASSWORD -T /usr/bin/codesign
-
+- security create-keychain -p travis mac-build.keychain
+- security import ./certs/apple.cer -k ~/Library/Keychains/mac-build.keychain -T /usr/bin/codesign
+- security import ./certs/dist.cer -k ~/Library/Keychains/mac-build.keychain -T /usr/bin/codesign
+- security import ./certs/dist.p12 -k ~/Library/Keychains/mac-build.keychain -P $KEY_PASSWORD
+  -T /usr/bin/codesign
 script:
-  - xcodebuild clean test -project Monique.xcodeproj -scheme MoniqueCI CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
-
+- xcodebuild clean test -project Monique.xcodeproj -scheme MoniqueCI CODE_SIGNING_REQUIRED=NO
+  CODE_SIGN_IDENTITY=""
 after_script:
-  - security delete-keychain ios-build.keychain
-
+- security delete-keychain ios-build.keychain
 after_success:
-  - echo "Configure Travis CI to deploy into TestFlight"
-
+- echo "Configure Travis CI to deploy into TestFlight"
+env:
+  global:
+    secure: Safs4PimeW9ilh3Qkm/MH0LaG2HCsoaoezSkJaiAyeETKc96+vx6AOM8N0IW4Sp0t/AqUF1Jk220KelJurCgRXgHT5xhkElMxrKdroUQ/Osfvc5pLssPFZYe+dQZPxglJjmrg/AHCnk1LGgXriXtvxPW+142vnxkrw6J0oC7X2O5C38eFAKpXZE5XAma8GYa4WBj52qkZUs9Jz5Z/kah9YlRVUuCD9FRdyEvo1tkZb/8rs5VZc5D8Gortrz9KT6VDetymO4sWUkweS6SagrhXlrWhsuUtV0UC0dSAYJqjYflVL92VwIvcLLqJGV75+xap2Uag3vT7/c3NSHDonZJBhIxW85NXc1q/LshuAfqZ7Hnj8/9e9IyqHa0ahTf7YHeAMIwkmQxSbLrEHcJlIzvis40gvfIUIvpFRk1rwVPeEflMwf+8X8hDDz1P/dPpfmhuePQQrnXg26Xa58ZRPItg3f9TaHUUgtlEciD6PoWxPT9C+XJOHOhvz7csOo3XgsHAMuagujLvuOBWPmOi8tN1uKlLwC1kXUNkPDuCKW+J59WisgKxci4j36zfUdSQj1QdTpqv5q7BAl/WCfNk3p0hQVUg3QJTOupvXuo8YrxapIsYeYfpjj3jeRY5mAKSwag00WpX6dnRQ8fVJKYqwwKrYKL1UITcywFBtgTOrWomfQ=
