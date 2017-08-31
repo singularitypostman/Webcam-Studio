@@ -2,10 +2,11 @@ language: objective-c
 os: osx
 osx_image: xcode9
 env:
-  - CODE_SIGNING_REQUIRED=0
+  - CODE_SIGNING_REQUIRED=NO
+  - CODE_SIGN_IDENTITY=""
 
 xcode_project: Monique.xcodeproj
 xcode_scheme: MoniqueCI
 
 script:
-  - xcodebuild clean build -project Monique.xcodeproj -scheme MoniqueCI
+  - xcodebuild clean test -project Monique.xcodeproj -scheme MoniqueCI
