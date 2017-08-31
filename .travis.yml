@@ -4,5 +4,19 @@ osx_image: xcode9
 xcode_project: Monique.xcodeproj
 xcode_scheme: MoniqueCI
 
+before_script:
+  - security create-keychain -p travis mac-build.keychain
+  - security import ./certs/apple.cer -k ~/Library/Keychains/mac-build.keychain -T /usr/bin/codesign
+  - security import ./certs/dist.cer -k ~/Library/Keychains/mac-build.keychain -T /usr/bin/codesign
+  - security import ./certs/dist.p12 -k ~/Library/Keychains/mac-build.keychain -P $KEY_PASSWORD -T /usr/bin/codesign
+
 script:
-  - xcodebuild clean test -project Monique.xcodeproj -scheme MoniqueCI CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
+  - xcodebuild clean test -project Monique.xcodeproj -scheme MoniqueCI CODE_SIGNING_REQUIRED=NO
+  CODE_SIGN_IDENTITY=""
+
+after_script:
+  - security delete-keychain ios-build.keychain
+
+after_success:
+  - echo "Configure Travis CI to deploy into TestFlight"
+
