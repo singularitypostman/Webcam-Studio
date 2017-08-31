@@ -1,8 +1,11 @@
-osx_image: xcode9
 language: objective-c
+os: osx
+osx_image: xcode9
 env:
-  - CODE_SIGNING_REQUIRED=NO
+  - CODE_SIGNING_REQUIRED=0
+
 xcode_project: Monique.xcodeproj
 xcode_scheme: MoniqueCI
+
 script:
-  - xcodebuild clean build -project Monique.xcodeproj -scheme MoniqueCI CODE_SIGNING_REQUIRED=NO
+  - xcodebuild clean build -project Monique.xcodeproj -scheme MoniqueCI
