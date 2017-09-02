@@ -12,7 +12,7 @@ class MFileWriter: MfileWriterProtocol {
     
     private var dir: URL? = nil
     private var filePath: URL? = nil
-    private let fileOutput: AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
+    private var fileOutput: AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
     private var segmentsCount: Int = 0
     private let timeScale: Int32 = 1000000000
     private var timer: Timer? = nil
@@ -50,10 +50,13 @@ class MFileWriter: MfileWriterProtocol {
     }
     
     func record(){
-        timer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true, block: { (t) in
+        print("---> Writer start")
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true, block: { (t) in
             print("---> Starting recording session segment \(self.segmentsCount)")
             
+            // Stop and restart and a new segment
             self.fileOutput.stopRecording()
+            self.fileOutput = AVCaptureMovieFileOutput()
             self.fileOutput.startRecording(to: self.getFilePath()!, recordingDelegate: self.delegate!)
         })
     }

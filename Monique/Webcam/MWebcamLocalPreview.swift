@@ -43,6 +43,7 @@ class MWebcamLocalPreview: NSView, AVCaptureVideoDataOutputSampleBufferDelegate,
     }
     
     func toggleRecording(){
+        print("---> Toggle recording: \(isRecording)")
         if isRecording {
             writer.stop()
         } else {

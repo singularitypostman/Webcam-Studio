@@ -719,6 +719,9 @@
                                         <buttonCell key="cell" type="push" title="Face detection" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YMg-UF-RDh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
+                                            <connections>
+                                                <action selector="startFaceDetection:" target="XfG-lQ-9wD" id="0M7-ZB-my1"/>
+                                            </connections>
                                         </buttonCell>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tHL-gP-AW3">
@@ -726,6 +729,9 @@
                                         <buttonCell key="cell" type="push" title="Stream" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hkN-uX-E9X">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
+                                            <connections>
+                                                <action selector="startStreaming:" target="XfG-lQ-9wD" id="Pek-b3-pTj"/>
+                                            </connections>
                                         </buttonCell>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nr4-UK-IhT">

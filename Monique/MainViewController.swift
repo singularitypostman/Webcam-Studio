@@ -23,11 +23,21 @@ class MainViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-
+    
+    
+    // Stream to server
+    @IBAction func startStreaming(_ sender: Any){
+        print("TODO: Video streaming is not implemented in this version")
+    }
     
     // Record to local disk
     @IBAction func startRecording(_ sender: Any) {
         mWebcamLocalPreview.toggleRecording()
+    }
+    
+    // Draw a square around the faces
+    @IBAction func startFaceDetection(_ sender: Any){
+        print("TODO: Face detection is not implemented in thie version")
     }
 }
 
