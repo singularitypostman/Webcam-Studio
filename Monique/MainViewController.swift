@@ -10,8 +10,7 @@ import Cocoa
 
 class MainViewController: NSViewController {
 
-    @IBOutlet var mWebcamLocalPreview: MWebcamLocalPreviewContainer!
-    @IBOutlet var mVideoPlayer: MVideoPlayerContainer!
+    @IBOutlet var mWebcamLocalPreview: MWebcamLocalPreview!
     
     override func viewDidLoad() {
         super.viewDidLoad()

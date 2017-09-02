@@ -684,14 +684,15 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="MainWindowController" customModule="Monique" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
                     </window>
                     <connections>
+                        <outlet property="mainWindow" destination="IQv-IB-iLA" id="bWr-Nt-ONM"/>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
                     </connections>
                 </windowController>
@@ -703,11 +704,11 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="MainViewController" customModule="Monique" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
+                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl" customClass="MWebcamView" customModule="Monique" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="312"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="3xf-Pl-Qfo" customClass="MWebcamLocalPreviewContainer" customModule="Monique" customModuleProvider="target">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="3xf-Pl-Qfo" customClass="MWebcamLocalPreview" customModule="Monique" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="52" width="480" height="260"/>
                             </customView>
                             <customView identifier="controlPanel" translatesAutoresizingMaskIntoConstraints="NO" id="8dh-fm-a62">
@@ -739,24 +740,24 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="wfi-61-hpm" firstAttribute="leading" secondItem="nr4-UK-IhT" secondAttribute="trailing" constant="18" id="Cmj-KU-RxQ"/>
-                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="baseline" secondItem="nr4-UK-IhT" secondAttribute="baseline" id="Dhm-Ud-hsZ"/>
-                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="centerY" secondItem="8dh-fm-a62" secondAttribute="centerY" id="Ffi-qD-lew"/>
-                                    <constraint firstItem="nr4-UK-IhT" firstAttribute="baseline" secondItem="wfi-61-hpm" secondAttribute="baseline" id="Shi-Eg-Kpc"/>
-                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="top" secondItem="8dh-fm-a62" secondAttribute="top" constant="10" id="azL-qV-Rxl"/>
-                                    <constraint firstItem="nr4-UK-IhT" firstAttribute="leading" secondItem="tHL-gP-AW3" secondAttribute="trailing" constant="12" symbolic="YES" id="cKm-Iv-UeE"/>
-                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="leading" secondItem="8dh-fm-a62" secondAttribute="leading" constant="20" symbolic="YES" id="zmK-Zh-qZx"/>
+                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="centerY" secondItem="8dh-fm-a62" secondAttribute="centerY" id="608-1a-IJW"/>
+                                    <constraint firstItem="nr4-UK-IhT" firstAttribute="leading" secondItem="tHL-gP-AW3" secondAttribute="trailing" constant="12" symbolic="YES" id="BiF-XD-ei5"/>
+                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="leading" secondItem="8dh-fm-a62" secondAttribute="leading" constant="20" symbolic="YES" id="Bxv-X5-pAL"/>
+                                    <constraint firstItem="nr4-UK-IhT" firstAttribute="baseline" secondItem="wfi-61-hpm" secondAttribute="baseline" id="PSe-QP-9Ci"/>
+                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="top" secondItem="8dh-fm-a62" secondAttribute="top" constant="10" id="bpm-gq-FFY"/>
+                                    <constraint firstItem="wfi-61-hpm" firstAttribute="leading" secondItem="nr4-UK-IhT" secondAttribute="trailing" constant="18" id="eMH-H8-7nQ"/>
+                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="baseline" secondItem="nr4-UK-IhT" secondAttribute="baseline" id="l0S-dK-Gfo"/>
                                 </constraints>
                             </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="3xf-Pl-Qfo" secondAttribute="trailing" id="2ZO-Ax-j2B"/>
-                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="4Lw-SK-0GO"/>
-                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="leading" secondItem="8dh-fm-a62" secondAttribute="leading" id="ET4-BU-d5D"/>
-                            <constraint firstAttribute="bottom" secondItem="8dh-fm-a62" secondAttribute="bottom" id="SR9-aw-BIr"/>
-                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="trailing" secondItem="8dh-fm-a62" secondAttribute="trailing" id="WcF-np-ugH"/>
-                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="dGl-fo-iFy"/>
-                            <constraint firstItem="8dh-fm-a62" firstAttribute="top" secondItem="3xf-Pl-Qfo" secondAttribute="bottom" constant="12" id="s3w-cO-Ak6"/>
+                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="trailing" secondItem="8dh-fm-a62" secondAttribute="trailing" id="EOy-Th-kum"/>
+                            <constraint firstAttribute="bottom" secondItem="8dh-fm-a62" secondAttribute="bottom" id="RhS-hW-HuE"/>
+                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="leading" secondItem="8dh-fm-a62" secondAttribute="leading" id="Sco-e3-q4f"/>
+                            <constraint firstAttribute="trailing" secondItem="3xf-Pl-Qfo" secondAttribute="trailing" id="UiN-05-Fk2"/>
+                            <constraint firstItem="8dh-fm-a62" firstAttribute="top" secondItem="3xf-Pl-Qfo" secondAttribute="bottom" constant="12" id="ZxH-iY-edj"/>
+                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="ngd-fM-6am"/>
+                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="vGG-KJ-zdP"/>
                         </constraints>
                     </view>
                     <connections>

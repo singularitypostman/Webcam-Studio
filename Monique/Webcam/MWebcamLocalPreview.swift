@@ -9,7 +9,7 @@
 import Cocoa
 import AVFoundation
 
-class MWebcamLocalPreviewContainer: NSView, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
+class MWebcamLocalPreview: NSView, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
     
     private let session: AVCaptureSession = AVCaptureSession()
     private let writer: MFileWriter = MFileWriter()
@@ -94,3 +94,4 @@ class MWebcamLocalPreviewContainer: NSView, AVCaptureVideoDataOutputSampleBuffer
         }
     }
 }
+

@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DEB1B21F1F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift */; };
-		DEB1B2201F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift */; };
-		DEB1B2211F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift */; };
+		DE2223771F5B0AE8008EDEA5 /* MWebcamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2223761F5B0AE8008EDEA5 /* MWebcamView.swift */; };
+		DE2223781F5B0AE8008EDEA5 /* MWebcamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2223761F5B0AE8008EDEA5 /* MWebcamView.swift */; };
+		DE2223791F5B0AE8008EDEA5 /* MWebcamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2223761F5B0AE8008EDEA5 /* MWebcamView.swift */; };
+		DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
+		DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
+		DE2223911F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
+		DEB1B21F1F48B4CD00E5586D /* MWebcamLocalPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreview.swift */; };
+		DEB1B2201F48B4CD00E5586D /* MWebcamLocalPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreview.swift */; };
+		DEB1B2211F48B4CD00E5586D /* MWebcamLocalPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreview.swift */; };
 		DEB1B2231F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B2221F48B84100E5586D /* MVideoPlayerContainer.swift */; };
 		DEB1B2241F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B2221F48B84100E5586D /* MVideoPlayerContainer.swift */; };
 		DEB1B2251F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B2221F48B84100E5586D /* MVideoPlayerContainer.swift */; };
@@ -46,7 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWebcamLocalPreviewContainer.swift; sourceTree = "<group>"; };
+		DE2223761F5B0AE8008EDEA5 /* MWebcamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWebcamView.swift; sourceTree = "<group>"; };
+		DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWebcamLocalPreview.swift; sourceTree = "<group>"; };
 		DEB1B2221F48B84100E5586D /* MVideoPlayerContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVideoPlayerContainer.swift; sourceTree = "<group>"; };
 		DEB1B22A1F48D9BE00E5586D /* MFileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFileWriter.swift; sourceTree = "<group>"; };
 		DEB1B2361F48E72800E5586D /* MFileWriterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFileWriterProtocol.swift; sourceTree = "<group>"; };
@@ -126,6 +134,7 @@
 				DEFE17621F48B1F200155215 /* Webcam */,
 				DEFE17331F48AFDC00155215 /* AppDelegate.swift */,
 				DEFE17351F48AFDC00155215 /* MainViewController.swift */,
+				DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */,
 				DEFE173A1F48AFDC00155215 /* Assets.xcassets */,
 				DEFE173C1F48AFDC00155215 /* Main.storyboard */,
 				DEFE173F1F48AFDC00155215 /* Info.plist */,
@@ -156,9 +165,10 @@
 		DEFE17621F48B1F200155215 /* Webcam */ = {
 			isa = PBXGroup;
 			children = (
-				DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift */,
+				DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreview.swift */,
 				DEB1B22A1F48D9BE00E5586D /* MFileWriter.swift */,
 				DEB1B2361F48E72800E5586D /* MFileWriterProtocol.swift */,
+				DE2223761F5B0AE8008EDEA5 /* MWebcamView.swift */,
 			);
 			path = Webcam;
 			sourceTree = "<group>";
@@ -297,10 +307,12 @@
 				DEB1B2371F48E72800E5586D /* MFileWriterProtocol.swift in Sources */,
 				DEB1B22B1F48D9BE00E5586D /* MFileWriter.swift in Sources */,
 				DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */,
-				DEB1B21F1F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift in Sources */,
+				DE2223771F5B0AE8008EDEA5 /* MWebcamView.swift in Sources */,
+				DEB1B21F1F48B4CD00E5586D /* MWebcamLocalPreview.swift in Sources */,
 				DEB1B2231F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */,
 				DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */,
 				DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */,
+				DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,8 +321,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEFE174A1F48AFDC00155215 /* MoniqueTests.swift in Sources */,
+				DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 				DEB1B2381F48E72800E5586D /* MFileWriterProtocol.swift in Sources */,
-				DEB1B2201F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift in Sources */,
+				DEB1B2201F48B4CD00E5586D /* MWebcamLocalPreview.swift in Sources */,
+				DE2223781F5B0AE8008EDEA5 /* MWebcamView.swift in Sources */,
 				DEB1B22C1F48D9BE00E5586D /* MFileWriter.swift in Sources */,
 				DEB1B2241F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */,
 			);
@@ -321,8 +335,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEFE17551F48AFDC00155215 /* MoniqueUITests.swift in Sources */,
+				DE2223911F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 				DEB1B2391F48E72800E5586D /* MFileWriterProtocol.swift in Sources */,
-				DEB1B2211F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift in Sources */,
+				DEB1B2211F48B4CD00E5586D /* MWebcamLocalPreview.swift in Sources */,
+				DE2223791F5B0AE8008EDEA5 /* MWebcamView.swift in Sources */,
 				DEB1B22D1F48D9BE00E5586D /* MFileWriter.swift in Sources */,
 				DEB1B2251F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */,
 			);
