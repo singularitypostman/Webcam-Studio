@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class MainViewController: NSViewController {
 
     @IBOutlet var mWebcamLocalPreview: MWebcamLocalPreviewContainer!
     @IBOutlet var mVideoPlayer: MVideoPlayerContainer!

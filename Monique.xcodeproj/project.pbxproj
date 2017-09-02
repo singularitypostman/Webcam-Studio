@@ -20,7 +20,7 @@
 		DEB1B2381F48E72800E5586D /* MFileWriterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B2361F48E72800E5586D /* MFileWriterProtocol.swift */; };
 		DEB1B2391F48E72800E5586D /* MFileWriterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B2361F48E72800E5586D /* MFileWriterProtocol.swift */; };
 		DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17331F48AFDC00155215 /* AppDelegate.swift */; };
-		DEFE17361F48AFDC00155215 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17351F48AFDC00155215 /* ViewController.swift */; };
+		DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17351F48AFDC00155215 /* MainViewController.swift */; };
 		DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */; };
 		DEFE173B1F48AFDC00155215 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFE173A1F48AFDC00155215 /* Assets.xcassets */; };
 		DEFE173E1F48AFDC00155215 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEFE173C1F48AFDC00155215 /* Main.storyboard */; };
@@ -52,7 +52,7 @@
 		DEB1B2361F48E72800E5586D /* MFileWriterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFileWriterProtocol.swift; sourceTree = "<group>"; };
 		DEFE17301F48AFDC00155215 /* Monique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monique.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFE17331F48AFDC00155215 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DEFE17351F48AFDC00155215 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DEFE17351F48AFDC00155215 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DEFE17381F48AFDC00155215 /* Monique.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Monique.xcdatamodel; sourceTree = "<group>"; };
 		DEFE173A1F48AFDC00155215 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEFE173D1F48AFDC00155215 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -91,6 +91,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE2223751F5B048E008EDEA5 /* VideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				DEB1B2221F48B84100E5586D /* MVideoPlayerContainer.swift */,
+			);
+			path = VideoPlayer;
+			sourceTree = "<group>";
+		};
 		DEFE17271F48AFDC00155215 = {
 			isa = PBXGroup;
 			children = (
@@ -114,9 +122,10 @@
 		DEFE17321F48AFDC00155215 /* Monique */ = {
 			isa = PBXGroup;
 			children = (
+				DE2223751F5B048E008EDEA5 /* VideoPlayer */,
 				DEFE17621F48B1F200155215 /* Webcam */,
 				DEFE17331F48AFDC00155215 /* AppDelegate.swift */,
-				DEFE17351F48AFDC00155215 /* ViewController.swift */,
+				DEFE17351F48AFDC00155215 /* MainViewController.swift */,
 				DEFE173A1F48AFDC00155215 /* Assets.xcassets */,
 				DEFE173C1F48AFDC00155215 /* Main.storyboard */,
 				DEFE173F1F48AFDC00155215 /* Info.plist */,
@@ -148,7 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift */,
-				DEB1B2221F48B84100E5586D /* MVideoPlayerContainer.swift */,
 				DEB1B22A1F48D9BE00E5586D /* MFileWriter.swift */,
 				DEB1B2361F48E72800E5586D /* MFileWriterProtocol.swift */,
 			);
@@ -288,7 +296,7 @@
 			files = (
 				DEB1B2371F48E72800E5586D /* MFileWriterProtocol.swift in Sources */,
 				DEB1B22B1F48D9BE00E5586D /* MFileWriter.swift in Sources */,
-				DEFE17361F48AFDC00155215 /* ViewController.swift in Sources */,
+				DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */,
 				DEB1B21F1F48B4CD00E5586D /* MWebcamLocalPreviewContainer.swift in Sources */,
 				DEB1B2231F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */,
 				DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */,

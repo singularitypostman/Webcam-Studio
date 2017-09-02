@@ -686,7 +686,7 @@
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -699,22 +699,19 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Monique" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="MainViewController" customModule="Monique" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="640"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="312"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="3xf-Pl-Qfo" customClass="MWebcamLocalPreviewContainer" customModule="Monique" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="380" width="480" height="260"/>
-                            </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="wOH-OC-0LH" customClass="MVideoPlayerContainer" customModule="Monique" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                                <rect key="frame" x="0.0" y="52" width="480" height="260"/>
                             </customView>
                             <customView identifier="controlPanel" translatesAutoresizingMaskIntoConstraints="NO" id="8dh-fm-a62">
-                                <rect key="frame" x="0.0" y="328" width="480" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wfi-61-hpm">
                                         <rect key="frame" x="187" y="2" width="130" height="32"/>
@@ -742,38 +739,33 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="wfi-61-hpm" firstAttribute="leading" secondItem="nr4-UK-IhT" secondAttribute="trailing" constant="18" id="5tS-5J-Lqv"/>
-                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="leading" secondItem="8dh-fm-a62" secondAttribute="leading" constant="20" symbolic="YES" id="IA9-Kh-zrA"/>
-                                    <constraint firstItem="nr4-UK-IhT" firstAttribute="leading" secondItem="tHL-gP-AW3" secondAttribute="trailing" constant="12" symbolic="YES" id="U47-1w-PdI"/>
-                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="baseline" secondItem="nr4-UK-IhT" secondAttribute="baseline" id="jW6-Dh-QM9"/>
-                                    <constraint firstItem="nr4-UK-IhT" firstAttribute="centerY" secondItem="8dh-fm-a62" secondAttribute="centerY" id="lsI-mq-zzW"/>
-                                    <constraint firstItem="nr4-UK-IhT" firstAttribute="top" secondItem="8dh-fm-a62" secondAttribute="top" constant="10" id="sZ6-xo-edZ"/>
-                                    <constraint firstItem="wfi-61-hpm" firstAttribute="baseline" secondItem="nr4-UK-IhT" secondAttribute="baseline" id="twM-p3-wEA"/>
+                                    <constraint firstItem="wfi-61-hpm" firstAttribute="leading" secondItem="nr4-UK-IhT" secondAttribute="trailing" constant="18" id="Cmj-KU-RxQ"/>
+                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="baseline" secondItem="nr4-UK-IhT" secondAttribute="baseline" id="Dhm-Ud-hsZ"/>
+                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="centerY" secondItem="8dh-fm-a62" secondAttribute="centerY" id="Ffi-qD-lew"/>
+                                    <constraint firstItem="nr4-UK-IhT" firstAttribute="baseline" secondItem="wfi-61-hpm" secondAttribute="baseline" id="Shi-Eg-Kpc"/>
+                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="top" secondItem="8dh-fm-a62" secondAttribute="top" constant="10" id="azL-qV-Rxl"/>
+                                    <constraint firstItem="nr4-UK-IhT" firstAttribute="leading" secondItem="tHL-gP-AW3" secondAttribute="trailing" constant="12" symbolic="YES" id="cKm-Iv-UeE"/>
+                                    <constraint firstItem="tHL-gP-AW3" firstAttribute="leading" secondItem="8dh-fm-a62" secondAttribute="leading" constant="20" symbolic="YES" id="zmK-Zh-qZx"/>
                                 </constraints>
                             </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="3xf-Pl-Qfo" secondAttribute="trailing" id="D4f-NP-0oL"/>
-                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="OT7-Fc-wZy"/>
-                            <constraint firstItem="wOH-OC-0LH" firstAttribute="top" secondItem="8dh-fm-a62" secondAttribute="bottom" constant="8" symbolic="YES" id="YTg-nA-98e"/>
-                            <constraint firstAttribute="bottom" secondItem="wOH-OC-0LH" secondAttribute="bottom" id="a07-Zl-B47"/>
-                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="cIN-GP-xGM"/>
-                            <constraint firstItem="8dh-fm-a62" firstAttribute="leading" secondItem="wOH-OC-0LH" secondAttribute="leading" id="eTd-Ii-Jld"/>
-                            <constraint firstItem="8dh-fm-a62" firstAttribute="trailing" secondItem="wOH-OC-0LH" secondAttribute="trailing" id="fvG-zT-hDt"/>
-                            <constraint firstItem="8dh-fm-a62" firstAttribute="top" secondItem="3xf-Pl-Qfo" secondAttribute="bottom" constant="12" id="g7K-lW-4bZ"/>
-                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="trailing" secondItem="8dh-fm-a62" secondAttribute="trailing" id="hjL-yU-Yn8"/>
-                            <constraint firstItem="8dh-fm-a62" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="272" id="iBs-d2-1ia"/>
-                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="leading" secondItem="8dh-fm-a62" secondAttribute="leading" id="x9O-ZJ-UGI"/>
+                            <constraint firstAttribute="trailing" secondItem="3xf-Pl-Qfo" secondAttribute="trailing" id="2ZO-Ax-j2B"/>
+                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="4Lw-SK-0GO"/>
+                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="leading" secondItem="8dh-fm-a62" secondAttribute="leading" id="ET4-BU-d5D"/>
+                            <constraint firstAttribute="bottom" secondItem="8dh-fm-a62" secondAttribute="bottom" id="SR9-aw-BIr"/>
+                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="trailing" secondItem="8dh-fm-a62" secondAttribute="trailing" id="WcF-np-ugH"/>
+                            <constraint firstItem="3xf-Pl-Qfo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="dGl-fo-iFy"/>
+                            <constraint firstItem="8dh-fm-a62" firstAttribute="top" secondItem="3xf-Pl-Qfo" secondAttribute="bottom" constant="12" id="s3w-cO-Ak6"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="mVideoPlayer" destination="wOH-OC-0LH" id="ilu-5w-KSo"/>
                         <outlet property="mWebcamLocalPreview" destination="3xf-Pl-Qfo" id="acE-Bv-Kbl"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="81" y="900"/>
+            <point key="canvasLocation" x="81" y="736"/>
         </scene>
     </scenes>
 </document>
