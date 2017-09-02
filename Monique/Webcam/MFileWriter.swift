@@ -71,11 +71,13 @@ class MFileWriter: MfileWriterProtocol {
         dir = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent(path)
         
         do{
-            try FileManager.default.createDirectory(atPath: dir!.path, withIntermediateDirectories: true, attributes: nil)
+            // TODO: Permissions problems, it shouldn't run as root
+            print("---> Creating a directory:")
+            print(dir!.path)
+            try FileManager.default.createDirectory(at: dir!, withIntermediateDirectories: true, attributes: nil)
         } catch let err as NSError {
-            print("Error creating a directory for the output file: \(err)")
+            fatalError("Error creating a directory for the output file: \(err)")
         }
     }
-    
 
 }

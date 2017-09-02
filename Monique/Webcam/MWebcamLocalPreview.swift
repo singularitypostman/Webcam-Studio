@@ -23,9 +23,9 @@ class MWebcamLocalPreview: NSView, AVCaptureVideoDataOutputSampleBufferDelegate,
         super.draw(dirtyRect)
         
         writer.delegate = self
-        addPreviewLayer()
         setInput()
         setOutput()
+        addPreviewLayer()
         startPreview()
     }
     
@@ -82,7 +82,7 @@ class MWebcamLocalPreview: NSView, AVCaptureVideoDataOutputSampleBufferDelegate,
     }
     
     fileprivate func setOutput(){
-        session.sessionPreset = AVCaptureSession.Preset.high
+        //session.sessionPreset = AVCaptureSession.Preset.high
         session.addOutput(videoOutput)
         session.addOutput(audioOutput)
         // File output
