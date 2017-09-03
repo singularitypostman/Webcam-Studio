@@ -55,7 +55,7 @@ class MWebcamLocalPreview: NSView, AVCaptureVideoDataOutputSampleBufferDelegate,
     
     fileprivate func addPreviewLayer(){
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer?.backgroundColor = NSColor.green.cgColor
+        previewLayer?.backgroundColor = CGColor(red: 0.14, green: 0.14, blue: 0.14, alpha: 1.0)
         
         layer = previewLayer
     }
