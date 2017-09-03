@@ -8,7 +8,7 @@
 
 import Foundation
 import AVFoundation
-class MFileWriter: MfileWriterProtocol {
+class MFileWriter: MfileWriterDelegate {
     
     private var dir: URL? = nil
     private var filePath: URL? = nil
