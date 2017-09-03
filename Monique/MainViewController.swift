@@ -24,6 +24,8 @@ class MainViewController: NSSplitViewController, MDetectionBoxDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        mWebcamLocalPreview.detector = self
+        
         let sidebarGradient = NSGradient(colors: [
             NSColor(calibratedRed: 0.09, green: 0.56, blue: 0.92, alpha: 1.0),
             NSColor(calibratedRed: 0.45, green: 0.93, blue: 1.00, alpha: 1.0)
@@ -56,11 +58,11 @@ class MainViewController: NSSplitViewController, MDetectionBoxDelegate {
         print("TODO: Face detection is not implemented in thie version")
     }
     
-    func start() {
+    func startDetection() {
         print("---> Starting detection box")
     }
     
-    func stop(){
+    func stopDetection(){
         print("---> Stopping detection box")
     }
 }

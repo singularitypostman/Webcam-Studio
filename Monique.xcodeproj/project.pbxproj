@@ -35,6 +35,7 @@
 		DEB236051F5B87E300B67298 /* MStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB236031F5B87E300B67298 /* MStreamer.swift */; };
 		DEB236081F5B885500B67298 /* MStreamerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB236071F5B885500B67298 /* MStreamerTests.swift */; };
 		DEB2360A1F5B889700B67298 /* MDetectionBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB236091F5B889600B67298 /* MDetectionBoxTests.swift */; };
+		DEB236111F5BA2B900B67298 /* MWebcamLocalPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB236101F5BA2B900B67298 /* MWebcamLocalPreviewTests.swift */; };
 		DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17331F48AFDC00155215 /* AppDelegate.swift */; };
 		DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17351F48AFDC00155215 /* MainViewController.swift */; };
 		DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */; };
@@ -73,6 +74,7 @@
 		DEB236031F5B87E300B67298 /* MStreamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MStreamer.swift; sourceTree = "<group>"; };
 		DEB236071F5B885500B67298 /* MStreamerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MStreamerTests.swift; sourceTree = "<group>"; };
 		DEB236091F5B889600B67298 /* MDetectionBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDetectionBoxTests.swift; sourceTree = "<group>"; };
+		DEB236101F5BA2B900B67298 /* MWebcamLocalPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWebcamLocalPreviewTests.swift; sourceTree = "<group>"; };
 		DEFE17301F48AFDC00155215 /* Monique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monique.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFE17331F48AFDC00155215 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEFE17351F48AFDC00155215 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				DEFE174B1F48AFDC00155215 /* Info.plist */,
 				DEB236071F5B885500B67298 /* MStreamerTests.swift */,
 				DEB236091F5B889600B67298 /* MDetectionBoxTests.swift */,
+				DEB236101F5BA2B900B67298 /* MWebcamLocalPreviewTests.swift */,
 			);
 			path = MoniqueTests;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB236111F5BA2B900B67298 /* MWebcamLocalPreviewTests.swift in Sources */,
 				DEFE174A1F48AFDC00155215 /* MoniqueTests.swift in Sources */,
 				DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 				DEB236011F5B872800B67298 /* MDetectionBoxDelegate.swift in Sources */,

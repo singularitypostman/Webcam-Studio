@@ -8,6 +8,6 @@
 
 import Foundation
 protocol MDetectionBoxDelegate {
-    func start()
-    func stop()
+    func startDetection()
+    func stopDetection()
 }

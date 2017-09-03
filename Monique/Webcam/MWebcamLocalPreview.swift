@@ -18,6 +18,12 @@ class MWebcamLocalPreview: NSView, AVCaptureVideoDataOutputSampleBufferDelegate,
     var previewLayer: AVCaptureVideoPreviewLayer? = nil
     let queue = DispatchQueue(label: "webcamPreview")
     private var isRecording = false
+    struct Status {
+        var Recording: Bool
+        var Detecting: Bool
+        var Streaming: Bool
+    }
+    var detector: MDetectionBoxDelegate? = nil
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
