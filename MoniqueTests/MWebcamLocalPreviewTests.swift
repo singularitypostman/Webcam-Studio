@@ -27,4 +27,14 @@ class MWebcamLocalPreviewTests: XCTestCase {
         assert(status.Detecting)
         assert(status.Streaming)
     }
+    
+    func testToggleRecording(){
+        let localPreview = MWebcamLocalPreview()
+        
+        assert(localPreview.getStatus().Recording == false)
+        localPreview.toggleRecording()
+        assert(localPreview.getStatus().Recording == true)
+        localPreview.toggleRecording()
+        assert(localPreview.getStatus().Recording == false)
+    }
 }

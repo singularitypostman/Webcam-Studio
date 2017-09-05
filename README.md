@@ -1,7 +1,5 @@
 # Monique
 
-Web cam client (Swift 4 macOS 10.13beta) 🎀
-
 ![Monique](https://github.com/shavit/Monique/blob/master/doc/preview.png?raw=true)
 
 ### Features

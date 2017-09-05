@@ -11,18 +11,20 @@ import AVFoundation
 
 class MWebcamLocalPreview: NSView, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
     
+    struct Status {
+        var Recording: Bool
+        var Detecting: Bool
+        var Streaming: Bool
+    }
+    
+    private var status = Status(Recording: false, Detecting: false, Streaming: false)
+    
     private let session: AVCaptureSession = AVCaptureSession()
     private let writer: MFileWriter = MFileWriter()
     let videoOutput: AVCaptureVideoDataOutput = AVCaptureVideoDataOutput()
     let audioOutput: AVCaptureAudioDataOutput = AVCaptureAudioDataOutput()
     var previewLayer: AVCaptureVideoPreviewLayer? = nil
     let queue = DispatchQueue(label: "webcamPreview")
-    private var isRecording = false
-    struct Status {
-        var Recording: Bool
-        var Detecting: Bool
-        var Streaming: Bool
-    }
     var detector: MDetectionBoxDelegate? = nil
     
     override func draw(_ dirtyRect: NSRect) {
@@ -49,14 +51,17 @@ class MWebcamLocalPreview: NSView, AVCaptureVideoDataOutputSampleBufferDelegate,
     }
     
     func toggleRecording(){
-        print("---> Toggle recording: \(isRecording)")
-        if isRecording {
+        print("---> Toggle recording: \(status.Recording)")
+        if status.Recording {
             writer.stop()
         } else {
             writer.record()
         }
-        
-        isRecording = !isRecording
+        status.Recording = !status.Recording
+    }
+    
+    func getStatus() -> Status {
+        return status
     }
     
     fileprivate func addPreviewLayer(){
