@@ -9,7 +9,7 @@
 import Cocoa
 import AVFoundation
 
-class MWebcamLocalPreviewContainer: NSView, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
+class MWebcamLocalPreview: NSView, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
     
     private let session: AVCaptureSession = AVCaptureSession()
     private let writer: MFileWriter = MFileWriter()
@@ -18,14 +18,20 @@ class MWebcamLocalPreviewContainer: NSView, AVCaptureVideoDataOutputSampleBuffer
     var previewLayer: AVCaptureVideoPreviewLayer? = nil
     let queue = DispatchQueue(label: "webcamPreview")
     private var isRecording = false
+    struct Status {
+        var Recording: Bool
+        var Detecting: Bool
+        var Streaming: Bool
+    }
+    var detector: MDetectionBoxDelegate? = nil
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         
         writer.delegate = self
-        addPreviewLayer()
         setInput()
         setOutput()
+        addPreviewLayer()
         startPreview()
     }
     
@@ -43,6 +49,7 @@ class MWebcamLocalPreviewContainer: NSView, AVCaptureVideoDataOutputSampleBuffer
     }
     
     func toggleRecording(){
+        print("---> Toggle recording: \(isRecording)")
         if isRecording {
             writer.stop()
         } else {
@@ -54,7 +61,7 @@ class MWebcamLocalPreviewContainer: NSView, AVCaptureVideoDataOutputSampleBuffer
     
     fileprivate func addPreviewLayer(){
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer?.backgroundColor = NSColor.green.cgColor
+        previewLayer?.backgroundColor = CGColor(red: 0.14, green: 0.14, blue: 0.14, alpha: 1.0)
         
         layer = previewLayer
     }
@@ -81,7 +88,7 @@ class MWebcamLocalPreviewContainer: NSView, AVCaptureVideoDataOutputSampleBuffer
     }
     
     fileprivate func setOutput(){
-        session.sessionPreset = AVCaptureSession.Preset.high
+        //session.sessionPreset = AVCaptureSession.Preset.high
         session.addOutput(videoOutput)
         session.addOutput(audioOutput)
         // File output
@@ -94,3 +101,4 @@ class MWebcamLocalPreviewContainer: NSView, AVCaptureVideoDataOutputSampleBuffer
         }
     }
 }
+

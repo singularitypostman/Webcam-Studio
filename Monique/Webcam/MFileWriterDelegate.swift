@@ -7,7 +7,7 @@
 //
 
 import Foundation
-protocol MfileWriterProtocol {
+protocol MfileWriterDelegate {
     func moveFile(from url: URL)
     func record()
     func stop()

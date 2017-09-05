@@ -8,11 +8,11 @@
 
 import Foundation
 import AVFoundation
-class MFileWriter: MfileWriterProtocol {
+class MFileWriter: MfileWriterDelegate {
     
     private var dir: URL? = nil
     private var filePath: URL? = nil
-    private let fileOutput: AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
+    private var fileOutput: AVCaptureMovieFileOutput = AVCaptureMovieFileOutput()
     private var segmentsCount: Int = 0
     private let timeScale: Int32 = 1000000000
     private var timer: Timer? = nil
@@ -50,10 +50,13 @@ class MFileWriter: MfileWriterProtocol {
     }
     
     func record(){
-        timer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true, block: { (t) in
+        print("---> Writer start")
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true, block: { (t) in
             print("---> Starting recording session segment \(self.segmentsCount)")
             
+            // Stop and restart and a new segment
             self.fileOutput.stopRecording()
+            self.fileOutput = AVCaptureMovieFileOutput()
             self.fileOutput.startRecording(to: self.getFilePath()!, recordingDelegate: self.delegate!)
         })
     }
@@ -68,11 +71,13 @@ class MFileWriter: MfileWriterProtocol {
         dir = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true)[0], isDirectory: true).appendingPathComponent(path)
         
         do{
-            try FileManager.default.createDirectory(atPath: dir!.path, withIntermediateDirectories: true, attributes: nil)
+            // TODO: Permissions problems, it shouldn't run as root
+            print("---> Creating a directory:")
+            print(dir!.path)
+            try FileManager.default.createDirectory(at: dir!, withIntermediateDirectories: true, attributes: nil)
         } catch let err as NSError {
-            print("Error creating a directory for the output file: \(err)")
+            fatalError("Error creating a directory for the output file: \(err)")
         }
     }
-    
 
 }

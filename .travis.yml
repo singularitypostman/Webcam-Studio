@@ -1,0 +1,21 @@
+language: objective-c
+os: osx
+osx_image: xcode9
+xcode_project: Monique.xcodeproj
+xcode_scheme: MoniqueCI
+before_script:
+- security create-keychain -p travis mac-build.keychain
+- security import ./certs/apple.cer -k ~/Library/Keychains/mac-build.keychain -T /usr/bin/codesign
+- security import ./certs/dist.cer -k ~/Library/Keychains/mac-build.keychain -T /usr/bin/codesign
+- security import ./certs/dist.p12 -k ~/Library/Keychains/mac-build.keychain -P $KEY_PASSWORD
+  -T /usr/bin/codesign
+script:
+- xcodebuild clean test -project Monique.xcodeproj -scheme MoniqueCI CODE_SIGNING_REQUIRED=NO
+  CODE_SIGN_IDENTITY=""
+after_script:
+- security delete-keychain ios-build.keychain
+after_success:
+- echo "Configure Travis CI to deploy into TestFlight"
+env:
+  global:
+    secure: R8bauT6Gxf7o7h8yvoGmq9Sm8ZiUpffqclL8jcESsQwuODhRJ3QLsB/mWvvVx8tBr9TetIxSxbgpK6q3hOCPlFGhzA2POeXcVm9OJi7GzNEaL7EyzdgCtY5dfwmus+pSTD6St6eTUTxTJnR8qpqHJjJQ41FqmRg3h+ApXkzLugqx+9Nl31YDYZJMAORBDVgG9mMlmY5cKGfFPqREgSia6iXh5hmzuOYMgVX2G50GtJsQXGmcrqsmxxVb2n5KY0Yp0XsvPu6BcDtzIE7DEwUmPBrgUe3IIZfxh83jnvErC75qnYiWCwfi6JhF6XNPqfCar3sZMQqamCDCk4xIyWbU8AunRfxqlEhskn5LuD1N3pJqgyyVJDnbrmHx2QlmPLuOu/kB7WIztbyeu0BMY4NijSWOfqPM7FPxnohadUutHtMgLbSuqykNt3AwwKm/rZ7jJYXVttwTrUSXHpUAH5yavAz6mmmbXYDPKY6pGzVy2GwLLiWDlQAn0xwJWQgC2tivct9xfkP/XQeOWD56cOMAJkPg+m812EtL2QUWDw/yJM45TBdhUoiWuwfRoyvqT0nJGZ8xs+aw4GQyS19rAV7bz/qA+dWKw3NklOhuq6csZBclYJCYrDQU/Ju3A5VfrVNcv9ecfUqViHLp09sl8Rs7CSzToxhWXThEykSYToiQ6dI=
