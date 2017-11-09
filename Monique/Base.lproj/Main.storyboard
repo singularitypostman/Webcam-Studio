@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13122.17" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13528" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13528"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -690,6 +690,9 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="dyt-LD-XHt"/>
+                        </connections>
                     </window>
                     <connections>
                         <outlet property="mainWindow" destination="IQv-IB-iLA" id="bWr-Nt-ONM"/>
@@ -916,8 +919,8 @@ AAAAAAAAAAAAAAAAAAAAPwAAAD8AAAA/AACAPwAAgD8AAIA/A
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="3xf-Pl-Qfo" customClass="MWebcamLocalPreview" customModule="Monique" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="722" height="520"/>
                                         <subviews>
-                                            <button identifier="btnRecord" translatesAutoresizingMaskIntoConstraints="NO" id="AeI-Ve-VTj">
-                                                <rect key="frame" x="668" y="20" width="34" height="34"/>
+                                            <button identifier="btnRecord" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AeI-Ve-VTj">
+                                                <rect key="frame" x="668" y="0.0" width="34" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="34" id="Xi0-Xi-OpC"/>
                                                 </constraints>
@@ -929,8 +932,8 @@ AAAAAAAAAAAAAAAAAAAAPwAAAD8AAAA/AACAPwAAgD8AAIA/A
                                                     <action selector="startRecording:" target="XfG-lQ-9wD" id="bkL-tY-aTS"/>
                                                 </connections>
                                             </button>
-                                            <button identifier="btnDetectFace" translatesAutoresizingMaskIntoConstraints="NO" id="z3y-HS-IzF">
-                                                <rect key="frame" x="624" y="20" width="34" height="34"/>
+                                            <button identifier="btnDetectFace" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3y-HS-IzF">
+                                                <rect key="frame" x="624" y="0.0" width="34" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="34" id="tbg-2x-jYY"/>
                                                     <constraint firstAttribute="height" constant="34" id="uci-Vp-JMR"/>
