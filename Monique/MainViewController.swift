@@ -8,76 +8,20 @@
 
 import Cocoa
 
-class MainViewController: NSSplitViewController, MDetectionBoxDelegate {
+class MainViewController: NSSplitViewController {
   
   @IBOutlet var mStage: NSView!
-  @IBOutlet var mWebcamLocalPreview: MWebcamLocalPreview!
-  @IBOutlet var mBtnFaceDetection: NSButton!
-  @IBOutlet var mBtnRecord: NSButton!
   
-  @IBOutlet var mSidebar: NSView!
-  @IBOutlet var mSidebarProfilePicture: NSImageView!
-  @IBOutlet var mSidebarBottomPanel: NSView!
   @IBOutlet var mBtnStream: NSButton!
   
   fileprivate var isStreaming = false
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    // Do any additional setup after loading the view.
-    mWebcamLocalPreview.detector = self
-    
-    let sidebarGradient = NSGradient(colors: [
-      NSColor(calibratedRed: 0.09, green: 0.56, blue: 0.92, alpha: 1.0),
-      NSColor(calibratedRed: 0.45, green: 0.93, blue: 1.00, alpha: 1.0)
-      ])
-    sidebarGradient?.draw(in: mSidebar.bounds, angle: 90)
-    mSidebar.layer?.backgroundColor = NSColor.red.cgColor
-    
-    mSidebarBottomPanel.layer?.backgroundColor = CGColor(red: 0.44, green: 0.63, blue: 0.73, alpha: 1.0)
-  }
-  
-  override var representedObject: Any? {
-    didSet {
-      // Update the view, if already loaded.
-    }
-  }
-  
-  
   // Stream to server
   @IBAction func startStreaming(_ sender: Any){
-    debugPrint("Toggle start streaming", isStreaming)
-    
-    if isStreaming {
-      // TODO: Stop the stream
-    } else {
-      doStartStreaming()
-    }
+    debugPrint("[MainViewController]", "Toggle. Is streaming?", isStreaming)
     
     isStreaming = !isStreaming
   }
   
-  fileprivate func doStartStreaming(){
-    // TODO: Start the stream
-  }
-  
-  // Record to local disk
-  @IBAction func startRecording(_ sender: Any) {
-    mWebcamLocalPreview.toggleRecording()
-  }
-  
-  // Draw a square around the faces
-  @IBAction func startFaceDetection(_ sender: Any){
-    print("TODO: Face detection is not implemented in thie version")
-  }
-  
-  func startDetection() {
-    print("---> Starting detection box")
-  }
-  
-  func stopDetection(){
-    print("---> Stopping detection box")
-  }
 }
 
