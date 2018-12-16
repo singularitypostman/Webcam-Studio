@@ -7,35 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DE2223771F5B0AE8008EDEA5 /* MWebcamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2223761F5B0AE8008EDEA5 /* MWebcamView.swift */; };
-		DE2223781F5B0AE8008EDEA5 /* MWebcamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2223761F5B0AE8008EDEA5 /* MWebcamView.swift */; };
-		DE2223791F5B0AE8008EDEA5 /* MWebcamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2223761F5B0AE8008EDEA5 /* MWebcamView.swift */; };
 		DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
 		DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
 		DE2223911F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
-		DEB1B21F1F48B4CD00E5586D /* MWebcamLocalPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreview.swift */; };
-		DEB1B2201F48B4CD00E5586D /* MWebcamLocalPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreview.swift */; };
-		DEB1B2211F48B4CD00E5586D /* MWebcamLocalPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreview.swift */; };
-		DEB1B2231F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B2221F48B84100E5586D /* MVideoPlayerContainer.swift */; };
-		DEB1B2241F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B2221F48B84100E5586D /* MVideoPlayerContainer.swift */; };
-		DEB1B2251F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B2221F48B84100E5586D /* MVideoPlayerContainer.swift */; };
-		DEB1B22B1F48D9BE00E5586D /* MFileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B22A1F48D9BE00E5586D /* MFileWriter.swift */; };
-		DEB1B22C1F48D9BE00E5586D /* MFileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B22A1F48D9BE00E5586D /* MFileWriter.swift */; };
-		DEB1B22D1F48D9BE00E5586D /* MFileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B22A1F48D9BE00E5586D /* MFileWriter.swift */; };
-		DEB1B2371F48E72800E5586D /* MFileWriterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B2361F48E72800E5586D /* MFileWriterDelegate.swift */; };
-		DEB1B2381F48E72800E5586D /* MFileWriterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B2361F48E72800E5586D /* MFileWriterDelegate.swift */; };
-		DEB1B2391F48E72800E5586D /* MFileWriterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB1B2361F48E72800E5586D /* MFileWriterDelegate.swift */; };
-		DEB235FC1F5B86C100B67298 /* MDetectionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB235FB1F5B86C100B67298 /* MDetectionBox.swift */; };
-		DEB235FD1F5B86C100B67298 /* MDetectionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB235FB1F5B86C100B67298 /* MDetectionBox.swift */; };
-		DEB235FE1F5B86C100B67298 /* MDetectionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB235FB1F5B86C100B67298 /* MDetectionBox.swift */; };
-		DEB236001F5B872800B67298 /* MDetectionBoxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB235FF1F5B872800B67298 /* MDetectionBoxDelegate.swift */; };
-		DEB236011F5B872800B67298 /* MDetectionBoxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB235FF1F5B872800B67298 /* MDetectionBoxDelegate.swift */; };
-		DEB236021F5B872800B67298 /* MDetectionBoxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB235FF1F5B872800B67298 /* MDetectionBoxDelegate.swift */; };
-		DEB236041F5B87E300B67298 /* MStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB236031F5B87E300B67298 /* MStreamer.swift */; };
-		DEB236051F5B87E300B67298 /* MStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB236031F5B87E300B67298 /* MStreamer.swift */; };
-		DEB236081F5B885500B67298 /* MStreamerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB236071F5B885500B67298 /* MStreamerTests.swift */; };
-		DEB2360A1F5B889700B67298 /* MDetectionBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB236091F5B889600B67298 /* MDetectionBoxTests.swift */; };
-		DEB236111F5BA2B900B67298 /* MWebcamLocalPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB236101F5BA2B900B67298 /* MWebcamLocalPreviewTests.swift */; };
 		DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17331F48AFDC00155215 /* AppDelegate.swift */; };
 		DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17351F48AFDC00155215 /* MainViewController.swift */; };
 		DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */; };
@@ -63,18 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DE2223761F5B0AE8008EDEA5 /* MWebcamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWebcamView.swift; sourceTree = "<group>"; };
 		DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
-		DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWebcamLocalPreview.swift; sourceTree = "<group>"; };
-		DEB1B2221F48B84100E5586D /* MVideoPlayerContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVideoPlayerContainer.swift; sourceTree = "<group>"; };
-		DEB1B22A1F48D9BE00E5586D /* MFileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFileWriter.swift; sourceTree = "<group>"; };
-		DEB1B2361F48E72800E5586D /* MFileWriterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFileWriterDelegate.swift; sourceTree = "<group>"; };
-		DEB235FB1F5B86C100B67298 /* MDetectionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDetectionBox.swift; sourceTree = "<group>"; };
-		DEB235FF1F5B872800B67298 /* MDetectionBoxDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDetectionBoxDelegate.swift; sourceTree = "<group>"; };
-		DEB236031F5B87E300B67298 /* MStreamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MStreamer.swift; sourceTree = "<group>"; };
-		DEB236071F5B885500B67298 /* MStreamerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MStreamerTests.swift; sourceTree = "<group>"; };
-		DEB236091F5B889600B67298 /* MDetectionBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDetectionBoxTests.swift; sourceTree = "<group>"; };
-		DEB236101F5BA2B900B67298 /* MWebcamLocalPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWebcamLocalPreviewTests.swift; sourceTree = "<group>"; };
 		DEFE17301F48AFDC00155215 /* Monique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monique.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFE17331F48AFDC00155215 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEFE17351F48AFDC00155215 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -116,23 +79,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DE2223751F5B048E008EDEA5 /* VideoPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				DEB1B2221F48B84100E5586D /* MVideoPlayerContainer.swift */,
-			);
-			path = VideoPlayer;
-			sourceTree = "<group>";
-		};
-		DEB235F61F5B853A00B67298 /* Detection */ = {
-			isa = PBXGroup;
-			children = (
-				DEB235FB1F5B86C100B67298 /* MDetectionBox.swift */,
-				DEB235FF1F5B872800B67298 /* MDetectionBoxDelegate.swift */,
-			);
-			path = Detection;
-			sourceTree = "<group>";
-		};
 		DEFE17271F48AFDC00155215 = {
 			isa = PBXGroup;
 			children = (
@@ -156,12 +102,9 @@
 		DEFE17321F48AFDC00155215 /* Monique */ = {
 			isa = PBXGroup;
 			children = (
-				DEB235F61F5B853A00B67298 /* Detection */,
-				DE2223751F5B048E008EDEA5 /* VideoPlayer */,
-				DEFE17621F48B1F200155215 /* Webcam */,
 				DEFE17331F48AFDC00155215 /* AppDelegate.swift */,
-				DEFE17351F48AFDC00155215 /* MainViewController.swift */,
 				DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */,
+				DEFE17351F48AFDC00155215 /* MainViewController.swift */,
 				DEFE173A1F48AFDC00155215 /* Assets.xcassets */,
 				DEFE173C1F48AFDC00155215 /* Main.storyboard */,
 				DEFE173F1F48AFDC00155215 /* Info.plist */,
@@ -176,9 +119,6 @@
 			children = (
 				DEFE17491F48AFDC00155215 /* MoniqueTests.swift */,
 				DEFE174B1F48AFDC00155215 /* Info.plist */,
-				DEB236071F5B885500B67298 /* MStreamerTests.swift */,
-				DEB236091F5B889600B67298 /* MDetectionBoxTests.swift */,
-				DEB236101F5BA2B900B67298 /* MWebcamLocalPreviewTests.swift */,
 			);
 			path = MoniqueTests;
 			sourceTree = "<group>";
@@ -190,18 +130,6 @@
 				DEFE17561F48AFDC00155215 /* Info.plist */,
 			);
 			path = MoniqueUITests;
-			sourceTree = "<group>";
-		};
-		DEFE17621F48B1F200155215 /* Webcam */ = {
-			isa = PBXGroup;
-			children = (
-				DEB1B21E1F48B4CD00E5586D /* MWebcamLocalPreview.swift */,
-				DEB1B22A1F48D9BE00E5586D /* MFileWriter.swift */,
-				DEB1B2361F48E72800E5586D /* MFileWriterDelegate.swift */,
-				DE2223761F5B0AE8008EDEA5 /* MWebcamView.swift */,
-				DEB236031F5B87E300B67298 /* MStreamer.swift */,
-			);
-			path = Webcam;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,19 +195,22 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Shavit Tzuriel";
 				TargetAttributes = {
 					DEFE172F1F48AFDC00155215 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 					DEFE17441F48AFDC00155215 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1010;
 						TestTargetID = DEFE172F1F48AFDC00155215;
 					};
 					DEFE174F1F48AFDC00155215 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1010;
 						TestTargetID = DEFE172F1F48AFDC00155215;
 					};
 				};
@@ -335,16 +266,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEB1B2371F48E72800E5586D /* MFileWriterDelegate.swift in Sources */,
-				DEB1B22B1F48D9BE00E5586D /* MFileWriter.swift in Sources */,
 				DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */,
-				DE2223771F5B0AE8008EDEA5 /* MWebcamView.swift in Sources */,
-				DEB236001F5B872800B67298 /* MDetectionBoxDelegate.swift in Sources */,
-				DEB1B21F1F48B4CD00E5586D /* MWebcamLocalPreview.swift in Sources */,
-				DEB236041F5B87E300B67298 /* MStreamer.swift in Sources */,
-				DEB1B2231F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */,
 				DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */,
-				DEB235FC1F5B86C100B67298 /* MDetectionBox.swift in Sources */,
 				DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */,
 				DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 			);
@@ -354,19 +277,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEB236111F5BA2B900B67298 /* MWebcamLocalPreviewTests.swift in Sources */,
 				DEFE174A1F48AFDC00155215 /* MoniqueTests.swift in Sources */,
 				DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
-				DEB236011F5B872800B67298 /* MDetectionBoxDelegate.swift in Sources */,
-				DEB1B2381F48E72800E5586D /* MFileWriterDelegate.swift in Sources */,
-				DEB235FD1F5B86C100B67298 /* MDetectionBox.swift in Sources */,
-				DEB236081F5B885500B67298 /* MStreamerTests.swift in Sources */,
-				DEB1B2201F48B4CD00E5586D /* MWebcamLocalPreview.swift in Sources */,
-				DEB2360A1F5B889700B67298 /* MDetectionBoxTests.swift in Sources */,
-				DE2223781F5B0AE8008EDEA5 /* MWebcamView.swift in Sources */,
-				DEB1B22C1F48D9BE00E5586D /* MFileWriter.swift in Sources */,
-				DEB236051F5B87E300B67298 /* MStreamer.swift in Sources */,
-				DEB1B2241F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,13 +288,6 @@
 			files = (
 				DEFE17551F48AFDC00155215 /* MoniqueUITests.swift in Sources */,
 				DE2223911F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
-				DEB236021F5B872800B67298 /* MDetectionBoxDelegate.swift in Sources */,
-				DEB1B2391F48E72800E5586D /* MFileWriterDelegate.swift in Sources */,
-				DEB235FE1F5B86C100B67298 /* MDetectionBox.swift in Sources */,
-				DEB1B2211F48B4CD00E5586D /* MWebcamLocalPreview.swift in Sources */,
-				DE2223791F5B0AE8008EDEA5 /* MWebcamView.swift in Sources */,
-				DEB1B22D1F48D9BE00E5586D /* MFileWriter.swift in Sources */,
-				DEB1B2251F48B84100E5586D /* MVideoPlayerContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,12 +332,16 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -482,12 +391,16 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -530,7 +443,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -549,7 +462,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -564,7 +477,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Shavit-Tzuriel.MoniqueTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Monique.app/Contents/MacOS/Monique";
 			};
 			name = Debug;
@@ -580,7 +493,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Shavit-Tzuriel.MoniqueTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Monique.app/Contents/MacOS/Monique";
 			};
 			name = Release;
@@ -595,7 +508,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Shavit-Tzuriel.MoniqueUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Monique;
 			};
 			name = Debug;
@@ -610,7 +523,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Shavit-Tzuriel.MoniqueUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Monique;
 			};
 			name = Release;
