@@ -712,7 +712,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="960" height="520"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <customView id="3xf-Pl-Qfo">
+                            <customView id="3xf-Pl-Qfo" customClass="PreviewNSView" customModule="Monique" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="960" height="520"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
@@ -739,7 +739,7 @@
                     </splitView>
                     <connections>
                         <outlet property="mBtnStream" destination="Bd1-9o-8Pw" id="aOM-hM-pSk"/>
-                        <outlet property="mWebcamLocalPreview" destination="3xf-Pl-Qfo" id="acE-Bv-Kbl"/>
+                        <outlet property="previewView" destination="3xf-Pl-Qfo" id="3hr-5u-vfA"/>
                     </connections>
                 </viewController>
             </objects>
