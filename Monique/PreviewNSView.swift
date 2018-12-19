@@ -33,6 +33,7 @@ class PreviewNSView: NSView,
   // MARK: AVFoundation
   
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+    debugPrint("[PreviewNSView]", "captureOutput.didOutput", sampleBuffer)
     // bufWriter?.append(sampleBuffer)
   }
 
