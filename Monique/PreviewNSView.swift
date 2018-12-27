@@ -35,6 +35,7 @@ class PreviewNSView: NSView,
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
     debugPrint("[PreviewNSView]", "captureOutput.didOutput", sampleBuffer)
     // bufWriter?.append(sampleBuffer)
+  
   }
 
   func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {

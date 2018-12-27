@@ -33,4 +33,17 @@ class MoniqueTests: XCTestCase {
     }
   }
   
+  // MARK - Streamer
+  
+  func testStreamerConnect(){
+    let streamer = Streamer()
+    XCTAssertNotNil(streamer)
+    
+    //let url = URL(string: "rtmp://live.stream.highwebmedia.com/live-origin")
+    let url = URL(string: "rtmp://12.0.0.1/test-room")
+    XCTAssertNotNil(url)
+    let token = ProcessInfo.processInfo.environment["RTMP_TOKEN"]
+    XCTAssertNotNil(token)
+    streamer.connect(to: url!)
+  }
 }

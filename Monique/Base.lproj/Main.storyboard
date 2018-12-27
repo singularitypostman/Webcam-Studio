@@ -688,7 +688,7 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="-11" y="240" width="1113" height="867"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="dyt-LD-XHt"/>
@@ -701,7 +701,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="184.5" y="548.5"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -709,11 +709,11 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController id="XfG-lQ-9wD" customClass="MainViewController" customModule="Monique" customModuleProvider="target" sceneMemberID="viewController">
                     <splitView key="view" wantsLayer="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" id="7Rx-Jt-Sgj">
-                        <rect key="frame" x="0.0" y="0.0" width="960" height="520"/>
+                        <rect key="frame" x="0.0" y="0.0" width="960" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <customView id="3xf-Pl-Qfo" customClass="PreviewNSView" customModule="Monique" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="960" height="520"/>
+                                <rect key="frame" x="0.0" y="0.0" width="960" height="600"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bd1-9o-8Pw">
@@ -726,9 +726,19 @@
                                             <action selector="startStreaming:" target="XfG-lQ-9wD" id="ath-9y-oUt"/>
                                         </connections>
                                     </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gom-kF-Ma0">
+                                        <rect key="frame" x="905" y="563" width="37" height="17"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="g6K-Sl-kvE">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Bd1-9o-8Pw" secondAttribute="bottom" constant="6" id="2ir-up-bcy"/>
+                                    <constraint firstItem="Gom-kF-Ma0" firstAttribute="trailing" secondItem="Bd1-9o-8Pw" secondAttribute="trailing" id="UjW-S8-ayd"/>
+                                    <constraint firstItem="Gom-kF-Ma0" firstAttribute="top" secondItem="3xf-Pl-Qfo" secondAttribute="top" constant="20" symbolic="YES" id="p9h-kd-tWD"/>
                                     <constraint firstAttribute="trailing" secondItem="Bd1-9o-8Pw" secondAttribute="trailing" constant="20" symbolic="YES" id="yAP-Zs-Iln"/>
                                 </constraints>
                             </customView>
@@ -739,11 +749,12 @@
                     </splitView>
                     <connections>
                         <outlet property="mBtnStream" destination="Bd1-9o-8Pw" id="aOM-hM-pSk"/>
+                        <outlet property="mLabelStatus" destination="Gom-kF-Ma0" id="Z4x-dg-MtF"/>
                         <outlet property="previewView" destination="3xf-Pl-Qfo" id="3hr-5u-vfA"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="301" y="1094"/>
+            <point key="canvasLocation" x="155" y="2133"/>
         </scene>
     </scenes>
 </document>

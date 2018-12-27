@@ -94,6 +94,11 @@
             value = "104.238.177.20"
             isEnabled = "YES">
          </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "RTMP_TOKEN"
+            value = "4879.fb36dc3586e545ce9f2161bd25b63fc336e82528769132a5f37f5f702b49c04f"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>

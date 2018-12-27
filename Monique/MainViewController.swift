@@ -13,7 +13,8 @@ class MainViewController: NSSplitViewController {
   
   @IBOutlet var previewView: PreviewNSView!
   
-  @IBOutlet var mBtnStream: NSButton!
+  @IBOutlet weak var mBtnStream: NSButton!
+  @IBOutlet weak var mLabelStatus: NSTextField!
   
   fileprivate var isStreaming = false
   
@@ -35,10 +36,16 @@ class MainViewController: NSSplitViewController {
   fileprivate func startStreaming(){
     let hostname: String = ProcessInfo.processInfo.environment["RTMP_HOST"] ?? "127.0.0.1"
     let url = "rtmp://\(hostname):1935/stream/dev_stream"
-    debugPrint("[MainViewController]", "Starting a stream to ", url)
+    debugPrint("[MainViewController]", "Starting a stream ", url)
     
     //let captureSession = AVCaptureSession()
     
+    mLabelStatus.stringValue = "Connecting"
+    // TODO: Remove this
+    let streamer = Streamer()
+    streamer.connect(to: URL(string: "rtmp://127.0.0.1")!)
+    // TODO: Check the connection status
+    mLabelStatus.stringValue = "Connected"
   }
 }
 

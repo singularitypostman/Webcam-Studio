@@ -13,6 +13,9 @@
 		DE8E55DD21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
 		DE8E55DE21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
 		DE8E55DF21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
+		DEA3E3F621D3A1A50044C4E6 /* Streamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */; };
+		DEA3E3F721D3A1A50044C4E6 /* Streamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */; };
+		DEA3E3F821D3A1A50044C4E6 /* Streamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */; };
 		DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17331F48AFDC00155215 /* AppDelegate.swift */; };
 		DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17351F48AFDC00155215 /* MainViewController.swift */; };
 		DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */; };
@@ -42,6 +45,7 @@
 /* Begin PBXFileReference section */
 		DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewNSView.swift; sourceTree = "<group>"; };
+		DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streamer.swift; sourceTree = "<group>"; };
 		DEFE17301F48AFDC00155215 /* Monique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monique.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFE17331F48AFDC00155215 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEFE17351F48AFDC00155215 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 				DEFE173F1F48AFDC00155215 /* Info.plist */,
 				DEFE17401F48AFDC00155215 /* Monique.entitlements */,
 				DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */,
+				DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */,
 			);
 			path = Monique;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 			files = (
 				DE8E55DD21C6F311007C2847 /* PreviewNSView.swift in Sources */,
 				DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */,
+				DEA3E3F621D3A1A50044C4E6 /* Streamer.swift in Sources */,
 				DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */,
 				DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */,
 				DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
@@ -283,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEA3E3F721D3A1A50044C4E6 /* Streamer.swift in Sources */,
 				DEFE174A1F48AFDC00155215 /* MoniqueTests.swift in Sources */,
 				DE8E55DE21C6F311007C2847 /* PreviewNSView.swift in Sources */,
 				DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
@@ -293,6 +300,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEA3E3F821D3A1A50044C4E6 /* Streamer.swift in Sources */,
 				DEFE17551F48AFDC00155215 /* MoniqueUITests.swift in Sources */,
 				DE8E55DF21C6F311007C2847 /* PreviewNSView.swift in Sources */,
 				DE2223911F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
