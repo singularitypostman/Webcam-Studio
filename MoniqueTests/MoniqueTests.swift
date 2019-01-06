@@ -46,4 +46,17 @@ class MoniqueTests: XCTestCase {
     XCTAssertNotNil(token)
     streamer.connect(to: url!)
   }
+  
+  func testStreamerCreatePacket0(){
+    let streamer = Streamer()
+    let packet: [UInt8] = streamer.packC0()
+    XCTAssertEqual(packet.count, 1)
+    XCTAssertEqual(packet, [0x03])
+  }
+  
+  func testStreamerCreatePacket1(){
+    let streamer = Streamer()
+    let packet: [UInt8] = streamer.packC1()
+    XCTAssertEqual(packet.count, 1536)
+  }
 }

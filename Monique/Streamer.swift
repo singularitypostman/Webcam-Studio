@@ -59,11 +59,45 @@ class Streamer: NSObject, StreamDelegate {
     outputStream = writeStream!.takeRetainedValue() as OutputStream
     outputStream?.delegate = self
     outputStream?.schedule(in: RunLoop.current, forMode: RunLoop.Mode.default)
-    
+
     queue.async {
       self.inputStream?.open()
       self.outputStream?.open()
     }
+  }
+  
+  /**
+   Exchange of 3 static sized chunks between the client and server
+    - From the client: c0, c1, c2
+    - From the server: s0, s1, s2
+   
+  http://wwwimages.adobe.com/www.adobe.com/content/dam/acom/en/devnet/rtmp/pdf/rtmp_specification_1.0.pdf
+   
+   The client sends first 2 chunks c0, c1. Then waits for the server to
+    response with s0 and s1.
+   
+   
+   */
+  func handshake(){
+    
+  }
+  
+  
+  func packC0() -> [UInt8] {
+    return [0x03]
+  }
+  
+  func packC1() -> [UInt8] {
+    let date: NSDate = NSDate()
+    var timeInterval = Int(date.timeIntervalSince1970)
+    let time: [UInt8] = withUnsafeBytes(of: &timeInterval) {
+      Array<UInt8>($0).filter({ (item) -> Bool in item != 0})
+    }
+    //let zero: [UInt8] = [0x00, 0x00, 0x00, 0x00]
+    let zero: [UInt8] = [UInt8].init(repeating: 0x00, count: 4)
+    let rand: [UInt8] = [UInt8].init(repeating: UInt8.random(in: 0...255), count: 1528)
+    
+    return time + zero + rand
   }
   
   // MARK - StreamDelegate
