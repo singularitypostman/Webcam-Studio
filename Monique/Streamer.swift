@@ -100,6 +100,14 @@ class Streamer: NSObject, StreamDelegate {
     return time + zero + rand
   }
   
+  func validate(s1 data: [UInt8]) -> Bool {
+    return false
+  }
+  
+  func validate(s2 data: [UInt8]) -> Bool {
+    return false
+  }
+  
   // MARK - StreamDelegate
   
   func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
