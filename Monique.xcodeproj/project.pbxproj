@@ -10,6 +10,9 @@
 		DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
 		DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
 		DE2223911F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
+		DE2C5D2021F6BE37004B4037 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2C5D1F21F6BE37004B4037 /* Connection.swift */; };
+		DE2C5D2121F6BE37004B4037 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2C5D1F21F6BE37004B4037 /* Connection.swift */; };
+		DE2C5D2221F6BE37004B4037 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2C5D1F21F6BE37004B4037 /* Connection.swift */; };
 		DE8E55DD21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
 		DE8E55DE21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
 		DE8E55DF21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
@@ -44,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		DE2C5D1F21F6BE37004B4037 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewNSView.swift; sourceTree = "<group>"; };
 		DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streamer.swift; sourceTree = "<group>"; };
 		DEFE17301F48AFDC00155215 /* Monique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monique.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +124,7 @@
 				DEFE17401F48AFDC00155215 /* Monique.entitlements */,
 				DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */,
 				DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */,
+				DE2C5D1F21F6BE37004B4037 /* Connection.swift */,
 			);
 			path = Monique;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */,
 				DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */,
 				DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
+				DE2C5D2021F6BE37004B4037 /* Connection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +297,7 @@
 			files = (
 				DEA3E3F721D3A1A50044C4E6 /* Streamer.swift in Sources */,
 				DEFE174A1F48AFDC00155215 /* MoniqueTests.swift in Sources */,
+				DE2C5D2121F6BE37004B4037 /* Connection.swift in Sources */,
 				DE8E55DE21C6F311007C2847 /* PreviewNSView.swift in Sources */,
 				DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 			);
@@ -302,6 +309,7 @@
 			files = (
 				DEA3E3F821D3A1A50044C4E6 /* Streamer.swift in Sources */,
 				DEFE17551F48AFDC00155215 /* MoniqueUITests.swift in Sources */,
+				DE2C5D2221F6BE37004B4037 /* Connection.swift in Sources */,
 				DE8E55DF21C6F311007C2847 /* PreviewNSView.swift in Sources */,
 				DE2223911F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 			);
@@ -448,17 +456,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = M87Q25Q5K3;
 				INFOPLIST_FILE = Monique/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "Shavit-Tzuriel.Monique";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -467,13 +477,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = M87Q25Q5K3;
 				INFOPLIST_FILE = Monique/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "Shavit-Tzuriel.Monique";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -10,20 +10,6 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>docker.dev</key>
-			<dict>
-				<key>NSTemporaryExceptionMinimumTLSVersion</key>
-				<string>TLSv1.1</string>
-				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-			<key>monique.dev</key>
-			<dict>
-				<key>NSTemporaryExceptionMinimumTLSVersion</key>
-				<string>TLSv1.1</string>
-				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
 			<key>localhost</key>
 			<dict>
 				<key>NSTemporaryExceptionMinimumTLSVersion</key>

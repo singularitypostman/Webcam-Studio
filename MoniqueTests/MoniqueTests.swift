@@ -40,11 +40,15 @@ class MoniqueTests: XCTestCase {
     XCTAssertNotNil(streamer)
     
     //let url = URL(string: "rtmp://live.stream.highwebmedia.com/live-origin")
-    let url = URL(string: "rtmp://12.0.0.1/test-room")
+    let url = URL(string: "rtmp://127.0.0.1/stream/test-room")
     XCTAssertNotNil(url)
     let token = ProcessInfo.processInfo.environment["RTMP_TOKEN"]
     XCTAssertNotNil(token)
-    streamer.connect(to: url!)
+    
+    // TODO: Complete this
+    //streamer.connect(to: url!)
+    
+    
   }
   
   func testStreamerCreatePacket0(){
