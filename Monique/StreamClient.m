@@ -7,3 +7,11 @@
 //
 
 #import "StreamClient.h"
+
+@implementation StreamClient
+
+- (instancetype)initWithAddress:(NSString *)addr port:(int)port {
+    return self;
+}
+
+@end

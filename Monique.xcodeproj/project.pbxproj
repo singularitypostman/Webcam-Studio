@@ -13,9 +13,7 @@
 		DE2C5D2021F6BE37004B4037 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2C5D1F21F6BE37004B4037 /* Connection.swift */; };
 		DE2C5D2121F6BE37004B4037 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2C5D1F21F6BE37004B4037 /* Connection.swift */; };
 		DE2C5D2221F6BE37004B4037 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2C5D1F21F6BE37004B4037 /* Connection.swift */; };
-		DE64922E21FF557300D98257 /* StreamClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DE64922D21FF557300D98257 /* StreamClient.m */; };
-		DE64922F21FF557300D98257 /* StreamClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DE64922D21FF557300D98257 /* StreamClient.m */; };
-		DE64923021FF557300D98257 /* StreamClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DE64922D21FF557300D98257 /* StreamClient.m */; };
+		DE64923E21FF599D00D98257 /* StreamClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DE64923D21FF599D00D98257 /* StreamClient.m */; };
 		DE8E55DD21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
 		DE8E55DE21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
 		DE8E55DF21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
@@ -51,8 +49,9 @@
 /* Begin PBXFileReference section */
 		DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		DE2C5D1F21F6BE37004B4037 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
-		DE64922D21FF557300D98257 /* StreamClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamClient.m; sourceTree = "<group>"; };
-		DE64923121FF557F00D98257 /* StreamClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamClient.h; sourceTree = "<group>"; };
+		DE64923B21FF598F00D98257 /* StreamClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamClient.h; sourceTree = "<group>"; };
+		DE64923C21FF599D00D98257 /* Monique-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Monique-Bridging-Header.h"; sourceTree = "<group>"; };
+		DE64923D21FF599D00D98257 /* StreamClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamClient.m; sourceTree = "<group>"; };
 		DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewNSView.swift; sourceTree = "<group>"; };
 		DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streamer.swift; sourceTree = "<group>"; };
 		DEFE17301F48AFDC00155215 /* Monique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monique.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,8 +129,9 @@
 				DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */,
 				DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */,
 				DE2C5D1F21F6BE37004B4037 /* Connection.swift */,
-				DE64922D21FF557300D98257 /* StreamClient.m */,
-				DE64923121FF557F00D98257 /* StreamClient.h */,
+				DE64923B21FF598F00D98257 /* StreamClient.h */,
+				DE64923D21FF599D00D98257 /* StreamClient.m */,
+				DE64923C21FF599D00D98257 /* Monique-Bridging-Header.h */,
 			);
 			path = Monique;
 			sourceTree = "<group>";
@@ -292,7 +292,7 @@
 				DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */,
 				DEA3E3F621D3A1A50044C4E6 /* Streamer.swift in Sources */,
 				DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */,
-				DE64922E21FF557300D98257 /* StreamClient.m in Sources */,
+				DE64923E21FF599D00D98257 /* StreamClient.m in Sources */,
 				DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */,
 				DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 				DE2C5D2021F6BE37004B4037 /* Connection.swift in Sources */,
@@ -307,7 +307,6 @@
 				DEFE174A1F48AFDC00155215 /* MoniqueTests.swift in Sources */,
 				DE2C5D2121F6BE37004B4037 /* Connection.swift in Sources */,
 				DE8E55DE21C6F311007C2847 /* PreviewNSView.swift in Sources */,
-				DE64922F21FF557300D98257 /* StreamClient.m in Sources */,
 				DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,7 +319,6 @@
 				DEFE17551F48AFDC00155215 /* MoniqueUITests.swift in Sources */,
 				DE2C5D2221F6BE37004B4037 /* Connection.swift in Sources */,
 				DE8E55DF21C6F311007C2847 /* PreviewNSView.swift in Sources */,
-				DE64923021FF557300D98257 /* StreamClient.m in Sources */,
 				DE2223911F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,6 +476,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Monique/Monique-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
@@ -499,6 +498,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Monique/Monique-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
