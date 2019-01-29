@@ -34,6 +34,7 @@ class MainViewController: NSSplitViewController {
   // MARK: Streaming
   
   fileprivate func startStreaming(){
+    /*
     let hostname: String = ProcessInfo.processInfo.environment["RTMP_HOST"] ?? "127.0.0.1"
     let url = "rtmp://\(hostname):1935/stream/dev_stream"
     debugPrint("[MainViewController]", "Starting a stream ", url)
@@ -46,6 +47,11 @@ class MainViewController: NSSplitViewController {
     streamer.connect(to: URL(string: "rtmp://127.0.0.1")!)
     // TODO: Check the connection status
     mLabelStatus.stringValue = "Connected"
+    */
+    
+    let hostname: String = ProcessInfo.processInfo.environment["RTMP_HOST"] ?? "127.0.0.1"
+    let url = "rtmp://\(hostname):1935/live/dev_stream"
+    let client = StreamClient(address: url)
   }
 }
 

@@ -13,10 +13,25 @@
 - (instancetype)initWithAddress:(NSString *)addr {
     const char *url = [addr UTF8String];
     self.rtmpClient = srs_rtmp_create(url);
-    srs_rtmp_set_schema(self.rtmpClient, srs_url_schema_normal);
-    srs_rtmp_connect_app(self.rtmpClient);
+    if (self.rtmpClient == nil) {
+        return nil;
+    }
     
     int err;
+    
+    err = srs_rtmp_handshake(self.rtmpClient);
+    if (err != 0){
+        return nil;
+    }
+    err = srs_rtmp_set_schema(self.rtmpClient, srs_url_schema_normal);
+    if (err != 0){
+        return nil;
+    }
+    err = srs_rtmp_connect_app(self.rtmpClient);
+    if (err != 0){
+        return nil;
+    }
+
     char *ip;
     int pid = -1;
     int cid = -1;
@@ -24,7 +39,7 @@
     if (err != 0){
         return nil;
     }
-    
+
     int vmaj;
     int vmin;
     int vrev;

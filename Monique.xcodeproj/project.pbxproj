@@ -10,16 +10,10 @@
 		DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
 		DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
 		DE2223911F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
-		DE2C5D2021F6BE37004B4037 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2C5D1F21F6BE37004B4037 /* Connection.swift */; };
-		DE2C5D2121F6BE37004B4037 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2C5D1F21F6BE37004B4037 /* Connection.swift */; };
-		DE2C5D2221F6BE37004B4037 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2C5D1F21F6BE37004B4037 /* Connection.swift */; };
 		DE64923E21FF599D00D98257 /* StreamClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = DE64923D21FF599D00D98257 /* StreamClient.mm */; };
 		DE8E55DD21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
 		DE8E55DE21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
 		DE8E55DF21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
-		DEA3E3F621D3A1A50044C4E6 /* Streamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */; };
-		DEA3E3F721D3A1A50044C4E6 /* Streamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */; };
-		DEA3E3F821D3A1A50044C4E6 /* Streamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */; };
 		DEC4362C21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEC4362A21FFD72C00C1CD9B /* srs_librtmp.cpp */; };
 		DEC4362D21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEC4362A21FFD72C00C1CD9B /* srs_librtmp.cpp */; };
 		DEC4362E21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEC4362A21FFD72C00C1CD9B /* srs_librtmp.cpp */; };
@@ -53,12 +47,10 @@
 
 /* Begin PBXFileReference section */
 		DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
-		DE2C5D1F21F6BE37004B4037 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		DE64923B21FF598F00D98257 /* StreamClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamClient.h; sourceTree = "<group>"; };
 		DE64923C21FF599D00D98257 /* Monique-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Monique-Bridging-Header.h"; sourceTree = "<group>"; };
 		DE64923D21FF599D00D98257 /* StreamClient.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = StreamClient.mm; sourceTree = "<group>"; };
 		DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewNSView.swift; sourceTree = "<group>"; };
-		DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streamer.swift; sourceTree = "<group>"; };
 		DEC4362A21FFD72C00C1CD9B /* srs_librtmp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = srs_librtmp.cpp; sourceTree = "<group>"; };
 		DEC4362B21FFD72C00C1CD9B /* srs_librtmp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = srs_librtmp.h; sourceTree = "<group>"; };
 		DEFE17301F48AFDC00155215 /* Monique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monique.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,8 +144,6 @@
 				DEFE173F1F48AFDC00155215 /* Info.plist */,
 				DEFE17401F48AFDC00155215 /* Monique.entitlements */,
 				DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */,
-				DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */,
-				DE2C5D1F21F6BE37004B4037 /* Connection.swift */,
 				DE64923B21FF598F00D98257 /* StreamClient.h */,
 				DE64923D21FF599D00D98257 /* StreamClient.mm */,
 				DE64923C21FF599D00D98257 /* Monique-Bridging-Header.h */,
@@ -324,12 +314,10 @@
 				DE8E55DD21C6F311007C2847 /* PreviewNSView.swift in Sources */,
 				DEC4362C21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */,
 				DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */,
-				DEA3E3F621D3A1A50044C4E6 /* Streamer.swift in Sources */,
 				DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */,
 				DE64923E21FF599D00D98257 /* StreamClient.mm in Sources */,
 				DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */,
 				DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
-				DE2C5D2021F6BE37004B4037 /* Connection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,11 +325,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEA3E3F721D3A1A50044C4E6 /* Streamer.swift in Sources */,
 				DEC4362D21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */,
 				DEC4362F21FFDC5C00C1CD9B /* Monique.xcdatamodeld in Sources */,
 				DEFE174A1F48AFDC00155215 /* MoniqueTests.swift in Sources */,
-				DE2C5D2121F6BE37004B4037 /* Connection.swift in Sources */,
 				DE8E55DE21C6F311007C2847 /* PreviewNSView.swift in Sources */,
 				DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 			);
@@ -351,11 +337,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEA3E3F821D3A1A50044C4E6 /* Streamer.swift in Sources */,
 				DEC4362E21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */,
 				DEC4363021FFDC5D00C1CD9B /* Monique.xcdatamodeld in Sources */,
 				DEFE17551F48AFDC00155215 /* MoniqueUITests.swift in Sources */,
-				DE2C5D2221F6BE37004B4037 /* Connection.swift in Sources */,
 				DE8E55DF21C6F311007C2847 /* PreviewNSView.swift in Sources */,
 				DE2223911F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 			);
