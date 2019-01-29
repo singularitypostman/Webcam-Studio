@@ -22,9 +22,9 @@ class MainViewController: NSSplitViewController {
   @IBAction func startStreaming(_ sender: Any){
     debugPrint("[MainViewController]", "Toggle. Is streaming?", isStreaming)
 
-    @IBOutlet var previewView: PreviewNSView!
+    //@IBOutlet var previewView: PreviewNSView!
 
-    @IBOutlet var mBtnStream: NSButton!
+    //@IBOutlet var mBtnStream: NSButton!
 
     isStreaming = !isStreaming
   }
