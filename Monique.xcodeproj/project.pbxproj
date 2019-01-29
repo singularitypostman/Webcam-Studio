@@ -23,6 +23,8 @@
 		DEC4362C21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEC4362A21FFD72C00C1CD9B /* srs_librtmp.cpp */; };
 		DEC4362D21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEC4362A21FFD72C00C1CD9B /* srs_librtmp.cpp */; };
 		DEC4362E21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEC4362A21FFD72C00C1CD9B /* srs_librtmp.cpp */; };
+		DEC4362F21FFDC5C00C1CD9B /* Monique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */; };
+		DEC4363021FFDC5D00C1CD9B /* Monique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */; };
 		DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17331F48AFDC00155215 /* AppDelegate.swift */; };
 		DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17351F48AFDC00155215 /* MainViewController.swift */; };
 		DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */; };
@@ -109,6 +111,13 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		DEC4363121FFDCFE00C1CD9B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DEFE17271F48AFDC00155215 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +125,7 @@
 				DEFE17481F48AFDC00155215 /* MoniqueTests */,
 				DEFE17531F48AFDC00155215 /* MoniqueUITests */,
 				DEFE17311F48AFDC00155215 /* Products */,
+				DEC4363121FFDCFE00C1CD9B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -239,6 +249,14 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.VPNLite = {
+								enabled = 0;
+							};
+						};
 					};
 					DEFE17441F48AFDC00155215 = {
 						CreatedOnToolsVersion = 9.0;
@@ -321,6 +339,7 @@
 			files = (
 				DEA3E3F721D3A1A50044C4E6 /* Streamer.swift in Sources */,
 				DEC4362D21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */,
+				DEC4362F21FFDC5C00C1CD9B /* Monique.xcdatamodeld in Sources */,
 				DEFE174A1F48AFDC00155215 /* MoniqueTests.swift in Sources */,
 				DE2C5D2121F6BE37004B4037 /* Connection.swift in Sources */,
 				DE8E55DE21C6F311007C2847 /* PreviewNSView.swift in Sources */,
@@ -334,6 +353,7 @@
 			files = (
 				DEA3E3F821D3A1A50044C4E6 /* Streamer.swift in Sources */,
 				DEC4362E21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */,
+				DEC4363021FFDC5D00C1CD9B /* Monique.xcdatamodeld in Sources */,
 				DEFE17551F48AFDC00155215 /* MoniqueUITests.swift in Sources */,
 				DE2C5D2221F6BE37004B4037 /* Connection.swift in Sources */,
 				DE8E55DF21C6F311007C2847 /* PreviewNSView.swift in Sources */,
@@ -483,6 +503,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Monique/Monique.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -505,6 +526,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Monique/Monique.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
