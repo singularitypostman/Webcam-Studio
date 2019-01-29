@@ -13,13 +13,16 @@
 		DE2C5D2021F6BE37004B4037 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2C5D1F21F6BE37004B4037 /* Connection.swift */; };
 		DE2C5D2121F6BE37004B4037 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2C5D1F21F6BE37004B4037 /* Connection.swift */; };
 		DE2C5D2221F6BE37004B4037 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2C5D1F21F6BE37004B4037 /* Connection.swift */; };
-		DE64923E21FF599D00D98257 /* StreamClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DE64923D21FF599D00D98257 /* StreamClient.m */; };
+		DE64923E21FF599D00D98257 /* StreamClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = DE64923D21FF599D00D98257 /* StreamClient.mm */; };
 		DE8E55DD21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
 		DE8E55DE21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
 		DE8E55DF21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
 		DEA3E3F621D3A1A50044C4E6 /* Streamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */; };
 		DEA3E3F721D3A1A50044C4E6 /* Streamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */; };
 		DEA3E3F821D3A1A50044C4E6 /* Streamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */; };
+		DEC4362C21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEC4362A21FFD72C00C1CD9B /* srs_librtmp.cpp */; };
+		DEC4362D21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEC4362A21FFD72C00C1CD9B /* srs_librtmp.cpp */; };
+		DEC4362E21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEC4362A21FFD72C00C1CD9B /* srs_librtmp.cpp */; };
 		DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17331F48AFDC00155215 /* AppDelegate.swift */; };
 		DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17351F48AFDC00155215 /* MainViewController.swift */; };
 		DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */; };
@@ -51,9 +54,11 @@
 		DE2C5D1F21F6BE37004B4037 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		DE64923B21FF598F00D98257 /* StreamClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamClient.h; sourceTree = "<group>"; };
 		DE64923C21FF599D00D98257 /* Monique-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Monique-Bridging-Header.h"; sourceTree = "<group>"; };
-		DE64923D21FF599D00D98257 /* StreamClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamClient.m; sourceTree = "<group>"; };
+		DE64923D21FF599D00D98257 /* StreamClient.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = StreamClient.mm; sourceTree = "<group>"; };
 		DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewNSView.swift; sourceTree = "<group>"; };
 		DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streamer.swift; sourceTree = "<group>"; };
+		DEC4362A21FFD72C00C1CD9B /* srs_librtmp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = srs_librtmp.cpp; sourceTree = "<group>"; };
+		DEC4362B21FFD72C00C1CD9B /* srs_librtmp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = srs_librtmp.h; sourceTree = "<group>"; };
 		DEFE17301F48AFDC00155215 /* Monique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monique.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFE17331F48AFDC00155215 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEFE17351F48AFDC00155215 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +100,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DEC4362921FFD70800C1CD9B /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				DEC4362A21FFD72C00C1CD9B /* srs_librtmp.cpp */,
+				DEC4362B21FFD72C00C1CD9B /* srs_librtmp.h */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 		DEFE17271F48AFDC00155215 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +132,7 @@
 		DEFE17321F48AFDC00155215 /* Monique */ = {
 			isa = PBXGroup;
 			children = (
+				DEC4362921FFD70800C1CD9B /* lib */,
 				DEFE17331F48AFDC00155215 /* AppDelegate.swift */,
 				DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */,
 				DEFE17351F48AFDC00155215 /* MainViewController.swift */,
@@ -130,7 +145,7 @@
 				DEA3E3F521D3A1A50044C4E6 /* Streamer.swift */,
 				DE2C5D1F21F6BE37004B4037 /* Connection.swift */,
 				DE64923B21FF598F00D98257 /* StreamClient.h */,
-				DE64923D21FF599D00D98257 /* StreamClient.m */,
+				DE64923D21FF599D00D98257 /* StreamClient.mm */,
 				DE64923C21FF599D00D98257 /* Monique-Bridging-Header.h */,
 			);
 			path = Monique;
@@ -289,10 +304,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE8E55DD21C6F311007C2847 /* PreviewNSView.swift in Sources */,
+				DEC4362C21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */,
 				DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */,
 				DEA3E3F621D3A1A50044C4E6 /* Streamer.swift in Sources */,
 				DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */,
-				DE64923E21FF599D00D98257 /* StreamClient.m in Sources */,
+				DE64923E21FF599D00D98257 /* StreamClient.mm in Sources */,
 				DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */,
 				DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 				DE2C5D2021F6BE37004B4037 /* Connection.swift in Sources */,
@@ -304,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEA3E3F721D3A1A50044C4E6 /* Streamer.swift in Sources */,
+				DEC4362D21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */,
 				DEFE174A1F48AFDC00155215 /* MoniqueTests.swift in Sources */,
 				DE2C5D2121F6BE37004B4037 /* Connection.swift in Sources */,
 				DE8E55DE21C6F311007C2847 /* PreviewNSView.swift in Sources */,
@@ -316,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEA3E3F821D3A1A50044C4E6 /* Streamer.swift in Sources */,
+				DEC4362E21FFD72C00C1CD9B /* srs_librtmp.cpp in Sources */,
 				DEFE17551F48AFDC00155215 /* MoniqueUITests.swift in Sources */,
 				DE2C5D2221F6BE37004B4037 /* Connection.swift in Sources */,
 				DE8E55DF21C6F311007C2847 /* PreviewNSView.swift in Sources */,

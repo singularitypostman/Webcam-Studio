@@ -10,13 +10,17 @@
 #define StreamClient_h
 
 #import <Foundation/Foundation.h>
+#import "srs_librtmp.h"
 
 @interface StreamClient: NSObject
 
+@property (nonatomic) srs_rtmp_t rtmpClient;
 @property (nonatomic) int errorCode;
 @property (nonatomic) CFSocketRef socket;
 
-- (instancetype) initWithAddress:(NSString *)addr port:(int)port;
+- (instancetype) initWithAddress:(NSString *)addr;
+- (int) publishStream;
+- (int) writeToStream:(char *)data;
 
 @end
 
