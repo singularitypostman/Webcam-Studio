@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE097DD921E7A419006B7CDA /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE097DD721E7A419006B7CDA /* PreferencesWindow.swift */; };
+		DE097DDA21E7A419006B7CDA /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE097DD721E7A419006B7CDA /* PreferencesWindow.swift */; };
+		DE097DDB21E7A419006B7CDA /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE097DD721E7A419006B7CDA /* PreferencesWindow.swift */; };
+		DE097DDC21E7A419006B7CDA /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE097DD821E7A419006B7CDA /* PreferencesWindow.xib */; };
+		DE097DDD21E7A419006B7CDA /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE097DD821E7A419006B7CDA /* PreferencesWindow.xib */; };
+		DE097DDE21E7A419006B7CDA /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE097DD821E7A419006B7CDA /* PreferencesWindow.xib */; };
 		DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
 		DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
 		DE2223911F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
@@ -46,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE097DD721E7A419006B7CDA /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
+		DE097DD821E7A419006B7CDA /* PreferencesWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
 		DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		DE64923B21FF598F00D98257 /* StreamClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamClient.h; sourceTree = "<group>"; };
 		DE64923C21FF599D00D98257 /* Monique-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Monique-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -139,6 +147,8 @@
 				DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */,
 				DEFE17351F48AFDC00155215 /* MainViewController.swift */,
 				DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */,
+				DE097DD721E7A419006B7CDA /* PreferencesWindow.swift */,
+				DE097DD821E7A419006B7CDA /* PreferencesWindow.xib */,
 				DEFE173A1F48AFDC00155215 /* Assets.xcassets */,
 				DEFE173C1F48AFDC00155215 /* Main.storyboard */,
 				DEFE173F1F48AFDC00155215 /* Info.plist */,
@@ -286,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEFE173B1F48AFDC00155215 /* Assets.xcassets in Resources */,
+				DE097DDC21E7A419006B7CDA /* PreferencesWindow.xib in Resources */,
 				DEFE173E1F48AFDC00155215 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,6 +305,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE097DDD21E7A419006B7CDA /* PreferencesWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE097DDE21E7A419006B7CDA /* PreferencesWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +330,7 @@
 				DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */,
 				DE64923E21FF599D00D98257 /* StreamClient.mm in Sources */,
 				DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */,
+				DE097DD921E7A419006B7CDA /* PreferencesWindow.swift in Sources */,
 				DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
