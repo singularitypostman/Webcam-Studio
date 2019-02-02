@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		DE097DD921E7A419006B7CDA /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE097DD721E7A419006B7CDA /* PreferencesWindow.swift */; };
-		DE097DDA21E7A419006B7CDA /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE097DD721E7A419006B7CDA /* PreferencesWindow.swift */; };
-		DE097DDB21E7A419006B7CDA /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE097DD721E7A419006B7CDA /* PreferencesWindow.swift */; };
 		DE097DDC21E7A419006B7CDA /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE097DD821E7A419006B7CDA /* PreferencesWindow.xib */; };
 		DE097DDD21E7A419006B7CDA /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE097DD821E7A419006B7CDA /* PreferencesWindow.xib */; };
 		DE097DDE21E7A419006B7CDA /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE097DD821E7A419006B7CDA /* PreferencesWindow.xib */; };
