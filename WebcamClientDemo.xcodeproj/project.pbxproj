@@ -11,6 +11,9 @@
 		DE603E422208C5510028A49F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603E412208C5510028A49F /* ViewController.swift */; };
 		DE603E442208C5520028A49F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE603E432208C5520028A49F /* Assets.xcassets */; };
 		DE603E472208C5520028A49F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE603E452208C5520028A49F /* Main.storyboard */; };
+		DE603E522208C6240028A49F /* srs_librtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE603E502208C6240028A49F /* srs_librtmp.cpp */; };
+		DE603E542208C6A20028A49F /* StreamClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DE603E532208C6A20028A49F /* StreamClient.m */; };
+		DE603E572208C7380028A49F /* StreamEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = DE603E562208C7380028A49F /* StreamEncoder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +24,12 @@
 		DE603E462208C5520028A49F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DE603E482208C5520028A49F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE603E492208C5520028A49F /* WebcamClientDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebcamClientDemo.entitlements; sourceTree = "<group>"; };
+		DE603E502208C6240028A49F /* srs_librtmp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = srs_librtmp.cpp; sourceTree = "<group>"; };
+		DE603E512208C6240028A49F /* srs_librtmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = srs_librtmp.h; sourceTree = "<group>"; };
+		DE603E532208C6A20028A49F /* StreamClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamClient.m; sourceTree = "<group>"; };
+		DE603E552208C6B20028A49F /* StreamClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamClient.h; sourceTree = "<group>"; };
+		DE603E562208C7380028A49F /* StreamEncoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamEncoder.m; sourceTree = "<group>"; };
+		DE603E582208C7740028A49F /* StreamEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamEncoder.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,14 +62,28 @@
 		DE603E3E2208C5510028A49F /* WebcamClientDemo */ = {
 			isa = PBXGroup;
 			children = (
+				DE603E4F2208C6240028A49F /* lib */,
 				DE603E3F2208C5510028A49F /* AppDelegate.swift */,
 				DE603E412208C5510028A49F /* ViewController.swift */,
 				DE603E432208C5520028A49F /* Assets.xcassets */,
 				DE603E452208C5520028A49F /* Main.storyboard */,
 				DE603E482208C5520028A49F /* Info.plist */,
 				DE603E492208C5520028A49F /* WebcamClientDemo.entitlements */,
+				DE603E532208C6A20028A49F /* StreamClient.m */,
+				DE603E552208C6B20028A49F /* StreamClient.h */,
+				DE603E562208C7380028A49F /* StreamEncoder.m */,
+				DE603E582208C7740028A49F /* StreamEncoder.h */,
 			);
 			path = WebcamClientDemo;
+			sourceTree = "<group>";
+		};
+		DE603E4F2208C6240028A49F /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				DE603E502208C6240028A49F /* srs_librtmp.cpp */,
+				DE603E512208C6240028A49F /* srs_librtmp.h */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,7 +156,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE603E542208C6A20028A49F /* StreamClient.m in Sources */,
 				DE603E422208C5510028A49F /* ViewController.swift in Sources */,
+				DE603E572208C7380028A49F /* StreamEncoder.m in Sources */,
+				DE603E522208C6240028A49F /* srs_librtmp.cpp in Sources */,
 				DE603E402208C5510028A49F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
