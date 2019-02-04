@@ -8,10 +8,8 @@
 #ifndef StreamClient_h
 #define StreamClient_h
 
-#ifndef StreamClient_h
-#define StreamClient_h
-
 #import <Foundation/Foundation.h>
+#import "srs_librtmp.h"
 
 #define STREAMING_ACTIVE_STATUS "Live"
 #define STREAMING_READY_STATUS "Ready"

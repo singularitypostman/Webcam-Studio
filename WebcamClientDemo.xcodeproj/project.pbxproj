@@ -12,10 +12,11 @@
 		DE603E442208C5520028A49F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE603E432208C5520028A49F /* Assets.xcassets */; };
 		DE603E472208C5520028A49F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE603E452208C5520028A49F /* Main.storyboard */; };
 		DE603E522208C6240028A49F /* srs_librtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE603E502208C6240028A49F /* srs_librtmp.cpp */; };
-		DE603E542208C6A20028A49F /* StreamClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DE603E532208C6A20028A49F /* StreamClient.m */; };
+		DE603E542208C6A20028A49F /* StreamClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = DE603E532208C6A20028A49F /* StreamClient.mm */; };
 		DE603E572208C7380028A49F /* StreamEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = DE603E562208C7380028A49F /* StreamEncoder.m */; };
 		DE603E5A2208CACD0028A49F /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603E592208CACD0028A49F /* MainWindowController.swift */; };
 		DE603E5C2208CB3F0028A49F /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603E5B2208CB3F0028A49F /* PreferencesWindow.swift */; };
+		DE603E602208CEAD0028A49F /* StreamWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603E5F2208CEAD0028A49F /* StreamWriter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,12 +29,14 @@
 		DE603E492208C5520028A49F /* WebcamClientDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebcamClientDemo.entitlements; sourceTree = "<group>"; };
 		DE603E502208C6240028A49F /* srs_librtmp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = srs_librtmp.cpp; sourceTree = "<group>"; };
 		DE603E512208C6240028A49F /* srs_librtmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = srs_librtmp.h; sourceTree = "<group>"; };
-		DE603E532208C6A20028A49F /* StreamClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamClient.m; sourceTree = "<group>"; };
+		DE603E532208C6A20028A49F /* StreamClient.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = StreamClient.mm; sourceTree = "<group>"; };
 		DE603E552208C6B20028A49F /* StreamClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamClient.h; sourceTree = "<group>"; };
 		DE603E562208C7380028A49F /* StreamEncoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamEncoder.m; sourceTree = "<group>"; };
 		DE603E582208C7740028A49F /* StreamEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamEncoder.h; sourceTree = "<group>"; };
 		DE603E592208CACD0028A49F /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		DE603E5B2208CB3F0028A49F /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
+		DE603E5E2208CCC30028A49F /* WebcamClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebcamClient-Bridging-Header.h"; sourceTree = "<group>"; };
+		DE603E5F2208CEAD0028A49F /* StreamWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamWriter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,10 +78,12 @@
 				DE603E452208C5520028A49F /* Main.storyboard */,
 				DE603E482208C5520028A49F /* Info.plist */,
 				DE603E492208C5520028A49F /* WebcamClientDemo.entitlements */,
-				DE603E532208C6A20028A49F /* StreamClient.m */,
+				DE603E532208C6A20028A49F /* StreamClient.mm */,
 				DE603E552208C6B20028A49F /* StreamClient.h */,
 				DE603E562208C7380028A49F /* StreamEncoder.m */,
 				DE603E582208C7740028A49F /* StreamEncoder.h */,
+				DE603E5E2208CCC30028A49F /* WebcamClient-Bridging-Header.h */,
+				DE603E5F2208CEAD0028A49F /* StreamWriter.swift */,
 			);
 			path = WebcamClientDemo;
 			sourceTree = "<group>";
@@ -162,12 +167,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE603E542208C6A20028A49F /* StreamClient.m in Sources */,
+				DE603E542208C6A20028A49F /* StreamClient.mm in Sources */,
 				DE603E422208C5510028A49F /* MainViewController.swift in Sources */,
 				DE603E5A2208CACD0028A49F /* MainWindowController.swift in Sources */,
 				DE603E572208C7380028A49F /* StreamEncoder.m in Sources */,
 				DE603E522208C6240028A49F /* srs_librtmp.cpp in Sources */,
 				DE603E5C2208CB3F0028A49F /* PreferencesWindow.swift in Sources */,
+				DE603E602208CEAD0028A49F /* StreamWriter.swift in Sources */,
 				DE603E402208C5510028A49F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,6 +321,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = demo.WebcamClientDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WebcamClientDemo/WebcamClient-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -333,6 +340,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = demo.WebcamClientDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WebcamClientDemo/WebcamClient-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
