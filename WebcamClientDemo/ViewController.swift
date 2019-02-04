@@ -2,8 +2,7 @@
 //  ViewController.swift
 //  WebcamClientDemo
 //
-//  Created by Shavit Tzuriel on 2/4/19.
-//  Copyright © 2019 demo. All rights reserved.
+//  Copyright © 2019 All rights reserved.
 //
 
 import Cocoa
