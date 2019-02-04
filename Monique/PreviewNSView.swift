@@ -13,8 +13,7 @@ import Cocoa
 import AVFoundation
 
 class PreviewNSView: NSView,
-    AVCaptureVideoDataOutputSampleBufferDelegate,
-AVCaptureAudioDataOutputSampleBufferDelegate {
+    AVCaptureFileOutputRecordingDelegate {
     
     private var session: AVCaptureSession? = nil
     private var previewLayer: AVCaptureVideoPreviewLayer? = nil
@@ -25,30 +24,31 @@ AVCaptureAudioDataOutputSampleBufferDelegate {
     fileprivate let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
     //fileprivate let queueWriter = DispatchQueue(label: "PreviewNSView.Writer")
     
-    fileprivate var bufWriter: AVAssetWriterInput? = nil
+    fileprivate var recordingTimer: Timer? = nil
+    fileprivate var segmentsCount: Int = 0
+    fileprivate let sessionId = Int(arc4random_uniform(1000)+1)
+    fileprivate var videoDirPath: URL? = nil
+    fileprivate var videoFileOutput: AVCaptureMovieFileOutput? = nil
+    
+    @IBOutlet weak var mLabelStatus: NSTextField!
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         
-        startPreview()
+        //startPreview()
     }
     
     // MARK: AVFoundation
     
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        
-        if isStreaming {
-            debugPrint("[PreviewNSView]", "captureOutput.didOutput", sampleBuffer)
-        }
-        // bufWriter?.append(sampleBuffer)
-        
+    func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
+        // TODO: Remove this
+        debugPrint("[PreviewNSView]", "didStartRecordingTo", fileURL)
     }
     
-    func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        let imageSize = CVImageBufferGetEncodedSize(imageBuffer)
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        debugPrint("[PreviewNSView]", "didFinishRecordingTo")
         
-        //debugPrint("[PreviewNSView]", "captureOutput.didDrop", imageSize)
+        encodeOutputFile(outputFileURL)
     }
     
     // MARK: Video preview
@@ -74,49 +74,134 @@ AVCaptureAudioDataOutputSampleBufferDelegate {
             print("Error adding device: \(err)")
         }
         
-        let videoOutput: AVCaptureVideoDataOutput = AVCaptureVideoDataOutput()
-        videoOutput.setSampleBufferDelegate(self, queue: queue)
-        let audioOutput: AVCaptureAudioDataOutput = AVCaptureAudioDataOutput()
-        audioOutput.setSampleBufferDelegate(self, queue: queue)
-        session?.sessionPreset = AVCaptureSession.Preset.high
-        session?.addOutput(videoOutput)
-        session?.addOutput(audioOutput)
+        videoFileOutput = AVCaptureMovieFileOutput()
+        videoFileOutput?.minFreeDiskSpaceLimit = 1024 * 1024 * 1024 * 1024 * 12
+        videoFileOutput?.maxRecordedDuration = CMTime(seconds: Double(6), preferredTimescale: 1)
+        session?.sessionPreset = AVCaptureSession.Preset.qvga320x240
+        if videoFileOutput != nil {
+            session?.addOutput(videoFileOutput!)
+        } else {
+            fatalError("No output")
+        }
+        //session?.addOutput(videoOutput)
+        //session?.addOutput(audioOutput)
         
         guard session != nil else { return }
-        previewLayer = AVCaptureVideoPreviewLayer(session: session!)
-        layer = previewLayer
-        
-        bufWriter = AVAssetWriterInput(mediaType: .video, outputSettings: [
-            AVVideoCodecKey: AVVideoCodecType.h264,
-            AVVideoWidthKey: 1280,
-            AVVideoHeightKey: 720,
-            ])
+        self.previewLayer = AVCaptureVideoPreviewLayer(session: session!)
+        DispatchQueue.main.async { [weak self] in
+            self?.layer = self?.previewLayer
+        }
         
         queue.async { [weak self] in
             self?.session?.startRunning()
         }
     }
     
+    func stopPreview(){
+        session?.stopRunning()
+    }
+    
+    // MARK: Recording
+    
+    /**
+     Create a media writer
+     */
+    func createWriter(){
+        // TODO: Get the value from teh preferences
+        if videoDirPath == nil {
+            createDownloadsDirectory()
+        }
+        guard let dir = videoDirPath else { return }
+        
+        recordingTimer?.invalidate()
+        recordingTimer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true, block: { (t) in
+            // TODO: Remove this
+            debugPrint("[PreviewNSView]", "Timer tick", self.segmentsCount)
+            self.videoFileOutput?.stopRecording()
+            guard let connection = self.videoFileOutput?.connections.first,
+                connection.isActive else { return }
+            
+            let outputFile = URL(fileURLWithPath: "\(self.sessionId)/seg_\(self.segmentsCount).mp4", relativeTo: dir)
+            debugPrint("[PreviewNSView]", "Output file", outputFile, "Directory", dir)
+            self.videoFileOutput?.startRecording(to: outputFile, recordingDelegate: self)
+            self.segmentsCount += 1
+        })
+    }
+    
+    func stopRecording(){
+        recordingTimer?.invalidate()
+        videoFileOutput?.stopRecording()
+    }
+    
+    func createDownloadsDirectory(){
+        // TODO: Get the value from the preferences
+        // For debugging
+        guard let path = NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true).first else { return }
+        videoDirPath = URL(fileURLWithPath: path, isDirectory: true).appendingPathComponent("Webcam/sessions/\(sessionId)")
+        guard let dir = videoDirPath else { return }
+        do {
+            try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true, attributes: nil)
+        } catch let err as NSError {
+            // TODO: Remove this
+            debugPrint("[PreviewNSView]", "Error creating a directory", err.localizedDescription)
+            videoDirPath = nil
+            return
+        }
+    }
+    
     // MARK: Streaming Client
     
-    // Stream to server
-    @IBAction func startStreaming(_ sender: Any){
-        debugPrint("[MainViewController]", "Toggle. Is streaming?", isStreaming)
+    /**
+     Stream to server
+     */
+    @IBAction func toggleStreaming(_ sender: Any){
+        if isStreaming {
+            stopStreaming()
+        } else {
+            startStreaming()
+        }
         
+        isStreaming = !isStreaming
+    }
+    
+    fileprivate func startStreaming(){
         // TODO: Replace the environment variable with user settings
         //let hostname: String = ProcessInfo.processInfo.environment["RTMP_HOST"] ?? "127.0.0.1"
         let hostname: String = "127.0.0.1"
         let url = "rtmp://\(hostname):1935/live/dev_stream"
         streamClient = StreamClient(address: url)
+        
+        // TODO: Handle errors
         let err = streamClient?.publishStream()
-        // TODO: Remove this
-        debugPrint("[PreviewNSView]", "Publish stream:", Int32(err))
+        if err != 0 {
+            DispatchQueue.main.async { [weak self] in
+                self?.mLabelStatus?.stringValue = NSLocalizedString(STREAMING_ERROR_STATUS, comment: "Started the stream")
+            }
+            return
+        }
         
-        //@IBOutlet var previewView: PreviewNSView!
+        // TODO: Handle errors
+        startPreview()
+        createWriter()
         
-        //@IBOutlet var mBtnStream: NSButton!
-        
-        isStreaming = !isStreaming
+        DispatchQueue.main.async { [weak self] in
+            self?.mLabelStatus?.stringValue = NSLocalizedString(STREAMING_ACTIVE_STATUS, comment: "Started the stream")
+        }
     }
     
+    fileprivate func stopStreaming(){
+        stopPreview()
+        stopRecording()
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.mLabelStatus?.stringValue = NSLocalizedString(STREAMING_READY_STATUS, comment: "Ready to stream")
+        }
+    }
+ 
+    // MARK - Encoder
+    
+    func encodeOutputFile(_ outputFileURL: URL) {
+        // TODO: Remove this
+        debugPrint("[PreviewNSView]", "Encoding file", outputFileURL)
+    }
 }

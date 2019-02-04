@@ -12,7 +12,4 @@ import AVFoundation
 class MainViewController: NSSplitViewController {
     
     @IBOutlet var previewView: PreviewNSView!
-    
-    @IBOutlet weak var mBtnStream: NSButton!
-    @IBOutlet weak var mLabelStatus: NSTextField!
 }

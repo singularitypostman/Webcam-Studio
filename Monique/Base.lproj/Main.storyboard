@@ -727,7 +727,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="startStreaming:" target="XfG-lQ-9wD" id="ath-9y-oUt"/>
+                                            <action selector="toggleStreaming:" target="3xf-Pl-Qfo" id="jAZ-P4-XBL"/>
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gom-kF-Ma0">
@@ -745,6 +745,9 @@
                                     <constraint firstItem="Gom-kF-Ma0" firstAttribute="top" secondItem="3xf-Pl-Qfo" secondAttribute="top" constant="20" symbolic="YES" id="p9h-kd-tWD"/>
                                     <constraint firstAttribute="trailing" secondItem="Bd1-9o-8Pw" secondAttribute="trailing" constant="20" symbolic="YES" id="yAP-Zs-Iln"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="mLabelStatus" destination="Gom-kF-Ma0" id="8VL-1U-rst"/>
+                                </connections>
                             </customView>
                         </subviews>
                         <holdingPriorities>
@@ -752,8 +755,6 @@
                         </holdingPriorities>
                     </splitView>
                     <connections>
-                        <outlet property="mBtnStream" destination="Bd1-9o-8Pw" id="aOM-hM-pSk"/>
-                        <outlet property="mLabelStatus" destination="Gom-kF-Ma0" id="Z4x-dg-MtF"/>
                         <outlet property="previewView" destination="3xf-Pl-Qfo" id="3hr-5u-vfA"/>
                     </connections>
                 </viewController>
