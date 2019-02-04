@@ -8,18 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		DE603E402208C5510028A49F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603E3F2208C5510028A49F /* AppDelegate.swift */; };
-		DE603E422208C5510028A49F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603E412208C5510028A49F /* ViewController.swift */; };
+		DE603E422208C5510028A49F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603E412208C5510028A49F /* MainViewController.swift */; };
 		DE603E442208C5520028A49F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE603E432208C5520028A49F /* Assets.xcassets */; };
 		DE603E472208C5520028A49F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE603E452208C5520028A49F /* Main.storyboard */; };
 		DE603E522208C6240028A49F /* srs_librtmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE603E502208C6240028A49F /* srs_librtmp.cpp */; };
 		DE603E542208C6A20028A49F /* StreamClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DE603E532208C6A20028A49F /* StreamClient.m */; };
 		DE603E572208C7380028A49F /* StreamEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = DE603E562208C7380028A49F /* StreamEncoder.m */; };
+		DE603E5A2208CACD0028A49F /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603E592208CACD0028A49F /* MainWindowController.swift */; };
+		DE603E5C2208CB3F0028A49F /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE603E5B2208CB3F0028A49F /* PreferencesWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DE603E3C2208C5510028A49F /* WebcamClientDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebcamClientDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE603E3F2208C5510028A49F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DE603E412208C5510028A49F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DE603E412208C5510028A49F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DE603E432208C5520028A49F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE603E462208C5520028A49F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DE603E482208C5520028A49F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -30,6 +32,8 @@
 		DE603E552208C6B20028A49F /* StreamClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamClient.h; sourceTree = "<group>"; };
 		DE603E562208C7380028A49F /* StreamEncoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamEncoder.m; sourceTree = "<group>"; };
 		DE603E582208C7740028A49F /* StreamEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamEncoder.h; sourceTree = "<group>"; };
+		DE603E592208CACD0028A49F /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		DE603E5B2208CB3F0028A49F /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +68,9 @@
 			children = (
 				DE603E4F2208C6240028A49F /* lib */,
 				DE603E3F2208C5510028A49F /* AppDelegate.swift */,
-				DE603E412208C5510028A49F /* ViewController.swift */,
+				DE603E592208CACD0028A49F /* MainWindowController.swift */,
+				DE603E5B2208CB3F0028A49F /* PreferencesWindow.swift */,
+				DE603E412208C5510028A49F /* MainViewController.swift */,
 				DE603E432208C5520028A49F /* Assets.xcassets */,
 				DE603E452208C5520028A49F /* Main.storyboard */,
 				DE603E482208C5520028A49F /* Info.plist */,
@@ -157,9 +163,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE603E542208C6A20028A49F /* StreamClient.m in Sources */,
-				DE603E422208C5510028A49F /* ViewController.swift in Sources */,
+				DE603E422208C5510028A49F /* MainViewController.swift in Sources */,
+				DE603E5A2208CACD0028A49F /* MainWindowController.swift in Sources */,
 				DE603E572208C7380028A49F /* StreamEncoder.m in Sources */,
 				DE603E522208C6240028A49F /* srs_librtmp.cpp in Sources */,
+				DE603E5C2208CB3F0028A49F /* PreferencesWindow.swift in Sources */,
 				DE603E402208C5510028A49F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
