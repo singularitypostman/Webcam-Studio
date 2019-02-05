@@ -8,9 +8,11 @@
 #ifndef StreamEncoder_h
 #define StreamEncoder_h
 
-#import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface StreamEncoder: NSObject
+
+- (void) checkWebcamPermissions;
 
 - (int) encodeFile:(NSURL *)path;
 
