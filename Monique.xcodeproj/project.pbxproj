@@ -14,6 +14,7 @@
 		DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
 		DE2223901F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
 		DE2223911F5B1564008EDEA5 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */; };
+		DE603E322208BFA50028A49F /* EncodingClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = DE603E302208BFA40028A49F /* EncodingClient.mm */; };
 		DE64923E21FF599D00D98257 /* StreamClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = DE64923D21FF599D00D98257 /* StreamClient.mm */; };
 		DE8E55DD21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
 		DE8E55DE21C6F311007C2847 /* PreviewNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8E55DC21C6F311007C2847 /* PreviewNSView.swift */; };
@@ -53,6 +54,8 @@
 		DE097DD721E7A419006B7CDA /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
 		DE097DD821E7A419006B7CDA /* PreferencesWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
 		DE22238E1F5B1564008EDEA5 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		DE603E302208BFA40028A49F /* EncodingClient.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EncodingClient.mm; sourceTree = "<group>"; };
+		DE603E312208BFA40028A49F /* EncodingClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncodingClient.h; sourceTree = "<group>"; };
 		DE64923B21FF598F00D98257 /* StreamClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamClient.h; sourceTree = "<group>"; };
 		DE64923C21FF599D00D98257 /* Monique-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Monique-Bridging-Header.h"; sourceTree = "<group>"; };
 		DE64923D21FF599D00D98257 /* StreamClient.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = StreamClient.mm; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 				DEFE17371F48AFDC00155215 /* Monique.xcdatamodeld */,
 				DE64923B21FF598F00D98257 /* StreamClient.h */,
 				DE64923D21FF599D00D98257 /* StreamClient.mm */,
+				DE603E312208BFA40028A49F /* EncodingClient.h */,
+				DE603E302208BFA40028A49F /* EncodingClient.mm */,
 				DE64923C21FF599D00D98257 /* Monique-Bridging-Header.h */,
 			);
 			path = Monique;
@@ -251,6 +256,9 @@
 							com.apple.Push = {
 								enabled = 1;
 							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
 							com.apple.VPNLite = {
 								enabled = 0;
 							};
@@ -327,6 +335,7 @@
 				DEFE17361F48AFDC00155215 /* MainViewController.swift in Sources */,
 				DEFE17391F48AFDC00155215 /* Monique.xcdatamodeld in Sources */,
 				DE64923E21FF599D00D98257 /* StreamClient.mm in Sources */,
+				DE603E322208BFA50028A49F /* EncodingClient.mm in Sources */,
 				DEFE17341F48AFDC00155215 /* AppDelegate.swift in Sources */,
 				DE097DD921E7A419006B7CDA /* PreferencesWindow.swift in Sources */,
 				DE22238F1F5B1564008EDEA5 /* MainWindowController.swift in Sources */,
@@ -498,18 +507,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Monique/Monique.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = M87Q25Q5K3;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = "/usr/local/Cellar/ffmpeg/4.1_1/include/**";
 				INFOPLIST_FILE = Monique/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTLLINKER_FLAGS = "-cikernel";
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "Shavit-Tzuriel.Monique";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Monique/Monique-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -521,18 +536,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Monique/Monique.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = M87Q25Q5K3;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = "/usr/local/Cellar/ffmpeg/4.1_1/include/**";
 				INFOPLIST_FILE = Monique/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTLLINKER_FLAGS = "-cikernel";
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "Shavit-Tzuriel.Monique";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Monique/Monique-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
