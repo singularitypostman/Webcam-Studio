@@ -713,40 +713,51 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController id="XfG-lQ-9wD" customClass="MainViewController" customModule="Monique" customModuleProvider="target" sceneMemberID="viewController">
                     <splitView key="view" wantsLayer="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" id="7Rx-Jt-Sgj">
-                        <rect key="frame" x="0.0" y="0.0" width="960" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="955" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <customView id="3xf-Pl-Qfo" customClass="PreviewNSView" customModule="Monique" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="960" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="955" height="600"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bd1-9o-8Pw">
-                                        <rect key="frame" x="860" y="-1" width="86" height="32"/>
+                                        <rect key="frame" x="855" y="-1" width="86" height="32"/>
                                         <buttonCell key="cell" type="push" title="Go Live" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DBc-QW-7BZ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="toggleStreaming:" target="3xf-Pl-Qfo" id="jAZ-P4-XBL"/>
+                                            <action selector="toggleStreaming:" target="3xf-Pl-Qfo" id="wSI-kR-nrX"/>
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gom-kF-Ma0">
-                                        <rect key="frame" x="905" y="563" width="37" height="17"/>
+                                        <rect key="frame" x="900" y="563" width="37" height="17"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="g6K-Sl-kvE">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="dKY-9S-f9e">
+                                        <rect key="frame" x="0.0" y="420" width="180" height="180"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="dKY-9S-f9e" secondAttribute="height" multiplier="1:1" id="30B-eC-qLK"/>
+                                            <constraint firstAttribute="width" priority="100" constant="180" id="HKp-X1-WAX"/>
+                                            <constraint firstAttribute="height" priority="100" constant="180" id="ZdG-M9-Hzq"/>
+                                        </constraints>
+                                    </customView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Bd1-9o-8Pw" secondAttribute="bottom" constant="6" id="2ir-up-bcy"/>
+                                    <constraint firstItem="dKY-9S-f9e" firstAttribute="top" secondItem="3xf-Pl-Qfo" secondAttribute="top" id="RCI-Su-Xj5"/>
                                     <constraint firstItem="Gom-kF-Ma0" firstAttribute="trailing" secondItem="Bd1-9o-8Pw" secondAttribute="trailing" id="UjW-S8-ayd"/>
                                     <constraint firstItem="Gom-kF-Ma0" firstAttribute="top" secondItem="3xf-Pl-Qfo" secondAttribute="top" constant="20" symbolic="YES" id="p9h-kd-tWD"/>
+                                    <constraint firstItem="dKY-9S-f9e" firstAttribute="leading" secondItem="3xf-Pl-Qfo" secondAttribute="leading" id="qhy-An-mWN"/>
                                     <constraint firstAttribute="trailing" secondItem="Bd1-9o-8Pw" secondAttribute="trailing" constant="20" symbolic="YES" id="yAP-Zs-Iln"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="mLabelStatus" destination="Gom-kF-Ma0" id="8VL-1U-rst"/>
+                                    <outlet property="mUserPreview" destination="dKY-9S-f9e" id="OFV-sd-SfH"/>
                                 </connections>
                             </customView>
                         </subviews>
@@ -759,7 +770,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="155" y="2133"/>
+            <point key="canvasLocation" x="152.5" y="2133"/>
         </scene>
     </scenes>
 </document>

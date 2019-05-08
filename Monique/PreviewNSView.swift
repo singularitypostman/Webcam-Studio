@@ -18,7 +18,7 @@ class PreviewNSView: NSView,
     private var session: AVCaptureSession? = nil
     private var previewLayer: AVCaptureVideoPreviewLayer? = nil
     
-    fileprivate var streamClient: StreamClient? = nil
+    //fileprivate var streamClient: StreamClient? = nil
     fileprivate var isStreaming: Bool = false
     
     fileprivate let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
@@ -30,12 +30,22 @@ class PreviewNSView: NSView,
     fileprivate var videoDirPath: URL? = nil
     fileprivate var videoFileOutput: AVCaptureMovieFileOutput? = nil
     
+    // TODO: Create a writer
+    // TODO: Move this
+    //fileprivate let encodingClient = EncodingClient()
+    
+    
+    @IBOutlet weak var mUserPreview: NSView!
     @IBOutlet weak var mLabelStatus: NSTextField!
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         
+        // TODO: Uncomment this line
         //startPreview()
+        
+        // TODO: Remove this line
+        mLabelStatus.stringValue = "Ready to stream"
     }
     
     // MARK: AVFoundation
@@ -48,7 +58,7 @@ class PreviewNSView: NSView,
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         debugPrint("[PreviewNSView]", "didFinishRecordingTo")
         
-        encodeOutputFile(outputFileURL)
+        //encodingClient.encodeFile(outputFileURL)
     }
     
     // MARK: Video preview
@@ -89,7 +99,9 @@ class PreviewNSView: NSView,
         guard session != nil else { return }
         self.previewLayer = AVCaptureVideoPreviewLayer(session: session!)
         DispatchQueue.main.async { [weak self] in
-            self?.layer = self?.previewLayer
+            // TODO: Uncomment this line when the design is ready
+            //self?.layer = self?.previewLayer
+            self?.mUserPreview.layer = self?.previewLayer
         }
         
         queue.async { [weak self] in
@@ -156,14 +168,21 @@ class PreviewNSView: NSView,
      */
     @IBAction func toggleStreaming(_ sender: Any){
         if isStreaming {
-            stopStreaming()
+            //stopStreaming()
+            stopPreview()
+            // TODO: Remove this line
+            mLabelStatus.stringValue = "Ready to stream"
         } else {
-            startStreaming()
+            //startStreaming()
+            startPreview()
+            // TODO: Remove this line
+            mLabelStatus.stringValue = "Started the stream"
         }
         
         isStreaming = !isStreaming
     }
     
+    /*
     fileprivate func startStreaming(){
         // TODO: Replace the environment variable with user settings
         //let hostname: String = ProcessInfo.processInfo.environment["RTMP_HOST"] ?? "127.0.0.1"
@@ -197,11 +216,5 @@ class PreviewNSView: NSView,
             self?.mLabelStatus?.stringValue = NSLocalizedString(STREAMING_READY_STATUS, comment: "Ready to stream")
         }
     }
- 
-    // MARK - Encoder
-    
-    func encodeOutputFile(_ outputFileURL: URL) {
-        // TODO: Remove this
-        debugPrint("[PreviewNSView]", "Encoding file", outputFileURL)
-    }
+    */
 }
